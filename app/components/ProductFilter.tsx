@@ -11,12 +11,13 @@ interface FilterOptions {
 
 interface ProductFilterProps {
   onFilterChange: (filters: FilterOptions) => void;
+  maxPrice?: number;
 }
 
 const BRANDS = ['ASUS', 'Canon', 'Nikon', 'Sony', 'Fujifilm', 'Custom', 'Multi'];
 
-export function ProductFilter({ onFilterChange }: ProductFilterProps) {
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 20000]);
+export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilterProps) {
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, maxPrice]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [inStockOnly, setInStockOnly] = useState(false);
@@ -77,11 +78,11 @@ export function ProductFilter({ onFilterChange }: ProductFilterProps) {
   };
 
   const resetFilters = () => {
-    setPriceRange([0, 20000]);
+    setPriceRange([0, maxPrice]);
     setSelectedBrands([]);
     setSelectedRating(null);
     setInStockOnly(false);
-    updateFilters([0, 20000], [], null, false);
+    updateFilters([0, maxPrice], [], null, false);
   };
 
   return (
@@ -117,7 +118,7 @@ export function ProductFilter({ onFilterChange }: ProductFilterProps) {
             <input
               type="range"
               min={0}
-              max={20000}
+              max={maxPrice}
               value={priceRange[0]}
               onChange={(e) => {
                 const newMin = Number(e.target.value);
@@ -130,7 +131,7 @@ export function ProductFilter({ onFilterChange }: ProductFilterProps) {
             <input
               type="range"
               min={0}
-              max={20000}
+              max={maxPrice}
               value={priceRange[1]}
               onChange={(e) => {
                 const newMax = Number(e.target.value);

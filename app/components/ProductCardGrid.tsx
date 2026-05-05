@@ -7,7 +7,7 @@ interface Product {
   id: string;
   title: string;
   handle: string;
-  brand: string;
+  brand?: string;
   price: number;
   originalPrice?: number;
   image: string;
@@ -113,7 +113,7 @@ export function ProductCardGrid({ products }: { products: Product[] }) {
               <div className="flex items-center gap-1 mb-3">
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className={i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}>
+                    <span key={i} className={i < Math.floor(product.rating || 0) ? 'text-yellow-400' : 'text-gray-300'}>
                       ★
                     </span>
                   ))}

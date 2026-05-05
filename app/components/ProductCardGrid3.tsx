@@ -7,7 +7,7 @@ interface Product {
   id: string;
   title: string;
   handle: string;
-  brand: string;
+  brand?: string;
   price: number;
   originalPrice?: number;
   image: string;

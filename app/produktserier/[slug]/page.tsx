@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { MainLayout } from '@/app/components/MainLayout';
-import { ProductFilter } from '@/app/components/ProductFilter';
-import { ProductCardGrid3 } from '@/app/components/ProductCardGrid3';
+import { ProductSeriesContent } from './ProductSeriesContent';
 
 // Mock products
 const MOCK_PRODUCTS = [
@@ -21,53 +19,22 @@ const CATEGORY_TITLES: Record<string, string> = {
   'gaming-laptops': 'Gaming Bärbara datorer',
   'gaming-pc': 'Gaming Stationär dator',
   'phones': 'Mobiltelefoner',
+  'ultrabooks': 'Ultrabooks',
 };
 
-interface FilterOptions {
-  priceRange: [number, number];
-  brands: string[];
-  rating: number | null;
-  inStock: boolean;
-}
-
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-function ProductSeriesPageContent({ slug }: { slug: string }) {
+export default async function ProductSeriesPage({ params }: PageProps) {
+  const { slug } = await params;
   const categoryTitle = CATEGORY_TITLES[slug] || slug.charAt(0).toUpperCase() + slug.slice(1);
-  const [filters, setFilters] = useState<FilterOptions>({
-    priceRange: [0, 20000],
-    brands: [],
-    rating: null,
-    inStock: false,
-  });
 
-  const filteredProducts = MOCK_PRODUCTS.filter((product) => {
-    const priceMatch = product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1];
-    const brandMatch = filters.brands.length === 0 || filters.brands.includes(product.brand);
-    const ratingMatch = filters.rating === null || (product.rating || 0) >= filters.rating;
-    const stockMatch = !filters.inStock || product.stock.includes('I lager');
-    return priceMatch && brandMatch && ratingMatch && stockMatch;
-  });
-
-  return (
-    <div className="flex">
-      <ProductFilter onFilterChange={setFilters} />
-      <div className="flex-1 px-6 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">{categoryTitle}</h1>
-        <ProductCardGrid3 products={filteredProducts} />
-      </div>
-    </div>
-  );
-}
-
-export default function ProductSeriesPage({ params }: PageProps) {
   return (
     <MainLayout>
-      <ProductSeriesPageContent slug={params.slug} />
+      <ProductSeriesContent categoryTitle={categoryTitle} products={MOCK_PRODUCTS} />
     </MainLayout>
   );
 }

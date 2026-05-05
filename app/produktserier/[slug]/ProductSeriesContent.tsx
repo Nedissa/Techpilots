@@ -10,7 +10,7 @@ interface Product {
   handle: string;
   price: number;
   originalPrice?: number;
-  brand: string;
+  brand?: string;
   discount?: string;
   rating?: number;
   reviews?: number;
@@ -34,8 +34,10 @@ export function ProductSeriesContent({
   categoryTitle: string;
   products: Product[];
 }) {
+  const maxPrice = Math.max(...products.map(p => p.price), 20000);
+
   const [filters, setFilters] = useState<FilterOptions>({
-    priceRange: [0, 20000],
+    priceRange: [0, maxPrice],
     brands: [],
     rating: null,
     inStock: false,
@@ -43,7 +45,7 @@ export function ProductSeriesContent({
 
   const filteredProducts = products.filter((product) => {
     const priceMatch = product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1];
-    const brandMatch = filters.brands.length === 0 || filters.brands.includes(product.brand);
+    const brandMatch = filters.brands.length === 0 || !product.brand || filters.brands.includes(product.brand);
     const ratingMatch = filters.rating === null || (product.rating || 0) >= filters.rating;
     const stockMatch = !filters.inStock || product.stock?.includes('I lager');
     return priceMatch && brandMatch && ratingMatch && stockMatch;
@@ -51,7 +53,7 @@ export function ProductSeriesContent({
 
   return (
     <div className="flex">
-      <ProductFilter onFilterChange={setFilters} />
+      <ProductFilter onFilterChange={setFilters} maxPrice={maxPrice} />
       <div className="flex-1 px-6 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">{categoryTitle}</h1>
         <ProductCardGrid3 products={filteredProducts} />
