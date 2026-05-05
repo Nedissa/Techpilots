@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { ProductsSection } from './components/ProductsSection';
 import { ProductBanner } from './components/ProductBanner';
 import { ProductCardGrid } from './components/ProductCardGrid';
-import { FeatureCardsSection } from './components/FeatureCardsSection';
 import { MainLayout } from './components/MainLayout';
 
 const FEATURED_COLLECTIONS = [
@@ -236,9 +235,6 @@ export default function Home() {
       <div className="flex flex-col gap-8">
         <div className="-mx-6">
           <HeroCarousel />
-        </div>
-        <div className="-mx-6">
-          <FeatureCardsSection />
         </div>
         <div className="px-6">
           <ProductsSection
