@@ -350,8 +350,8 @@ footer a {
 .price-slider-container input[type="range"].price-input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #000000;
   cursor: pointer;
@@ -362,8 +362,8 @@ footer a {
 }
 
 .price-slider-container input[type="range"].price-input::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #000000;
   cursor: pointer;
