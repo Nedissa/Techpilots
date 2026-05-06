@@ -78,7 +78,7 @@ export function ProductCard({
 
   return (
     <div
-      className="flex flex-col bg-white h-full transition-all duration-300 hover:-translate-y-3"
+      className="flex flex-col bg-white h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
