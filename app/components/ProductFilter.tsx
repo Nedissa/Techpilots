@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 interface FilterOptions {
   priceRange: [number, number];
   brands: string[];
+  colors: string[];
   rating: number | null;
   inStock: boolean;
 }
@@ -15,15 +16,23 @@ interface ProductFilterProps {
 }
 
 const BRANDS = ['ASUS', 'Canon', 'Nikon', 'Sony', 'Fujifilm', 'Custom', 'Multi'];
+const COLORS = [
+  { name: 'Svart', value: '#000000' },
+  { name: 'Vit', value: '#FFFFFF' },
+  { name: 'Silver', value: '#C0C0C0' },
+  { name: 'Grå', value: '#808080' },
+];
 
 export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilterProps) {
   const [priceRange, setPriceRange] = useState<[number, number]>(() => [0, maxPrice]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [inStockOnly, setInStockOnly] = useState(false);
   const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>({
     price: true,
     brands: true,
+    colors: true,
     rating: true,
     stock: true,
   });
@@ -52,30 +61,40 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
       ? selectedBrands.filter(b => b !== brand)
       : [...selectedBrands, brand];
     setSelectedBrands(newBrands);
-    updateFilters(priceRange, newBrands, selectedRating, inStockOnly);
+    updateFilters(priceRange, newBrands, selectedColors, selectedRating, inStockOnly);
+  };
+
+  const handleColorToggle = (color: string) => {
+    const newColors = selectedColors.includes(color)
+      ? selectedColors.filter(c => c !== color)
+      : [...selectedColors, color];
+    setSelectedColors(newColors);
+    updateFilters(priceRange, selectedBrands, newColors, selectedRating, inStockOnly);
   };
 
   const handleRatingChange = (rating: number) => {
     const newRating = selectedRating === rating ? null : rating;
     setSelectedRating(newRating);
-    updateFilters(priceRange, selectedBrands, newRating, inStockOnly);
+    updateFilters(priceRange, selectedBrands, selectedColors, newRating, inStockOnly);
   };
 
   const handleStockChange = () => {
     const newStock = !inStockOnly;
     setInStockOnly(newStock);
-    updateFilters(priceRange, selectedBrands, selectedRating, newStock);
+    updateFilters(priceRange, selectedBrands, selectedColors, selectedRating, newStock);
   };
 
   const updateFilters = (
     range: [number, number],
     brands: string[],
+    colors: string[],
     rating: number | null,
     stock: boolean
   ) => {
     onFilterChange({
       priceRange: range,
       brands,
+      colors,
       rating,
       inStock: stock,
     });
@@ -84,9 +103,10 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
   const resetFilters = () => {
     setPriceRange([0, maxPrice]);
     setSelectedBrands([]);
+    setSelectedColors([]);
     setSelectedRating(null);
     setInStockOnly(false);
-    updateFilters([0, maxPrice], [], null, false);
+    updateFilters([0, maxPrice], [], [], null, false);
   };
 
   return (
@@ -175,6 +195,40 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                 className="w-4 h-4 border-gray-400 accent-black"
               />
               <span className="text-sm text-gray-800">{brand}</span>
+            </label>
+          ))}
+        </div>
+        )}
+      </div>
+
+      {/* Colors */}
+      <div className="border-b border-gray-300">
+        <button
+          onClick={() => toggleSection('colors')}
+          className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+        >
+          <h4 className="text-sm font-semibold text-black">Färg</h4>
+          <svg className={`w-4 h-4 text-black transition-transform ${expandedSections.colors ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+          </svg>
+        </button>
+        {expandedSections.colors && (
+        <div className="px-6 py-4 space-y-3">
+          {COLORS.map((color) => (
+            <label key={color.value} className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={selectedColors.includes(color.value)}
+                onChange={() => handleColorToggle(color.value)}
+                className="w-4 h-4 border-gray-400 accent-black"
+              />
+              <div className="flex items-center gap-2 flex-1">
+                <div
+                  className="w-5 h-5 rounded border-2 border-gray-400"
+                  style={{ backgroundColor: color.value }}
+                />
+                <span className="text-sm text-gray-800">{color.name}</span>
+              </div>
             </label>
           ))}
         </div>
