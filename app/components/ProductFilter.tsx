@@ -183,17 +183,15 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                 type="text"
                 value={priceRange[0]}
                 onChange={(e) => {
-                  const value = e.target.value.trim();
-                  if (value === '') {
-                    handlePriceChange('min', priceRange[0]);
-                    return;
-                  }
+                  const value = e.target.value;
+                  if (value === '') return;
+
                   let newMin = Number(value);
                   if (isNaN(newMin)) return;
                   if (newMin > maxPrice) newMin = maxPrice;
-                  if (newMin <= priceRange[1]) {
-                    handlePriceChange('min', newMin);
-                  }
+                  if (newMin > priceRange[1]) return;
+
+                  handlePriceChange('min', newMin);
                 }}
                 className="w-14 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700"
               />
