@@ -320,10 +320,17 @@ export function HeaderWrapper() {
       setIsHeaderVisible(true);
       if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
 
-      // Trigger vibration on cart icon - longer if header is hidden
-      setIsVibrating(true);
-      const vibrationDuration = isHeaderVisible ? 600 : 1200;
-      setTimeout(() => setIsVibrating(false), vibrationDuration);
+      // Trigger vibration on cart icon only if header is already visible
+      if (isHeaderVisible) {
+        setIsVibrating(true);
+        setTimeout(() => setIsVibrating(false), 400);
+      } else {
+        // If header is hidden, wait for it to slide up (300ms) then vibrate for longer
+        setTimeout(() => {
+          setIsVibrating(true);
+          setTimeout(() => setIsVibrating(false), 800);
+        }, 300);
+      }
     };
 
     const handleCartUpdated = (event: Event) => {
