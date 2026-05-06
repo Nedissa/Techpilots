@@ -320,9 +320,10 @@ export function HeaderWrapper() {
       setIsHeaderVisible(true);
       if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
 
-      // Trigger vibration on cart icon
+      // Trigger vibration on cart icon - longer if header is hidden
       setIsVibrating(true);
-      setTimeout(() => setIsVibrating(false), 600);
+      const vibrationDuration = isHeaderVisible ? 600 : 1200;
+      setTimeout(() => setIsVibrating(false), vibrationDuration);
     };
 
     const handleCartUpdated = (event: Event) => {
@@ -473,8 +474,13 @@ export function HeaderWrapper() {
                 25% { transform: translateX(-2px); }
                 75% { transform: translateX(2px); }
               }
+              @keyframes vibrateLong {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-2px); }
+                75% { transform: translateX(2px); }
+              }
               .vibrating {
-                animation: vibrate 0.3s ease-in-out;
+                animation: ${isHeaderVisible ? 'vibrate 0.3s ease-in-out' : 'vibrateLong 0.3s ease-in-out 4'};
               }
             `}</style>
             {/* Language Switcher */}
