@@ -178,32 +178,38 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
             />
           </div>
           <div className="flex items-center justify-between gap-2 text-xs">
-            <input
-              type="text"
-              inputMode="numeric"
-              value={priceRange[0].toLocaleString('sv-SE') + ' kr'}
-              onChange={(e) => {
-                let input = e.target.value.replace(/[^\d]/g, '');
-                if (input === '') input = '0';
-                const num = parseInt(input, 10) || 0;
-                setPriceRange([num, priceRange[1]]);
-                updateFilters([num, priceRange[1]], selectedBrands, selectedColors, selectedRating, inStockOnly);
-              }}
-              className="px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700 flex-1"
-            />
-            <input
-              type="text"
-              inputMode="numeric"
-              value={priceRange[1].toLocaleString('sv-SE') + ' kr'}
-              onChange={(e) => {
-                let input = e.target.value.replace(/[^\d]/g, '');
-                if (input === '') input = '0';
-                const num = parseInt(input, 10) || 0;
-                setPriceRange([priceRange[0], num]);
-                updateFilters([priceRange[0], num], selectedBrands, selectedColors, selectedRating, inStockOnly);
-              }}
-              className="px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700 flex-1"
-            />
+            <div className="flex items-center gap-1">
+              <input
+                type="text"
+                inputMode="numeric"
+                value={priceRange[0].toLocaleString('sv-SE')}
+                onChange={(e) => {
+                  let input = e.target.value.replace(/\s/g, '');
+                  if (input === '') input = '0';
+                  const num = parseInt(input, 10) || 0;
+                  setPriceRange([num, priceRange[1]]);
+                  updateFilters([num, priceRange[1]], selectedBrands, selectedColors, selectedRating, inStockOnly);
+                }}
+                className="w-16 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700"
+              />
+              <span className="text-gray-600">kr</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <input
+                type="text"
+                inputMode="numeric"
+                value={priceRange[1].toLocaleString('sv-SE')}
+                onChange={(e) => {
+                  let input = e.target.value.replace(/\s/g, '');
+                  if (input === '') input = '0';
+                  const num = parseInt(input, 10) || 0;
+                  setPriceRange([priceRange[0], num]);
+                  updateFilters([priceRange[0], num], selectedBrands, selectedColors, selectedRating, inStockOnly);
+                }}
+                className="w-16 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700"
+              />
+              <span className="text-gray-600">kr</span>
+            </div>
           </div>
         </div>
         )}
