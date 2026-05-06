@@ -235,8 +235,10 @@ export function ProductCard({
 
         {/* Button Container */}
         {product.stock && (
-          <div className={`mt-auto transition-all duration-200 overflow-hidden ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <button
+          <>
+            <div className={`mt-auto border-t border-gray-200 ${isHovered ? 'hidden' : ''}`}></div>
+            <div className={`mt-auto transition-all duration-200 overflow-hidden ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              <button
               onClick={handleClick}
               disabled={added}
               className={`w-full py-2.5 font-semibold text-sm flex items-center justify-center gap-2 bg-black text-white`}
@@ -256,8 +258,9 @@ export function ProductCard({
                   Lägg i varukorg
                 </>
               )}
-            </button>
-          </div>
+              </button>
+            </div>
+          </>
         )}
       </div>
     </div>
