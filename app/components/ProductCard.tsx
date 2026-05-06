@@ -172,16 +172,16 @@ export function ProductCard({
 
         {/* Rating */}
         {product.rating && (
-          <div className="flex items-center gap-1 mb-3">
+          <Link href={`${productLink}#reviews`} className="flex items-center gap-1 mb-3 hover:opacity-70 transition-opacity">
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <span key={i} className={i < Math.floor(product.rating || 0) ? 'text-yellow-400' : 'text-gray-300'}>
+                <span key={i} className={i < Math.floor(product.rating || 0) ? 'text-black' : 'text-gray-300'}>
                   ★
                 </span>
               ))}
             </div>
             <span className="text-xs text-gray-600">({product.reviews})</span>
-          </div>
+          </Link>
         )}
 
         {/* Price */}

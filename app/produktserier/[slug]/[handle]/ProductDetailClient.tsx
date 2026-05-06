@@ -151,25 +151,30 @@ export default function ProductDetailClient({
                   ‹
                 </button>
 
-                <button
-                  onClick={() => setShowZoom(true)}
-                  className="relative bg-white flex items-center justify-center h-96 w-full overflow-hidden p-8 cursor-zoom-in"
-                >
-                  <img
-                    src={mainImage.url}
-                    alt={mainImage.altText}
-                    className="max-w-full max-h-full object-contain"
-                  />
+                <div className="relative">
+                  <button
+                    onClick={() => setShowZoom(true)}
+                    className="relative bg-white flex items-center justify-center h-96 w-full overflow-hidden p-8 cursor-zoom-in"
+                  >
+                    <img
+                      src={mainImage.url}
+                      alt={mainImage.altText}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </button>
                   {/* Rating Badge - Top Right Corner */}
-                  <div className="absolute top-2 right-2 flex items-center gap-1.5">
+                  <button
+                    onClick={() => setActiveTab('reviews')}
+                    className="absolute top-2 -right-8 flex items-center gap-1.5 hover:opacity-70 transition-opacity cursor-pointer"
+                  >
                     <div className="flex gap-0">
                       {[...Array(5)].map((_, i) => (
-                        <span key={i} className="text-yellow-400 text-lg leading-none">★</span>
+                        <span key={i} className="text-black text-lg leading-none">★</span>
                       ))}
                     </div>
                     <span className="text-xs text-black font-semibold">({product.reviews})</span>
-                  </div>
-                </button>
+                  </button>
+                </div>
 
                 <button
                   onClick={() => setSelectedImage((prev) => (prev + 1) % productDetails.images.length)}
@@ -303,7 +308,7 @@ export default function ProductDetailClient({
               )}
 
               {activeTab === 'reviews' && (
-                <div className="space-y-3 pb-8">
+                <div id="reviews" className="space-y-3 pb-8">
                   {[
                     { rating: 5, title: 'Utmärkt laptop', text: 'En fantastisk laptop med utmärkt prestanda och display. Väl värd pengarna!' },
                     { rating: 5, title: 'Mycket nöjd', text: 'Leverans gick snabbt och produkten är exakt som beskrivit.' },
@@ -447,28 +452,31 @@ export default function ProductDetailClient({
               </svg>
             </button>
             {showAccessories && (
-              <div className="border-t border-gray-200 divide-y divide-gray-100">
-                {RECOMMENDED_ACCESSORIES.map((accessory) => (
-                  <label key={accessory.id} className="flex items-center gap-3 p-4 hover:bg-gray-50 cursor-pointer">
-                    <img src={accessory.image} alt={accessory.name} className="w-10 h-10 object-contain flex-shrink-0 bg-gray-100" />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900">{accessory.name}</p>
-                    </div>
-                    <p className="text-sm text-gray-900 flex-shrink-0">{Number(accessory.price).toLocaleString('sv-SE')} kr</p>
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 flex-shrink-0 accent-black"
-                      checked={selectedAccessories.includes(accessory.id)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedAccessories([...selectedAccessories, accessory.id]);
-                        } else {
+              <div className="border-t border-gray-200 space-y-2">
+                {RECOMMENDED_ACCESSORIES.map((accessory) => {
+                  const isSelected = selectedAccessories.includes(accessory.id);
+                  return (
+                    <button
+                      key={accessory.id}
+                      onClick={() => {
+                        if (isSelected) {
                           setSelectedAccessories(selectedAccessories.filter(id => id !== accessory.id));
+                        } else {
+                          setSelectedAccessories([...selectedAccessories, accessory.id]);
                         }
                       }}
-                    />
-                  </label>
-                ))}
+                      className={`w-full flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors hover:bg-gray-50`}
+                    >
+                      <img src={accessory.image} alt={accessory.name} className="w-8 h-8 object-contain flex-shrink-0 bg-gray-100" />
+                      <div className="flex-1 min-w-0 text-left">
+                        <p className="text-sm font-medium text-gray-900">{accessory.name}</p>
+                      </div>
+                      <p className="text-sm flex-shrink-0 text-gray-900">{Number(accessory.price).toLocaleString('sv-SE')} kr</p>
+                      <div className={`w-3 h-3 flex-shrink-0 ml-3 transition-colors ${isSelected ? 'bg-black' : 'bg-gray-300'}`} />
+
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>
