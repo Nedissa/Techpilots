@@ -6,6 +6,7 @@ import { ProductsSection } from './components/ProductsSection';
 import { ProductBanner } from './components/ProductBanner';
 import { ProductCardGrid } from './components/ProductCardGrid';
 import { MainLayout } from './components/MainLayout';
+import { NewsletterPopup } from './components/NewsletterPopup';
 
 const FEATURED_COLLECTIONS = [
   { title: 'Gaming Laptops', handle: 'gaming-laptops' },
@@ -222,30 +223,35 @@ function CallToAction() {
 
 export default function Home() {
   return (
-    <MainLayout bordered={true} noPadding={true}>
-      <div className="flex flex-col gap-8">
-        <div className="-mx-6">
-          <HeroCarousel />
+    <div className="relative">
+      <MainLayout bordered={true} noPadding={true}>
+        <div className="flex flex-col gap-8">
+          <div className="-mx-6">
+            <HeroCarousel />
+          </div>
+          <div className="px-6">
+            <ProductsSection
+              variant="popular"
+              products={POPULAR_PRODUCTS}
+            />
+          </div>
+          <div className="px-6">
+            <ProductBanner />
+          </div>
+          <div className="px-6">
+            <ProductsSection
+              variant="recommended"
+              products={RECOMMENDED_PRODUCTS}
+            />
+          </div>
+          <div className="-mx-6">
+            <CallToAction />
+          </div>
         </div>
-        <div className="px-6">
-          <ProductsSection
-            variant="popular"
-            products={POPULAR_PRODUCTS}
-          />
-        </div>
-        <div className="px-6">
-          <ProductBanner />
-        </div>
-        <div className="px-6">
-          <ProductsSection
-            variant="recommended"
-            products={RECOMMENDED_PRODUCTS}
-          />
-        </div>
-        <div className="-mx-6">
-          <CallToAction />
-        </div>
+      </MainLayout>
+      <div className="fixed bottom-4 right-4 z-50">
+        <NewsletterPopup />
       </div>
-    </MainLayout>
+    </div>
   );
 }
