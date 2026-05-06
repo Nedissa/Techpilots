@@ -122,8 +122,8 @@ export function ProductCardGrid({ products }: { products: Product[] }) {
               </div>
             )}
 
-            {/* Price */}
-            <div className="mb-3">
+            {/* Price and Stock Container */}
+            <div className="mb-3 flex items-center justify-between">
               <div className="flex items-baseline gap-2">
                 <span className="text-lg font-bold text-gray-900">
                   {product.price.toLocaleString('sv-SE')} kr
@@ -134,6 +134,12 @@ export function ProductCardGrid({ products }: { products: Product[] }) {
                   </span>
                 )}
               </div>
+              {product.stock && (
+                <p className="text-xs text-green-600 font-semibold flex items-center gap-1">
+                  <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                  I lager
+                </p>
+              )}
             </div>
 
             {/* Color Selector */}
@@ -150,38 +156,30 @@ export function ProductCardGrid({ products }: { products: Product[] }) {
               </div>
             )}
 
-            {/* Stock Status and Button Container */}
-            {product.stock && (
-              <div className="mt-auto">
-                <p className="text-xs text-green-600 font-semibold mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-600 rounded-full"></span>
-                  {product.stock}
-                </p>
-
-                {/* Add to Cart Button - Always visible */}
-                <button
-                  onClick={() => addToCart(product)}
-                  disabled={addedIds.has(product.id)}
-                  className={`w-full py-2.5 font-semibold text-sm flex items-center justify-center gap-2 bg-black text-white`}
-                >
-                  {addedIds.has(product.id) ? (
-                    <>
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                      </svg>
-                      Tillagd
-                    </>
-                  ) : (
-                    <>
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
-                      </svg>
-                      Lägg i varukorg
-                    </>
-                  )}
-                </button>
-              </div>
-            )}
+            {/* Add to Cart Button */}
+            <div className="mt-auto">
+              <button
+                onClick={() => addToCart(product)}
+                disabled={addedIds.has(product.id)}
+                className={`w-full py-2.5 font-semibold text-sm flex items-center justify-center gap-2 bg-black text-white`}
+              >
+                {addedIds.has(product.id) ? (
+                  <>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                    Tillagd
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+                    </svg>
+                    Lägg i varukorg
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       ))}
