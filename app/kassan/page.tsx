@@ -125,7 +125,7 @@ export default function Checkout() {
   return (
     <MainLayout bordered={false}>
       <div className="flex justify-center">
-      <div className="w-full max-w-[1280px] flex flex-col gap-12">
+      <div className="w-full max-w-[640px] flex flex-col gap-12">
         {/* Cart Items Section */}
         <section>
           <h2 className="text-2xl font-bold mb-6">Din beställning</h2>
