@@ -207,7 +207,7 @@ const MENU_DATA: MenuCategory[] = [
         url: '/produktserier/smartphones',
         icon: <ProcessorIcon />,
         items: [
-          { id: 'flagship', title: 'Flaggskip', url: '/produktserier/flagship-phones' },
+          { id: 'flagship', title: 'Flaggskepp', url: '/produktserier/flagship-phones' },
           { id: 'mid-range-phone', title: 'Mid-Range', url: '/produktserier/mid-range-phones' },
           { id: 'budget-phone', title: 'Budget', url: '/produktserier/budget-phones' },
         ],
