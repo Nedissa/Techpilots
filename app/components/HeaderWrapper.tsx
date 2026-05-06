@@ -57,7 +57,7 @@ const MENU_DATA: MenuCategory[] = [
     items: [
       {
         id: 'barbara',
-        title: 'Bärbara',
+        title: 'Bärbara datorer',
         url: '/produktserier/laptops',
         icon: <LaptopIcon />,
         items: [
@@ -68,7 +68,7 @@ const MENU_DATA: MenuCategory[] = [
       },
       {
         id: 'stationara',
-        title: 'Stationära',
+        title: 'Stationära datorer',
         url: '/produktserier/desktops',
         icon: <DesktopIcon />,
         items: [
@@ -79,7 +79,7 @@ const MENU_DATA: MenuCategory[] = [
       },
       {
         id: 'datortillbehor',
-        title: 'Tillbehör',
+        title: 'Dator tillbehör',
         url: '/produktserier/accessories',
         icon: <AccessoriesIcon />,
         items: [
@@ -98,7 +98,7 @@ const MENU_DATA: MenuCategory[] = [
     items: [
       {
         id: 'processorer',
-        title: 'Processorer',
+        title: 'CPU processorer',
         url: '/produktserier/processorer',
         icon: <ProcessorIcon />,
         items: [
@@ -108,7 +108,7 @@ const MENU_DATA: MenuCategory[] = [
       },
       {
         id: 'moderkort',
-        title: 'Moderkort',
+        title: 'Dator moderkort',
         url: '/produktserier/moderkort',
         icon: <ModerkortIcon />,
         items: [
@@ -118,7 +118,7 @@ const MENU_DATA: MenuCategory[] = [
       },
       {
         id: 'grafikkort',
-        title: 'Grafikkort',
+        title: 'GPU grafikkort',
         url: '/produktserier/grafikkort',
         icon: <GrafikkortIcon />,
         items: [
@@ -128,7 +128,7 @@ const MENU_DATA: MenuCategory[] = [
       },
       {
         id: 'ram',
-        title: 'RAM-minnen',
+        title: 'RAM arbetminne',
         url: '/produktserier/ram',
         icon: <ProcessorIcon />,
         items: [
@@ -138,7 +138,7 @@ const MENU_DATA: MenuCategory[] = [
       },
       {
         id: 'lagringsenhet',
-        title: 'Lagringsenhet',
+        title: 'Lagring SSD & HDD',
         url: '/produktserier/lagring',
         icon: <ProcessorIcon />,
         items: [
@@ -148,7 +148,7 @@ const MENU_DATA: MenuCategory[] = [
       },
       {
         id: 'natlagring',
-        title: 'Nätaggregat',
+        title: 'Nätaggregat strömförsörjning',
         url: '/produktserier/natlagring',
         icon: <ProcessorIcon />,
         items: [
