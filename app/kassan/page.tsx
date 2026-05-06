@@ -124,7 +124,8 @@ export default function Checkout() {
 
   return (
     <MainLayout bordered={false}>
-      <div className="flex flex-col gap-12">
+      <div className="flex justify-center">
+      <div className="w-full max-w-[1280px] flex flex-col gap-12">
         {/* Cart Items Section */}
         <section>
           <h2 className="text-2xl font-bold mb-6">Din beställning</h2>
@@ -160,9 +161,8 @@ export default function Checkout() {
         </section>
 
         {/* Form and Summary */}
-        <div className="grid grid-cols-3 gap-8">
-          {/* Left column - Form */}
-          <div className="col-span-2">
+        <div className="w-full">
+          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Shipping Information */}
             <section>
@@ -419,57 +419,55 @@ export default function Checkout() {
               ← Fortsätt handla
             </Link>
           </form>
-        </div>
 
-        {/* Right column - Order Summary */}
-        <div className="col-span-1">
-          <div className="sticky top-20 bg-gray-50 p-6 border border-gray-200">
-            <h2 className="text-xl font-bold mb-6">Orderöversikt</h2>
+        {/* Order Summary */}
+        <div className="bg-gray-50 p-6 border border-gray-200">
+          <h2 className="text-xl font-bold mb-6">Orderöversikt</h2>
 
-            {/* Cart Items */}
-            <div className="space-y-4 mb-6 pb-6 border-b border-gray-300">
-              {cartItems.map(item => (
-                <div key={item.id} className="flex justify-between text-sm">
-                  <div>
-                    <p className="font-medium text-gray-900">{item.title}</p>
-                    <p className="text-gray-600">Qty: {item.quantity}</p>
-                  </div>
-                  <p className="font-semibold text-gray-900">
-                    {(item.price * item.quantity).toLocaleString('sv-SE')} SEK
-                  </p>
+          {/* Cart Items */}
+          <div className="space-y-4 mb-6 pb-6 border-b border-gray-300">
+            {cartItems.map(item => (
+              <div key={item.id} className="flex justify-between text-sm">
+                <div>
+                  <p className="font-medium text-gray-900">{item.title}</p>
+                  <p className="text-gray-600">Qty: {item.quantity}</p>
                 </div>
-              ))}
+                <p className="font-semibold text-gray-900">
+                  {(item.price * item.quantity).toLocaleString('sv-SE')} SEK
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Order Summary */}
+          <div className="space-y-3">
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">Delsumma</span>
+              <span className="text-gray-900">{cartTotal.toLocaleString('sv-SE')} SEK</span>
             </div>
 
-            {/* Order Summary */}
-            <div className="space-y-3">
+            {totalDiscount > 0 && (
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Delsumma</span>
-                <span className="text-gray-900">{cartTotal.toLocaleString('sv-SE')} SEK</span>
+                <span className="text-green-600">Rabatt</span>
+                <span className="text-green-600 font-semibold">-{totalDiscount.toLocaleString('sv-SE')} SEK</span>
               </div>
+            )}
 
-              {totalDiscount > 0 && (
-                <div className="flex justify-between text-sm">
-                  <span className="text-green-600">Rabatt</span>
-                  <span className="text-green-600 font-semibold">-{totalDiscount.toLocaleString('sv-SE')} SEK</span>
-                </div>
-              )}
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">Frakt</span>
+              <span className="text-gray-900">
+                {shippingCost === 0 ? 'Gratis' : `${shippingCost.toLocaleString('sv-SE')} SEK`}
+              </span>
+            </div>
 
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Frakt</span>
-                <span className="text-gray-900">
-                  {shippingCost === 0 ? 'Gratis' : `${shippingCost.toLocaleString('sv-SE')} SEK`}
-                </span>
-              </div>
-
-              <div className="flex justify-between text-lg font-bold pt-3 border-t border-gray-300">
-                <span>Totalt</span>
-                <span>{finalTotal.toLocaleString('sv-SE')} SEK</span>
-              </div>
+            <div className="flex justify-between text-lg font-bold pt-3 border-t border-gray-300">
+              <span>Totalt</span>
+              <span>{finalTotal.toLocaleString('sv-SE')} SEK</span>
             </div>
           </div>
         </div>
-        </div>
+      </div>
+      </div>
       </div>
     </MainLayout>
   );
