@@ -76,7 +76,7 @@ export function ProductCard({
     : `/produkter/${product.handle}`;
 
   return (
-    <div className="flex flex-col bg-white h-full transition-all duration-300 hover:-translate-y-1">
+    <div className="flex flex-col bg-white h-full transition-all duration-300 hover:-translate-y-3">
       {/* Image Container with Badges */}
       <div
         className={`relative bg-gray-100 overflow-hidden mb-4 ${config.imageHeight} flex items-center justify-center`}
