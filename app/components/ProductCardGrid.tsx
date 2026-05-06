@@ -92,7 +92,7 @@ export function ProductCardGrid({
   return (
     <div className="space-y-6">
       {/* Products Grid */}
-      <div className="grid grid-cols-3 gap-6 py-6">
+      <div className={`grid ${categorySlug ? 'grid-cols-3' : 'grid-cols-4'} gap-6 py-6`}>
         {sortedProducts.map((product) => (
           <div
             key={product.id}
