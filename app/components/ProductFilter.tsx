@@ -183,8 +183,9 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                 type="number"
                 value={priceRange[0]}
                 onChange={(e) => {
-                  const newMin = Math.min(Number(e.target.value), priceRange[1]);
-                  handlePriceChange('min', newMin);
+                  const num = Number(e.target.value);
+                  setPriceRange([num, priceRange[1]]);
+                  updateFilters([num, priceRange[1]], selectedBrands, selectedColors, selectedRating, inStockOnly);
                 }}
                 className="w-14 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700"
               />
@@ -195,8 +196,9 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                 type="number"
                 value={priceRange[1]}
                 onChange={(e) => {
-                  const newMax = Math.max(Number(e.target.value), priceRange[0]);
-                  handlePriceChange('max', newMax);
+                  const num = Number(e.target.value);
+                  setPriceRange([priceRange[0], num]);
+                  updateFilters([priceRange[0], num], selectedBrands, selectedColors, selectedRating, inStockOnly);
                 }}
                 className="w-14 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700"
               />
