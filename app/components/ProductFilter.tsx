@@ -48,12 +48,18 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
     }));
   };
 
+  const snapToInterval = (value: number) => {
+    const interval = 1000;
+    return Math.round(value / interval) * interval;
+  };
+
   const handlePriceChange = (type: 'min' | 'max', value: number) => {
+    const snappedValue = snapToInterval(value);
     const newRange: [number, number] = type === 'min'
-      ? [value, priceRange[1]]
-      : [priceRange[0], value];
+      ? [snappedValue, priceRange[1]]
+      : [priceRange[0], snappedValue];
     setPriceRange(newRange);
-    updateFilters(newRange, selectedBrands, selectedRating, inStockOnly);
+    updateFilters(newRange, selectedBrands, selectedColors, selectedRating, inStockOnly);
   };
 
   const handleBrandToggle = (brand: string) => {
@@ -128,36 +134,6 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
         </button>
         {expandedSections.price && (
         <div className="px-6 py-4 space-y-4">
-          <div className="space-y-3 mb-4">
-            <div>
-              <label className="block text-xs text-gray-600 mb-1">Min pris (kr)</label>
-              <input
-                type="number"
-                value={priceRange[0]}
-                onChange={(e) => {
-                  const newMin = Number(e.target.value);
-                  if (newMin <= priceRange[1]) {
-                    handlePriceChange('min', newMin);
-                  }
-                }}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-              />
-            </div>
-            <div>
-              <label className="block text-xs text-gray-600 mb-1">Max pris (kr)</label>
-              <input
-                type="number"
-                value={priceRange[1]}
-                onChange={(e) => {
-                  const newMax = Number(e.target.value);
-                  if (newMax >= priceRange[0]) {
-                    handlePriceChange('max', newMax);
-                  }
-                }}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-              />
-            </div>
-          </div>
           <div className="price-slider-container">
             <div className="price-slider-track bg-gray-300 rounded pointer-events-none">
               <div
