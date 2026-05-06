@@ -128,15 +128,38 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
         </button>
         {expandedSections.price && (
         <div className="px-6 py-4 space-y-4">
+          <div className="space-y-3 mb-4">
+            <div>
+              <label className="block text-xs text-gray-600 mb-1">Min pris (kr)</label>
+              <input
+                type="number"
+                value={priceRange[0]}
+                onChange={(e) => {
+                  const newMin = Number(e.target.value);
+                  if (newMin <= priceRange[1]) {
+                    handlePriceChange('min', newMin);
+                  }
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-gray-600 mb-1">Max pris (kr)</label>
+              <input
+                type="number"
+                value={priceRange[1]}
+                onChange={(e) => {
+                  const newMax = Number(e.target.value);
+                  if (newMax >= priceRange[0]) {
+                    handlePriceChange('max', newMax);
+                  }
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              />
+            </div>
+          </div>
           <div className="price-slider-container">
-            <div className="price-slider-track bg-gray-300 rounded pointer-events-none relative">
-              <div className="absolute inset-0 flex pointer-events-none">
-                {[...Array(101)].map((_, i) => (
-                  <div key={i} className="flex-1 relative">
-                    <div className={`absolute left-1/2 -translate-x-1/2 bg-gray-400 ${i % 10 === 0 ? 'h-2 top-1/2 -translate-y-1/2' : 'h-1 top-1/3'}`} />
-                  </div>
-                ))}
-              </div>
+            <div className="price-slider-track bg-gray-300 rounded pointer-events-none">
               <div
                 className="absolute h-1 bg-black rounded"
                 style={{
@@ -173,9 +196,6 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
               className="price-input"
             />
           </div>
-            <div className="text-xs text-gray-700 font-semibold">
-              {priceRange[0].toLocaleString('sv-SE')} - {priceRange[1].toLocaleString('sv-SE')} kr
-            </div>
         </div>
         )}
       </div>
