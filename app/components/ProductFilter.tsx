@@ -190,7 +190,7 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                   setPriceRange([num, priceRange[1]]);
                   updateFilters([num, priceRange[1]], selectedBrands, selectedColors, selectedRating, inStockOnly);
                 }}
-                className="w-16 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700"
+                className="w-16 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-900 focus:outline-none focus:border-gray-900"
               />
               <span className="text-gray-600">kr</span>
             </div>
@@ -206,7 +206,7 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                   setPriceRange([priceRange[0], num]);
                   updateFilters([priceRange[0], num], selectedBrands, selectedColors, selectedRating, inStockOnly);
                 }}
-                className="w-16 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700"
+                className="w-16 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-900 focus:outline-none focus:border-gray-900"
               />
               <span className="text-gray-600">kr</span>
             </div>
