@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { HeaderWrapper } from './components/HeaderWrapper';
 import { FooterWrapper } from './components/FooterWrapper';
 import { RootLayoutClient } from './components/RootLayoutClient';
+import dynamic from 'next/dynamic';
+
+const HeaderWrapperLazy = dynamic(() => import('./components/HeaderWrapper').then(mod => ({ default: mod.HeaderWrapper })), {
+  loading: () => null,
+});
 
 export const metadata: Metadata = {
   title: 'TechPilots - Datorkomponenter och Datorer',
@@ -18,7 +22,7 @@ export default function RootLayout({
     <html lang="sv">
       <body className="bg-white">
         <RootLayoutClient>
-          <HeaderWrapper />
+          <HeaderWrapperLazy />
           <main className="py-4">{children}</main>
           <FooterWrapper />
         </RootLayoutClient>
