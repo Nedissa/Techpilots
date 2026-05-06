@@ -178,7 +178,8 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                 type="text"
                 value={priceRange[0]}
                 onChange={(e) => {
-                  const newMin = Number(e.target.value) || 0;
+                  let newMin = Number(e.target.value) || 0;
+                  if (newMin > maxPrice) newMin = maxPrice;
                   if (newMin <= priceRange[1]) {
                     handlePriceChange('min', newMin);
                   }
@@ -192,7 +193,8 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                 type="text"
                 value={priceRange[1]}
                 onChange={(e) => {
-                  const newMax = Number(e.target.value) || maxPrice;
+                  let newMax = Number(e.target.value) || maxPrice;
+                  if (newMax > maxPrice) newMax = maxPrice;
                   if (newMax >= priceRange[0]) {
                     handlePriceChange('max', newMax);
                   }
