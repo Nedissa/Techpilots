@@ -5,35 +5,7 @@
 ▲ Next.js 16.2.4 (Turbopack)
 - Local:         http://localhost:3000
 - Network:       http://192.168.0.9:3000
-✓ Ready in 303ms
-
- GET / 200 in 281ms (next.js: 112ms, application-code: 168ms)
- GET / 200 in 50ms (next.js: 4ms, application-code: 47ms)
- GET /assets/Produkt%20bilder/STATION%C3%83%C2%84R/1.webp 404 in 182ms (next.js: 20ms, application-code: 161ms)
- GET /assets/Produkt%20bilder/STATION%C3%83%C2%84R/6907594_t7dv07.webp 404 in 138ms (next.js: 38ms, application-code: 99ms)
- GET /assets/Produkt%20bilder/STATION%C3%83%C2%84R/6907594_jzbn2q.webp 404 in 109ms (next.js: 37ms, application-code: 71ms)
- GET /assets/Produkt%20bilder/STATION%C3%83%C2%84R/6907594_ebnf7f.webp 404 in 110ms (next.js: 48ms, application-code: 63ms)
- GET /produkter/asus-rog-gaming-laptop 200 in 299ms (next.js: 279ms, application-code: 19ms)
- GET / 200 in 12ms (next.js: 2ms, application-code: 10ms)
- GET /produktserier/ultrabooks 200 in 300ms (next.js: 283ms, application-code: 17ms)
- GET / 200 in 12ms (next.js: 1894µs, application-code: 10ms)
- GET /produkter 200 in 59ms (next.js: 15ms, application-code: 44ms)
- GET /produkter/asus-rog-gaming-laptop 200 in 19ms (next.js: 6ms, application-code: 13ms)
- GET /produkter/asus-rog-gaming-laptop 200 in 17ms (next.js: 5ms, application-code: 12ms)
- GET /produktserier 404 in 15ms (next.js: 2ms, application-code: 13ms)
- GET /produktserier 404 in 38ms (next.js: 8ms, application-code: 30ms)
- GET /produkter/asus-rog-gaming-laptop 200 in 48ms (next.js: 7ms, application-code: 41ms)
-✓ Compiled in 586ms
- GET /produkter/asus-rog-gaming-laptop 200 in 84ms (next.js: 57ms, application-code: 27ms)
-✓ Compiled in 36ms
- GET /produkter/asus-rog-gaming-laptop 200 in 73ms (next.js: 45ms, application-code: 28ms)
-✓ Compiled in 44ms
- GET /produkter/asus-rog-gaming-laptop 200 in 75ms (next.js: 45ms, application-code: 30ms)
-✓ Compiled in 37ms
- GET /produkter/asus-rog-gaming-laptop 200 in 72ms (next.js: 48ms, application-code: 24ms)
- GET /produktserier 404 in 25ms (next.js: 8ms, application-code: 17ms)
- GET /produktserier 404 in 74ms (next.js: 2ms, application-code: 72ms)
- GET /produktserier/ultrabooks 200 in 24ms (next.js: 10ms, application-code: 15ms)
- GET /produkter/asus-rog-gaming-laptop 200 in 17ms (next.js: 5ms, application-code: 12ms)
- GET /produktserier/ultrabooks 200 in 21ms (next.js: 6ms, application-code: 15ms)
- GET /produkter/asus-rog-gaming-laptop 200 in 17ms (next.js: 5ms, application-code: 12ms)
+✓ Ready in 290ms
+Error: You cannot use different slug names for the same dynamic path ('handle' !== 'slug').
+    at ignore-listed frames
+[?25h
