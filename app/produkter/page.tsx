@@ -29,7 +29,9 @@ export default function ProductsPage() {
   const categoryFilteredProducts = ALL_PRODUCTS.filter((product) =>
     selectedCategory === 'Alla' || product.category === selectedCategory
   );
-  const maxPriceInCategory = Math.max(...categoryFilteredProducts.map(p => p.price));
+  const maxPriceInCategory = categoryFilteredProducts.length > 0
+    ? Math.max(...categoryFilteredProducts.map(p => p.price))
+    : 20000;
 
   const filtered = categoryFilteredProducts;
 
