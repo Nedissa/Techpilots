@@ -443,7 +443,7 @@ export function HeaderWrapper() {
                                 {product.category} | Frekvensband: Dual-band
                               </div>
                             </div>
-                            <div className="flex items-center gap-2 flex-shrink-0">
+                            <div className="flex items-center gap-3 flex-shrink-0">
                               <div className="flex gap-0.5">
                                 {[...Array(5)].map((_, i) => (
                                   <svg key={i} className={`w-3 h-3 ${i < product.rating ? 'fill-black' : 'fill-gray-300'}`} viewBox="0 0 20 20">
