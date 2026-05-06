@@ -4,24 +4,11 @@ import { useState } from 'react';
 import { ProductFilter } from '@/app/components/ProductFilter';
 import { ProductCardGrid } from '@/app/components/ProductCardGrid';
 import { Breadcrumb } from '@/app/components/Breadcrumb';
+import { ProductData } from '@/app/components/ProductCard';
 
 type SortOption = 'recommended' | 'latest' | 'rating' | 'popularity' | 'price-asc' | 'price-desc';
 
-interface Product {
-  id: string;
-  title: string;
-  handle: string;
-  price: number;
-  originalPrice?: number;
-  brand?: string;
-  discount?: string;
-  rating?: number;
-  reviews?: number;
-  image: string;
-  colors?: string[];
-  stock?: string;
-  features?: string[];
-}
+type Product = ProductData;
 
 interface FilterOptions {
   priceRange: [number, number];
@@ -127,7 +114,7 @@ export function ProductSeriesContent({
               )}
             </div>
           </div>
-          <ProductCardGrid products={filteredProducts} categorySlug={categorySlug} breadcrumbTrail={breadcrumbTrail} sortBy={sortBy} />
+          <ProductCardGrid products={filteredProducts} categorySlug={categorySlug} breadcrumbTrail={breadcrumbTrail} sortBy={sortBy} variant="recommended" />
         </div>
       </div>
     </div>

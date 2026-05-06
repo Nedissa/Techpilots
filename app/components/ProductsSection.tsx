@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { ProductCardGrid } from './ProductCardGrid';
+import { ProductData } from './ProductCard';
 
-type SectionVariant = 'popular' | 'recommended' | 'related';
+type SectionVariant = 'popular' | 'recommended' | 'new' | 'related';
 
 const SECTION_CONFIG: Record<SectionVariant, { title: string; buttonLabel: string }> = {
   popular: {
@@ -14,30 +15,17 @@ const SECTION_CONFIG: Record<SectionVariant, { title: string; buttonLabel: strin
     title: 'Rekommenderade produkter',
     buttonLabel: 'Lägg i varukorg',
   },
+  new: {
+    title: 'Nya produkter',
+    buttonLabel: 'Lägg i varukorg',
+  },
   related: {
-    title: 'Du kanske också gillar',
+    title: 'Relaterade produkter',
     buttonLabel: 'Lägg i varukorg',
   },
 };
 
-interface Product {
-  id: string;
-  title: string;
-  handle: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  images?: string[];
-  brand?: string;
-  discount?: string;
-  discountPercent?: number;
-  rating?: number;
-  reviews?: number;
-  colors?: string[];
-  features?: string[];
-  stock?: string;
-  isNew?: boolean;
-}
+type Product = ProductData;
 
 export function ProductsSection({
   variant = 'recommended',
@@ -62,7 +50,7 @@ export function ProductsSection({
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-900">{config.title}</h2>
         </div>
-        <ProductCardGrid products={visibleProducts} />
+        <ProductCardGrid products={visibleProducts} variant={variant as 'popular' | 'recommended' | 'new' | 'related'} />
       </div>
     </section>
   );
