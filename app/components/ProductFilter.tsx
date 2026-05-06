@@ -183,14 +183,9 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                 type="number"
                 value={priceRange[0]}
                 onChange={(e) => {
-                  let newMin = Number(e.target.value);
-                  if (newMin > maxPrice) newMin = maxPrice;
-                  if (newMin <= priceRange[1]) {
-                    handlePriceChange('min', newMin);
-                  }
+                  const newMin = Math.min(Number(e.target.value), priceRange[1]);
+                  handlePriceChange('min', newMin);
                 }}
-                min={0}
-                max={maxPrice}
                 className="w-14 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700"
               />
               <span className="text-gray-600">kr</span>
@@ -200,14 +195,9 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
                 type="number"
                 value={priceRange[1]}
                 onChange={(e) => {
-                  let newMax = Number(e.target.value);
-                  if (newMax > maxPrice) newMax = maxPrice;
-                  if (newMax >= priceRange[0]) {
-                    handlePriceChange('max', newMax);
-                  }
+                  const newMax = Math.max(Number(e.target.value), priceRange[0]);
+                  handlePriceChange('max', newMax);
                 }}
-                min={0}
-                max={maxPrice}
                 className="w-14 px-1 py-0.5 text-xs text-gray-700 text-center border-b border-gray-400 focus:outline-none focus:border-gray-700"
               />
               <span className="text-gray-600">kr</span>
