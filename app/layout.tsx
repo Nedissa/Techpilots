@@ -20,7 +20,7 @@ export default function RootLayout({
         <RootLayoutClient>
           <HeaderWrapper />
           <main className="py-4 pb-24 flex justify-center">
-            <div className="w-full max-w-[1280px] px-6">
+            <div className="w-full max-w-[1280px]">
               {children}
             </div>
           </main>
