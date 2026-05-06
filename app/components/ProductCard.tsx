@@ -63,6 +63,14 @@ export function ProductCard({
     onAddToCart?.(product);
   }, [product, onAddToCart]);
 
+  const [added, setAdded] = useState(false);
+
+  const handleClick = () => {
+    handleAddToCart();
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
   const productLink = categorySlug
     ? `/produktserier/${categorySlug}/${product.handle}`
     : `/produkter/${product.handle}`;
@@ -224,11 +232,11 @@ export function ProductCard({
         {product.stock && (
           <div className="mt-auto">
             <button
-              onClick={handleAddToCart}
-              disabled={isAdded}
+              onClick={handleClick}
+              disabled={added}
               className={`w-full py-2.5 font-semibold text-sm flex items-center justify-center gap-2 bg-black text-white`}
             >
-              {isAdded ? (
+              {added ? (
                 <>
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
