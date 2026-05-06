@@ -76,7 +76,7 @@ export function ProductSeriesContent({
   const filteredProducts = products.filter((product) => {
     const priceMatch = product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1];
     const brandMatch = filters.brands.length === 0 || !product.brand || filters.brands.includes(product.brand);
-    const colorMatch = filters.colors.length === 0 || (product.colors && product.colors.some(color => filters.colors.includes(color)));
+    const colorMatch = !filters.colors || filters.colors.length === 0 || (product.colors && product.colors.some(color => filters.colors.includes(color)));
     const ratingMatch = filters.rating === null || (product.rating || 0) >= filters.rating;
     const stockMatch = !filters.inStock || product.stock?.includes('I lager');
     return priceMatch && brandMatch && colorMatch && ratingMatch && stockMatch;
