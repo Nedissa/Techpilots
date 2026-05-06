@@ -53,7 +53,7 @@ const MENU_DATA: MenuCategory[] = [
   {
     id: 'datorer-och-tillbehor',
     title: 'Datorer & Tillbehör',
-    url: '/produktserier',
+    url: '/kategori/datorer-tillbehor',
     items: [
       {
         id: 'barbara',
@@ -94,7 +94,7 @@ const MENU_DATA: MenuCategory[] = [
   {
     id: 'komponenter',
     title: 'Datorkomponenter',
-    url: '/produktserier/components',
+    url: '/kategori/datorkomponenter',
     items: [
       {
         id: 'processorer',
@@ -161,7 +161,7 @@ const MENU_DATA: MenuCategory[] = [
   {
     id: 'gaming',
     title: 'Gaming',
-    url: '/produktserier/gaming',
+    url: '/kategori/gaming',
     items: [
       {
         id: 'gaming-laptops',
@@ -199,7 +199,7 @@ const MENU_DATA: MenuCategory[] = [
   {
     id: 'mobiltelefoner',
     title: 'Mobiltelefoner',
-    url: '/produktserier/phones',
+    url: '/kategori/mobiltelefoner',
     items: [
       {
         id: 'smartphones',
@@ -228,7 +228,7 @@ const MENU_DATA: MenuCategory[] = [
   {
     id: 'tv-hifi',
     title: 'TV & HiFi',
-    url: '/produktserier/tv-hifi',
+    url: '/kategori/tv-hifi',
     items: [
       {
         id: 'tv',
