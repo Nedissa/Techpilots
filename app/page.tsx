@@ -120,8 +120,8 @@ function HeroCarousel() {
   const currentCollection = FEATURED_COLLECTIONS[currentIndex];
 
   return (
-    <div className="relative z-0">
-      <div className="relative w-full h-[484px] overflow-hidden bg-gray-900 flex items-center justify-center">
+    <div className="relative z-0 flex justify-center">
+      <div className="relative max-w-[1280px] w-full h-[484px] overflow-hidden bg-gray-900 flex items-center justify-center">
         <Link href={`/kategorier/${currentCollection.handle}`} className="block relative w-full h-full flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">{currentCollection.title}</h1>
