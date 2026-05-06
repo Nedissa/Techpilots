@@ -2,24 +2,20 @@
 
 import Link from 'next/link';
 import { MainLayout } from '@/app/components/MainLayout';
+import { Breadcrumb } from '@/app/components/Breadcrumb';
 
 export default function TermsPage() {
   return (
     <MainLayout>
-      {/* Breadcrumbs */}
-      <div className="max-w-[1280px] mx-auto px-4 py-4 text-sm text-gray-600">
-        <Link href="/" className="hover:text-black">Hem</Link>
-        <span className="mx-2">/</span>
-        <span className="text-black">Villkor</span>
-      </div>
+      <Breadcrumb items={[{ label: 'Villkor' }]} />
 
       {/* Header */}
-      <div className="max-w-[1280px] mx-auto px-4 py-16">
+      <div className="max-w-[1280px] mx-auto px-6 py-16">
         <h1 className="text-5xl font-bold mb-4">Allmänna villkor</h1>
         <p className="text-gray-600 mb-4">Gäller från 1 januari 2024</p>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 pb-16 space-y-8">
+      <div className="max-w-4xl mx-auto px-6 pb-16 space-y-8">
         {/* Section 1 */}
         <section>
           <h2 className="text-2xl font-bold mb-4">1. Allmänt</h2>

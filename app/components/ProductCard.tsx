@@ -89,9 +89,6 @@ export function ProductCard({
 
           setImageIndex(newIndex);
         }}
-        onMouseLeave={() => {
-          setImageIndex(0);
-        }}
       >
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">

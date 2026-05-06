@@ -104,16 +104,7 @@ export default function ProductDetailClient({
     <div>
       <Breadcrumb items={breadcrumbItems} />
 
-      {/* Rating */}
-      <div className="flex items-center gap-2 mb-5">
-        <div className="flex gap-1 text-black">
-          {[...Array(5)].map((_, i) => (
-            <span key={i}>★</span>
-          ))}
-        </div>
-        <span className="text-sm text-black">{product.rating} ({product.reviews})</span>
-      </div>
-
+      <div className="px-6">
       {/* Main Product Grid */}
       <div className="flex gap-2">
         {/* Left Column - Image & Tabs */}
@@ -169,6 +160,15 @@ export default function ProductDetailClient({
                     alt={mainImage.altText}
                     className="max-w-full max-h-full object-contain"
                   />
+                  {/* Rating Badge - Top Right Corner */}
+                  <div className="absolute top-2 right-2 flex items-center gap-1.5">
+                    <div className="flex gap-0">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-yellow-400 text-lg leading-none">★</span>
+                      ))}
+                    </div>
+                    <span className="text-xs text-black font-semibold">({product.reviews})</span>
+                  </div>
                 </button>
 
                 <button
@@ -552,6 +552,7 @@ export default function ProductDetailClient({
 
         </div>
       </div>
+      </div>
 
       {/* Image Zoom Dialog */}
       <ImageZoomDialog
@@ -562,7 +563,7 @@ export default function ProductDetailClient({
       />
 
       {/* Related Products Section */}
-      <div className="mt-12 pt-8 border-t border-gray-200">
+      <div className="px-6 mt-12 pt-8 border-t border-gray-200">
         <ProductsSection
           variant="related"
           products={RELATED_PRODUCTS}

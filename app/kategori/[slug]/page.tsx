@@ -21,7 +21,7 @@ export default async function CategoryPage({ params }: PageProps) {
   return (
     <MainLayout>
       <Breadcrumb items={breadcrumbItems} />
-      <div className="text-center py-16">
+      <div className="px-6 text-center py-16">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">{categoryTitle}</h1>
         <p className="text-lg text-gray-600">Innehål för denna kategori kommer snart</p>
       </div>

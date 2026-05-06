@@ -2,24 +2,20 @@
 
 import Link from 'next/link';
 import { MainLayout } from '@/app/components/MainLayout';
+import { Breadcrumb } from '@/app/components/Breadcrumb';
 
 export default function ReturnPolicyPage() {
   return (
     <MainLayout>
-      {/* Breadcrumbs */}
-      <div className="max-w-[1280px] mx-auto px-4 py-4 text-sm text-gray-600">
-        <Link href="/" className="hover:text-black">Hem</Link>
-        <span className="mx-2">/</span>
-        <span className="text-black">Returpolicy</span>
-      </div>
+      <Breadcrumb items={[{ label: 'Returpolicy' }]} />
 
       {/* Header */}
-      <div className="max-w-[1280px] mx-auto px-4 py-16">
+      <div className="max-w-[1280px] mx-auto px-6 py-16">
         <h1 className="text-5xl font-bold mb-4">Returpolicy</h1>
         <p className="text-xl text-gray-600">Vi erbjuder enkla och rättvisa retureringar</p>
       </div>
 
-      <div className="max-w-[1280px] mx-auto px-4 pb-16 space-y-12">
+      <div className="max-w-[1280px] mx-auto px-6 pb-16 space-y-12">
         {/* Key Points */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="border border-gray-200 p-6 rounded-lg">

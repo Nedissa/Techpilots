@@ -7,10 +7,7 @@ export function NewsletterPopup() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    const hasClosedPopup = localStorage.getItem('newsletterPopupClosed');
-    if (!hasClosedPopup) {
-      setIsOpen(true);
-    }
+    setIsOpen(true);
   }, []);
 
   const handleClose = () => {
@@ -28,11 +25,11 @@ export function NewsletterPopup() {
   if (!isOpen) return null;
 
   return (
-    <div className="w-full max-w-2xl">
-      <div className="bg-white rounded-2xl overflow-hidden shadow-2xl">
-        <div className="flex flex-row">
+    <div className="w-full max-w-3xl">
+      <div className="bg-white overflow-hidden shadow-2xl">
+        <div className="flex flex-row h-96">
           {/* Image Section */}
-          <div className="w-1/2 bg-gray-200 h-80 flex items-center justify-center">
+          <div className="w-[35%] bg-gray-200 flex items-center justify-center p-6">
             <img
               src="/assets/Produkt bilder/LAPTOP/1978563_1.webp"
               alt="Newsletter"
@@ -41,7 +38,7 @@ export function NewsletterPopup() {
           </div>
 
           {/* Content Section */}
-          <div className="w-1/2 p-8 flex flex-col justify-center relative">
+          <div className="w-[65%] p-10 flex flex-col justify-center relative">
             {/* Close Button */}
             <button
               onClick={handleClose}
@@ -55,9 +52,9 @@ export function NewsletterPopup() {
 
             {/* Text Content */}
             <div className="mb-6">
-              <p className="text-xs text-gray-500 font-semibold tracking-wide mb-3">FIRST TIMER?</p>
+              <p className="text-xs text-gray-500 font-semibold tracking-wide mb-3">FÖRSTA GÅNGEN?</p>
               <h2 className="text-3xl font-bold text-black mb-4">
-                Sign up and get 20% off your first order
+                Registrera dig och få 20% rabatt
               </h2>
             </div>
 
@@ -66,7 +63,7 @@ export function NewsletterPopup() {
               <div className="flex gap-2">
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Ange din e-postadress"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -74,8 +71,8 @@ export function NewsletterPopup() {
                 />
                 <button
                   type="submit"
-                  className="bg-black text-white px-6 py-3 font-semibold hover:bg-gray-900 transition-colors flex items-center justify-center rounded-full"
-                  aria-label="Subscribe"
+                  className="bg-black text-white px-6 py-3 font-semibold hover:bg-gray-900 transition-colors flex items-center justify-center"
+                  aria-label="Prenumerera"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -86,7 +83,7 @@ export function NewsletterPopup() {
 
             {/* Description */}
             <p className="text-sm text-gray-600 mb-6">
-              Subscribe to our newsletter and be the first to hear about our new arrivals, special promotions and online exclusives.
+              Prenumerera på vårt nyhetsbrev och bli först att höra om nya varor, specialerbjudanden och exklusiva erbjudanden online.
             </p>
 
             {/* Social Links - Footer style */}

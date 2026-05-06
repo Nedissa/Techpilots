@@ -2,19 +2,15 @@
 
 import Link from 'next/link';
 import { MainLayout } from '@/app/components/MainLayout';
+import { Breadcrumb } from '@/app/components/Breadcrumb';
 
 export default function AboutPage() {
   return (
     <MainLayout>
-      {/* Breadcrumbs */}
-      <div className="max-w-[1280px] mx-auto px-4 py-4 text-sm text-gray-600">
-        <Link href="/" className="hover:text-black">Hem</Link>
-        <span className="mx-2">/</span>
-        <span className="text-black">Om oss</span>
-      </div>
+      <Breadcrumb items={[{ label: 'Om oss' }]} />
 
       {/* Hero */}
-      <div className="max-w-[1280px] mx-auto px-4 py-16">
+      <div className="max-w-[1280px] mx-auto px-6 py-16">
         <h1 className="text-5xl font-bold mb-4">Om TechPilots</h1>
         <p className="text-xl text-gray-600 max-w-3xl">
           Vi är en e-handelsplattform dedikerad till att leverera högkvalitativa datorer, komponenter och tillbehör till bästa pris.
@@ -23,7 +19,7 @@ export default function AboutPage() {
 
       {/* Story */}
       <div className="bg-gray-50 py-16">
-        <div className="max-w-[1280px] mx-auto px-4">
+        <div className="max-w-[1280px] mx-auto px-6">
           <h2 className="text-3xl font-bold mb-8">Vår historia</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
@@ -47,7 +43,7 @@ export default function AboutPage() {
       </div>
 
       {/* Values */}
-      <div className="max-w-[1280px] mx-auto px-4 py-16">
+      <div className="max-w-[1280px] mx-auto px-6 py-16">
         <h2 className="text-3xl font-bold mb-12">Våra värden</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="border border-gray-200 p-6 rounded-lg">
@@ -70,7 +66,7 @@ export default function AboutPage() {
 
       {/* Team */}
       <div className="bg-gray-50 py-16">
-        <div className="max-w-[1280px] mx-auto px-4">
+        <div className="max-w-[1280px] mx-auto px-6">
           <h2 className="text-3xl font-bold mb-12">Vårt team</h2>
           <p className="text-gray-700 mb-8">
             TechPilots-teamet består av erfarna professionaler inom e-handel, logistik och kundservice som är passionerade om teknik och dedikerade till att ge bästa möjliga upplevelse.
@@ -90,7 +86,7 @@ export default function AboutPage() {
       </div>
 
       {/* Stats */}
-      <div className="max-w-[1280px] mx-auto px-4 py-16">
+      <div className="max-w-[1280px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
           <div>
             <p className="text-4xl font-bold mb-2">5000+</p>
@@ -113,7 +109,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12">
-        <div className="max-w-[1280px] mx-auto px-4 text-center">
+        <div className="max-w-[1280px] mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4">Redo att börja?</h2>
           <p className="text-lg mb-8">Utforska vårt kompletta sortiment av högkvalitativa datorer och komponenter</p>
           <Link href="/produkter" className="inline-block bg-white text-gray-900 px-8 py-3 rounded font-bold hover:bg-gray-100">
