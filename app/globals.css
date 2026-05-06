@@ -318,7 +318,7 @@ footer a {
   display: flex;
   align-items: center;
   margin-bottom: 4px;
-  max-width: 85%;
+  max-width: 100%;
 }
 
 .price-slider-track {
