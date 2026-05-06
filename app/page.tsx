@@ -130,11 +130,9 @@ function HeroCarousel() {
             </button>
           </div>
         </Link>
-      </div>
 
-
-      {/* Carousel controls - positioned at bottom right */}
-      <div className="absolute bottom-6 right-6 flex items-center gap-4">
+        {/* Carousel controls - positioned at bottom right inside container */}
+        <div className="absolute bottom-6 right-6 flex items-center gap-4">
         <div className="bg-white rounded-full px-4 py-2 flex items-center gap-3">
           <button
             onClick={() => setCurrentIndex((prev) => (prev - 1 + FEATURED_COLLECTIONS.length) % FEATURED_COLLECTIONS.length)}
@@ -174,6 +172,7 @@ function HeroCarousel() {
             </svg>
           )}
         </button>
+        </div>
       </div>
     </div>
   );
