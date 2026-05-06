@@ -96,7 +96,7 @@ export function ProductSeriesContent({
       </div>
       <div className="flex">
         <ProductFilter onFilterChange={setFilters} maxPrice={maxPrice} />
-        <div className="flex-1 px-6 py-8">
+        <div className="flex-1 px-6 pt-0 pb-8">
           <div className="flex items-center justify-between mb-8 gap-6">
             <h1 className="text-3xl font-bold text-gray-900">{categoryTitle}</h1>
             <div className="relative w-44">
