@@ -180,10 +180,13 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
           <div className="flex items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-1">
               <input
-                type="number"
+                type="text"
+                inputMode="numeric"
                 value={priceRange[0]}
                 onChange={(e) => {
-                  const num = Number(e.target.value);
+                  let input = e.target.value;
+                  if (input === '') input = '0';
+                  const num = parseInt(input, 10) || 0;
                   setPriceRange([num, priceRange[1]]);
                   updateFilters([num, priceRange[1]], selectedBrands, selectedColors, selectedRating, inStockOnly);
                 }}
@@ -193,10 +196,13 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
             </div>
             <div className="flex items-center gap-1">
               <input
-                type="number"
+                type="text"
+                inputMode="numeric"
                 value={priceRange[1]}
                 onChange={(e) => {
-                  const num = Number(e.target.value);
+                  let input = e.target.value;
+                  if (input === '') input = '0';
+                  const num = parseInt(input, 10) || 0;
                   setPriceRange([priceRange[0], num]);
                   updateFilters([priceRange[0], num], selectedBrands, selectedColors, selectedRating, inStockOnly);
                 }}
