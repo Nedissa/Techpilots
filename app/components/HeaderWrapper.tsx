@@ -474,13 +474,8 @@ export function HeaderWrapper() {
                 25% { transform: translateX(-2px); }
                 75% { transform: translateX(2px); }
               }
-              @keyframes vibrateLong {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-2px); }
-                75% { transform: translateX(2px); }
-              }
               .vibrating {
-                animation: ${isHeaderVisible ? 'vibrate 0.3s ease-in-out' : 'vibrateLong 0.3s ease-in-out 4'};
+                animation: vibrate 0.15s ease-in-out infinite;
               }
             `}</style>
             {/* Language Switcher */}
