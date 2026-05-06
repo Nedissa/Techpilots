@@ -170,12 +170,12 @@ export function ProductCardGrid({
 
             {/* Image Carousel Dots */}
             {product.images && product.images.length > 0 && (
-              <div className="flex gap-1.5 justify-center mb-4">
+              <div className="flex gap-2 justify-center mb-4">
                 {product.images.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setImageIndex(prev => ({ ...prev, [product.id]: idx }))}
-                    className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer ${
+                    className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${
                       (imageIndex[product.id] || 0) === idx ? 'bg-gray-900' : 'bg-gray-300'
                     }`}
                     aria-label={`Image ${idx + 1}`}
