@@ -158,7 +158,7 @@ export function ProductCardGrid3({
               ) : null}
             </div>
 
-            <Link href={categorySlug ? `/produktserier/${categorySlug}/${product.handle}` : `/produkter/${product.handle}`} className="w-full h-full flex items-center justify-center">
+            <Link href={categorySlug ? `/produktserier/${categorySlug}/${product.handle}` : `/produkter/${product.handle}`} scroll={false} className="w-full h-full flex items-center justify-center">
               <img
                 src={product.image}
                 alt={product.title}

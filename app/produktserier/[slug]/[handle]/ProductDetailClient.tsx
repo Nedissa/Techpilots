@@ -46,6 +46,7 @@ export default function ProductDetailClient({
   const [activeTab, setActiveTab] = useState('description');
   const [showAccessories, setShowAccessories] = useState(false);
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
+  const [isAdded, setIsAdded] = useState(false);
   const router = useRouter();
 
   // Mock product details for display
@@ -201,6 +202,7 @@ export default function ProductDetailClient({
                 {[
                 { key: 'description', label: 'Beskrivning' },
                 { key: 'specifications', label: 'Specifikationer' },
+                { key: 'contents', label: 'Produktinnehål' },
                 { key: 'reviews', label: 'Recensioner' },
                 { key: 'questions', label: 'Frågor' },
               ].map(({ key, label }) => (
@@ -221,6 +223,13 @@ export default function ProductDetailClient({
                     {key === 'specifications' && (
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.12-2.59-1.84 2.25h9.5L13.96 9.29z" />
+                      </svg>
+                    )}
+                    {key === 'contents' && (
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
                       </svg>
                     )}
                     {key === 'reviews' && (
@@ -261,6 +270,22 @@ export default function ProductDetailClient({
                       <p className="text-sm text-gray-700">{spec.value}</p>
                     </div>
                   ))}
+                </div>
+              )}
+
+              {activeTab === 'contents' && (
+                <div className="space-y-3 pb-8">
+                  <div className="border-b border-gray-200 pb-3">
+                    <p className="text-sm text-gray-700">
+                      Följande tillbehör ingår i paketet:
+                    </p>
+                    <ul className="text-sm text-gray-700 mt-2 space-y-1 list-disc list-inside">
+                      <li>1 x Gaming Laptop</li>
+                      <li>Laddare (USB-C)</li>
+                      <li>Användarhandbok</li>
+                      <li>Drivrutiner (på USB-enhet)</li>
+                    </ul>
+                  </div>
                 </div>
               )}
 
@@ -352,7 +377,7 @@ export default function ProductDetailClient({
                 <button
                   key={name}
                   onClick={() => setSelectedColor(name)}
-                  className={`w-6 h-6 rounded border-2 flex-shrink-0 transition-all ${
+                  className={`w-6 h-6 rounded border-2 flex-shrink-0 ${
                     selectedColor === name ? 'border-black scale-110' : 'border-gray-300'
                   }`}
                   style={{ backgroundColor: hex }}
@@ -448,13 +473,27 @@ export default function ProductDetailClient({
                 },
               });
               window.dispatchEvent(event);
+              setIsAdded(true);
+              setTimeout(() => setIsAdded(false), 2000);
             }}
-            className="w-full bg-black text-white text-sm font-semibold py-3 px-4 mb-2 hover:bg-gray-900 transition-colors flex items-center justify-center gap-2"
+            disabled={isAdded}
+            className="w-full bg-black text-white text-sm font-semibold py-3 px-4 mb-2 flex items-center justify-center gap-2"
           >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" fill="none"/>
-            </svg>
-            Lägg i varukorg
+            {isAdded ? (
+              <>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+                Tillagd
+              </>
+            ) : (
+              <>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" fill="none"/>
+                </svg>
+                Lägg i varukorg
+              </>
+            )}
           </button>
 
           {/* Buy Now Button */}

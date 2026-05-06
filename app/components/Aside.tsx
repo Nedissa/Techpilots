@@ -25,13 +25,10 @@ export function Aside({
   useEffect(() => {
     if (expanded) {
       setIsVisible(true);
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
     } else {
       setIsVisible(false);
       document.body.style.overflow = 'unset';
-      document.body.style.paddingRight = '0px';
     }
   }, [expanded]);
 
@@ -85,7 +82,14 @@ export function Aside({
         </header>
 
         {/* Content */}
-        <main className="flex-1 overflow-y-auto">{children}</main>
+        <main className="flex-1 overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {children}
+          <style>{`
+            main::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+        </main>
       </aside>
     </div>
   );

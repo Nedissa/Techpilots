@@ -504,22 +504,22 @@ export function HeaderWrapper() {
               {MENU_DATA.map((category) => {
                 const isActive = isPathActive(category.url);
                 return (
-                  <button
+                  <Link
                     key={category.id}
+                    href={category.url}
                     onMouseEnter={() => {
                       if (category.items && category.items.length > 0) {
                         setShowMegaMenu(true);
                         setActiveMegaMenu(category.id);
                       }
                     }}
-                    onClick={() => category.items?.length === 0 && (window.location.href = category.url)}
-                    className="px-6 py-4 text-sm font-semibold text-black whitespace-nowrap relative group"
+                    className="px-6 py-4 text-sm font-semibold text-black whitespace-nowrap relative group inline-flex"
                   >
                     {category.title}
                     <span className={`absolute bottom-0 left-6 right-6 h-0.5 transition-all ${
                       isActive ? 'bg-black' : 'bg-transparent group-hover:bg-black'
                     }`}></span>
-                  </button>
+                  </Link>
                 );
               })}
             </div>
