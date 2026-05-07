@@ -45,12 +45,14 @@ export async function fetchProductsFromMedusa(): Promise<Product[]> {
     }
 
     const data = await response.json();
+    console.log('Medusa API response:', data);
 
     if (!data.products || !Array.isArray(data.products)) {
-      console.error('Invalid response format from Medusa API');
+      console.error('Invalid response format from Medusa API:', data);
       return [];
     }
 
+    console.log('Found', data.products.length, 'products');
     return data.products.map((product: MedusaProduct) => ({
       id: product.id,
       title: product.title,
@@ -65,6 +67,7 @@ export async function fetchProductsFromMedusa(): Promise<Product[]> {
     }));
   } catch (error) {
     console.error('Error fetching products from Medusa:', error);
+    console.error('Full error:', JSON.stringify(error));
     return [];
   }
 }
