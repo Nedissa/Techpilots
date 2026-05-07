@@ -26,29 +26,21 @@ export interface Product {
 
 export async function fetchProductsFromMedusa(): Promise<Product[]> {
   try {
-    console.log('Fetching products from Medusa...');
-    const response = await fetch(
-      `${MEDUSA_API_URL}/store/products?limit=100`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-publishable-api-key': PUBLISHABLE_API_KEY,
-        },
-      }
-    );
+    console.log('Fetching products from API route...');
+    const response = await fetch('/api/products');
 
-    console.log('Medusa response status:', response.status);
+    console.log('API response status:', response.status);
 
     if (!response.ok) {
-      console.error('Failed to fetch products from Medusa:', response.status);
+      console.error('Failed to fetch products from API:', response.status);
       return [];
     }
 
     const data = await response.json();
-    console.log('Medusa API response:', data);
+    console.log('API response:', data);
 
     if (!data.products || !Array.isArray(data.products)) {
-      console.error('Invalid response format from Medusa API:', data);
+      console.error('Invalid response format from API:', data);
       return [];
     }
 
@@ -74,15 +66,7 @@ export async function fetchProductsFromMedusa(): Promise<Product[]> {
 
 export async function fetchProductByHandle(handle: string): Promise<Product | null> {
   try {
-    const response = await fetch(
-      `${MEDUSA_API_URL}/store/products?handle=${handle}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-publishable-api-key': PUBLISHABLE_API_KEY,
-        },
-      }
-    );
+    const response = await fetch(`/api/products?handle=${handle}`);
 
     if (!response.ok) {
       return null;
