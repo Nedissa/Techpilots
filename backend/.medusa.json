@@ -1,7 +1,0 @@
-{
-  "id": "techpilots-medusa",
-  "status": "ACTIVE",
-  "projectConfig": {
-    "autoMigrateDb": false
-  }
-}
