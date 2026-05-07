@@ -118,9 +118,38 @@ export default function Checkout() {
     e.preventDefault();
     setIsProcessing(true);
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cartItems,
+          total: finalTotal,
+          formData,
+          shippingCost,
+        }),
+      });
 
-    window.location.href = '/order-bekraftelse';
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error('API error details:', data);
+        throw new Error(data.details || 'Failed to create checkout session');
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL returned');
+      }
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      console.error('Checkout error:', errorMsg);
+      setIsProcessing(false);
+      alert('Det gick inte att starta checkout. Försök igen senare.');
+    }
   };
 
   return (
@@ -397,51 +426,6 @@ export default function Checkout() {
               </div>
             </section>
 
-            {/* Payment Method */}
-            <section>
-              <h2 className="text-2xl font-bold mb-6">Betalning</h2>
-              <div className="space-y-3">
-                <label className="flex items-center gap-4 p-4 border border-gray-300 cursor-pointer hover:bg-gray-50">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="card"
-                    checked={paymentMethod === 'card'}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="w-4 h-4"
-                  />
-                  <div className="flex-1">
-                    <p className="font-medium">Kort (Visa, Mastercard)</p>
-                  </div>
-                </label>
-                <label className="flex items-center gap-4 p-4 border border-gray-300 cursor-pointer hover:bg-gray-50">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="swish"
-                    checked={paymentMethod === 'swish'}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="w-4 h-4"
-                  />
-                  <div className="flex-1">
-                    <p className="font-medium">Swish</p>
-                  </div>
-                </label>
-                <label className="flex items-center gap-4 p-4 border border-gray-300 cursor-pointer hover:bg-gray-50">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="invoice"
-                    checked={paymentMethod === 'invoice'}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="w-4 h-4"
-                  />
-                  <div className="flex-1">
-                    <p className="font-medium">Faktura</p>
-                  </div>
-                </label>
-              </div>
-            </section>
 
             {/* Submit Button */}
             <button
@@ -459,6 +443,7 @@ export default function Checkout() {
               ← Fortsätt handla
             </Link>
           </form>
+
 
         {/* Order Summary */}
         <div className="bg-white p-6 border border-gray-200" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
