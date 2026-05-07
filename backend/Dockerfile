@@ -2,7 +2,10 @@ FROM node:26-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+# Remove yarn completely
+RUN npm install -g npm@latest && yarn --version || true
+
+COPY package.json package-lock.json ./
 
 RUN npm ci
 

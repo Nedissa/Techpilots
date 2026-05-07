@@ -3,37 +3,30 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { MainLayout } from '@/app/components/MainLayout';
-import { fetchProductsFromMedusa, type Product } from '@/app/lib/medusa-client';
 
-const CATEGORIES = ['Alla', 'Laptops', 'Komponenter', 'Datorer', 'Tillbehör'];
-
-const FALLBACK_PRODUCTS = [
+const ALL_PRODUCTS = [
   { id: '1', title: 'ASUS ROG Gaming Laptop 16"', handle: 'asus-rog-gaming-laptop', price: 14999, originalPrice: 17999, rating: 4.8, reviews: 128, category: 'Laptops', image: '/assets/Produkt bilder/LAPTOP/1978563_1.webp' },
   { id: '2', title: 'Intel Core i9-13900H', handle: 'intel-core-i9', price: 8999, originalPrice: 9999, rating: 4.7, reviews: 89, category: 'Komponenter', image: 'https://via.placeholder.com/300?text=Intel+i9' },
   { id: '3', title: 'NVIDIA RTX 4080', handle: 'nvidia-rtx-4080', price: 11999, originalPrice: 13999, rating: 4.9, reviews: 156, category: 'Komponenter', image: 'https://via.placeholder.com/300?text=RTX+4080' },
   { id: '4', title: 'Corsair Headset', handle: 'corsair-headset', price: 1499, originalPrice: 1899, rating: 4.6, reviews: 67, category: 'Tillbehör', image: 'https://via.placeholder.com/300?text=Corsair+Headset' },
   { id: '5', title: 'Dell XPS 13', handle: 'dell-xps-13', price: 12999, originalPrice: 14999, rating: 4.8, reviews: 112, category: 'Laptops', image: 'https://via.placeholder.com/300?text=Dell+XPS' },
   { id: '6', title: 'AMD Ryzen 9', handle: 'amd-ryzen-9', price: 7999, originalPrice: 8999, rating: 4.7, reviews: 95, category: 'Komponenter', image: 'https://via.placeholder.com/300?text=AMD+Ryzen' },
+  { id: '7', title: 'Samsung Monitor 4K', handle: 'samsung-monitor-4k', price: 5499, originalPrice: 6999, rating: 4.5, reviews: 78, category: 'Tillbehör', image: 'https://via.placeholder.com/300?text=Samsung+Monitor' },
+  { id: '8', title: 'Mechanical Gaming Keyboard', handle: 'gaming-keyboard', price: 1299, originalPrice: 1699, rating: 4.8, reviews: 234, category: 'Tillbehör', image: 'https://via.placeholder.com/300?text=Gaming+Keyboard' },
+  { id: '9', title: 'Lenovo ThinkPad Pro', handle: 'lenovo-thinkpad', price: 13999, originalPrice: 16999, rating: 4.7, reviews: 101, category: 'Laptops', image: 'https://via.placeholder.com/300?text=Lenovo+ThinkPad' },
+  { id: '10', title: 'RTX 4070 Ti', handle: 'rtx-4070-ti', price: 8999, originalPrice: 10999, rating: 4.8, reviews: 143, category: 'Komponenter', image: 'https://via.placeholder.com/300?text=RTX+4070' },
+  { id: '11', title: 'Mouse Logitech MX', handle: 'logitech-mx-mouse', price: 899, originalPrice: 1199, rating: 4.9, reviews: 189, category: 'Tillbehör', image: 'https://via.placeholder.com/300?text=Logitech+MX' },
+  { id: '12', title: 'Mousepad Large Pro', handle: 'mousepad-pro', price: 499, originalPrice: 699, rating: 4.6, reviews: 55, category: 'Tillbehör', image: 'https://via.placeholder.com/300?text=Mousepad' },
 ];
 
+const CATEGORIES = ['Alla', 'Laptops', 'Komponenter', 'Datorer', 'Tillbehör'];
+
 export default function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>(FALLBACK_PRODUCTS);
-  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('Alla');
   const [sortBy, setSortBy] = useState('relevant');
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      setLoading(true);
-      const fetchedProducts = await fetchProductsFromMedusa();
-      setProducts(fetchedProducts.length > 0 ? fetchedProducts : FALLBACK_PRODUCTS);
-      setLoading(false);
-    };
-    loadProducts();
-  }, []);
-
-  const categoryFilteredProducts = products.filter((product) =>
+  const categoryFilteredProducts = ALL_PRODUCTS.filter((product) =>
     selectedCategory === 'Alla' || product.category === selectedCategory
   );
   const maxPriceInCategory = categoryFilteredProducts.length > 0
@@ -41,10 +34,6 @@ export default function ProductsPage() {
     : 20000;
 
   const filtered = categoryFilteredProducts;
-
-  if (loading) {
-    return <MainLayout><div className="text-center py-10">Laddar produkter...</div></MainLayout>;
-  }
 
   const sorted = [...filtered].sort((a, b) => {
     switch (sortBy) {
