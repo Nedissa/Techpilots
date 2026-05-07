@@ -130,17 +130,22 @@ function HeroCarousel() {
 
   const currentCollection = FEATURED_COLLECTIONS[currentIndex];
 
+  const heroImages = [
+    '/assets/Hero bilder/1.jpg.jpg',
+    '/assets/Hero bilder/2.jpg.jpg',
+    '/assets/Hero bilder/3.jpg.jpg',
+  ];
+
   return (
     <div className="relative z-0 flex justify-center">
-      <div className="relative max-w-[1280px] w-full h-[484px] overflow-hidden bg-gray-900 flex items-center justify-center">
-        <Link href={`/kategorier/${currentCollection.handle}`} className="block relative w-full h-full flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">{currentCollection.title}</h1>
-            <button className="bg-white text-black px-8 py-3 font-semibold hover:bg-gray-100 transition-colors">
-              Utforska →
-            </button>
-          </div>
-        </Link>
+      <div className="relative max-w-[1280px] w-full h-[484px] overflow-hidden flex items-center justify-center">
+        <img
+          src={heroImages[currentIndex]}
+          alt={currentCollection.title}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/30"></div>
+        <Link href={`/kategorier/${currentCollection.handle}`} className="block relative z-10 w-full h-full" />
 
         {/* Carousel controls - positioned at bottom right inside container */}
         <div className="absolute bottom-6 right-6 flex items-center gap-4">

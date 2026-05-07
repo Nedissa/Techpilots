@@ -32,6 +32,7 @@ export const MAIN_CATEGORIES: Record<string, string> = {
   'datorkomponenter': 'Datorkomponenter',
   'gaming': 'Gaming',
   'mobiltelefoner': 'Mobiltelefoner',
+  'natwerk': 'Nätverk',
   'tv-hifi': 'TV & HiFi',
 };
 

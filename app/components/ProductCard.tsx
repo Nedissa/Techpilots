@@ -238,16 +238,16 @@ export function ProductCard({
           <>
             <div className={`mt-auto border-t border-gray-200 ${isHovered ? 'hidden' : ''}`}></div>
             <style>{`
-              @keyframes slideInFill {
+              @keyframes slideUpFill {
                 from {
-                  clip-path: inset(0 100% 0 0);
+                  clip-path: inset(100% 0 0 0);
                 }
                 to {
                   clip-path: inset(0 0 0 0);
                 }
               }
               .button-fill {
-                animation: slideInFill 0.3s ease-out forwards;
+                animation: slideUpFill 0.3s ease-out forwards;
               }
             `}</style>
             <div className={`mt-auto ${isHovered ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}>
