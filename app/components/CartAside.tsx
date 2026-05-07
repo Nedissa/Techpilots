@@ -15,27 +15,33 @@ interface CartItem {
 
 export function CartAside() {
   const { close } = useAside();
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    // Initialize state from sessionStorage (only in browser)
-    if (typeof window === 'undefined') return [];
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartTotal, setCartTotal] = useState(0);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    // Load from sessionStorage after hydration
     const savedCartItems = sessionStorage.getItem('cartItems');
     if (savedCartItems) {
       try {
-        return JSON.parse(savedCartItems);
+        const items = JSON.parse(savedCartItems);
+        setCartItems(items);
+        const total = items.reduce((sum: number, item: CartItem) => sum + (item.price * item.quantity), 0);
+        setCartTotal(total);
       } catch (e) {
         console.error('Failed to load cart items from sessionStorage', e);
-        return [];
       }
     }
-    return [];
-  });
-  const [cartTotal, setCartTotal] = useState(0);
+    setIsHydrated(true);
+  }, []);
 
   useEffect(() => {
     // Update total when cartItems changes
-    const total = cartItems.reduce((sum: number, item: CartItem) => sum + (item.price * item.quantity), 0);
-    setCartTotal(total);
-  }, [cartItems]);
+    if (isHydrated) {
+      const total = cartItems.reduce((sum: number, item: CartItem) => sum + (item.price * item.quantity), 0);
+      setCartTotal(total);
+    }
+  }, [cartItems, isHydrated]);
 
   useEffect(() => {
     const handleAddToCart = (event: Event) => {

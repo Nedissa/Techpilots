@@ -1,7 +1,0 @@
-app/
-.next/
-node_modules/
-.git/
-.env
-.env.local
-*.log
