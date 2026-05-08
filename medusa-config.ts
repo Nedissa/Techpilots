@@ -1,2 +1,2 @@
 // Monorepo root - delegates to apps/backend/src
-export * from './apps/backend/src/medusa-config'
+module.exports = require('./apps/backend/src/medusa-config')
