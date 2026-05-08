@@ -1,6 +1,6 @@
 import { MainLayout } from '@/app/components/MainLayout';
 import { ProductSeriesContent } from './ProductSeriesContent';
-import { MOCK_PRODUCTS, getCategoryTitle, getBreadcrumbTrail } from '@/app/lib/products';
+import { getCategoryTitle, getBreadcrumbTrail } from '@/app/lib/products';
 
 interface PageProps {
   params: Promise<{
@@ -8,10 +8,23 @@ interface PageProps {
   }>;
 }
 
+async function fetchProducts() {
+  try {
+    const response = await fetch('http://localhost:3000/api/products');
+    if (!response.ok) return [];
+    const data = await response.json();
+    return data.products || [];
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return [];
+  }
+}
+
 export default async function ProductSeriesPage({ params }: PageProps) {
   const { slug } = await params;
   const categoryTitle = getCategoryTitle(slug);
   const breadcrumbTrail = getBreadcrumbTrail(slug);
+  const products = await fetchProducts();
 
   return (
     <MainLayout>
@@ -19,7 +32,7 @@ export default async function ProductSeriesPage({ params }: PageProps) {
         categoryTitle={categoryTitle}
         categorySlug={slug}
         breadcrumbTrail={breadcrumbTrail}
-        products={MOCK_PRODUCTS}
+        products={products}
       />
     </MainLayout>
   );
