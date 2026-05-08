@@ -225,7 +225,7 @@ export function ProductCard({
             {product.colors.map((color, idx) => (
               <button
                 key={idx}
-                className="w-5 h-5 border-2 border-gray-300 hover:border-gray-900 transition-colors"
+                className="h-7 px-4 rounded-full border-2 border-gray-300 hover:border-gray-900 transition-colors"
                 style={{ backgroundColor: color }}
                 title={color}
               />
