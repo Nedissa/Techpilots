@@ -1,6 +1,9 @@
 import { loadEnv, defineConfig } from '@medusajs/framework/utils'
+import path from 'path'
 
-loadEnv(process.env.NODE_ENV || 'development', process.cwd())
+// In monorepo, ensure we're loading env from backend directory
+const backendDir = __dirname
+loadEnv(process.env.NODE_ENV || 'development', backendDir)
 
 module.exports = defineConfig({
   projectConfig: {
