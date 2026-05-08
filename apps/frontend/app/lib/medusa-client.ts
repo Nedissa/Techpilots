@@ -1,5 +1,5 @@
 const MEDUSA_API_URL = 'https://absorbed-basket-practise.medusajs.app';
-const PUBLISHABLE_API_KEY = 'pk_91214f8d5ac9aa3cbfee7384cd66d2d3607d6a563b7d33508c23e836adff56f9';
+const PUBLISHABLE_API_KEY = 'pk_28a7e81fa3c5143763dab1cd7dab06c13e477e3bc9811b0ac4f32fdf39f2ace7';
 
 export interface MedusaProduct {
   id: string;

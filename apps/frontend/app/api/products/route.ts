@@ -5,7 +5,7 @@ export async function GET() {
       {
         headers: {
           'Content-Type': 'application/json',
-          'x-publishable-api-key': 'pk_91214f8d5ac9aa3cbfee7384cd66d2d3607d6a563b7d33508c23e836adff56f9',
+          'x-publishable-api-key': 'pk_28a7e81fa3c5143763dab1cd7dab06c13e477e3bc9811b0ac4f32fdf39f2ace7',
         },
       }
     );
