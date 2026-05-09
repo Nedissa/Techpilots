@@ -27,12 +27,6 @@ export default function Checkout() {
     city: '',
     country: 'Sverige',
     companyName: '',
-    useShippingAddress: false,
-    shippingFirstName: '',
-    shippingLastName: '',
-    shippingAddress: '',
-    shippingPostalCode: '',
-    shippingCity: '',
   });
   const [shippingMethod, setShippingMethod] = useState('standard');
   const [paymentMethod, setPaymentMethod] = useState('card');
@@ -40,41 +34,87 @@ export default function Checkout() {
   const [shippingOptions, setShippingOptions] = useState<any[]>([]);
   const [loadingShipping, setLoadingShipping] = useState(false);
   const addressInputRef = useRef<HTMLInputElement>(null);
-  const shippingAddressInputRef = useRef<HTMLInputElement>(null);
+
+  const countryCodeMap: Record<string, string> = {
+    'Sverige': 'se',
+    'Norge': 'no',
+    'Danmark': 'dk',
+    'Finland': 'fi'
+  };
+
+  const fetchShippingOptions = async (country: string) => {
+    setLoadingShipping(true);
+    try {
+      const countryCode = countryCodeMap[country] || country.toLowerCase();
+      const response = await fetch(`/api/shipping-options?country=${countryCode}`);
+      const data = await response.json();
+      if (data.shipping_options) {
+        setShippingOptions(data.shipping_options);
+        setShippingMethod(data.shipping_options[0]?.id || 'standard');
+      }
+    } catch (error) {
+      console.error('Failed to fetch shipping options:', error);
+      setShippingOptions([]);
+    } finally {
+      setLoadingShipping(false);
+    }
+  };
 
   useEffect(() => {
-    // Load Google Maps Places API script
+    // Load Google Maps Places API script once
+    if ((window as any).google?.maps?.places) {
+      // API already loaded
+      return;
+    }
+
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
-    script.async = true;
+    script.async = false;
     script.defer = true;
 
-    script.onload = () => {
+    window.initGoogleMapsAutocomplete = () => {
       if (addressInputRef.current && (window as any).google?.maps?.places) {
-        const autocomplete = new (window as any).google.maps.places.Autocomplete(addressInputRef.current, {
-          componentRestrictions: { country: 'se' },
-          types: ['address']
-        });
+        try {
+          new (window as any).google.maps.places.Autocomplete(addressInputRef.current, {
+            types: ['address'],
+            componentRestrictions: { country: ['se', 'no', 'dk', 'fi'] }
+          }).addListener('place_changed', function() {
+            const place = this.getPlace();
+            if (place.geometry && place.address_components) {
+              const addressComponents = place.address_components;
+              const address = place.formatted_address || addressInputRef.current!.value;
+              const streetAddress = addressComponents.find((c: any) => c.types.includes('route'))?.long_name || '';
+              const streetNumber = addressComponents.find((c: any) => c.types.includes('street_number'))?.long_name || '';
+              const postalCode = addressComponents.find((c: any) => c.types.includes('postal_code'))?.long_name || '';
+              const city = addressComponents.find((c: any) => c.types.includes('locality'))?.long_name || '';
+              const countryCode = addressComponents.find((c: any) => c.types.includes('country'))?.short_name || '';
 
-        autocomplete.addListener('place_changed', () => {
-          const place = autocomplete.getPlace();
-          if (place.geometry && place.address_components) {
-            const addressComponents = place.address_components;
-            const address = place.formatted_address || addressInputRef.current!.value;
-            const streetAddress = addressComponents.find((c: any) => c.types.includes('route'))?.long_name || '';
-            const streetNumber = addressComponents.find((c: any) => c.types.includes('street_number'))?.long_name || '';
-            const postalCode = addressComponents.find((c: any) => c.types.includes('postal_code'))?.long_name || '';
-            const city = addressComponents.find((c: any) => c.types.includes('locality'))?.long_name || '';
+              const countryMap: Record<string, string> = {
+                'SE': 'Sverige',
+                'NO': 'Norge',
+                'DK': 'Danmark',
+                'FI': 'Finland'
+              };
 
-            setFormData(prev => ({
-              ...prev,
-              address: `${streetAddress} ${streetNumber}`.trim() || address,
-              postalCode,
-              city
-            }));
-          }
-        });
+              setFormData(prev => ({
+                ...prev,
+                address: `${streetAddress} ${streetNumber}`.trim() || address,
+                postalCode,
+                city,
+                country: countryMap[countryCode] || prev.country
+              }));
+
+              fetchShippingOptions(countryMap[countryCode] || formData.country);
+            }
+          });
+        } catch (error) {
+          console.warn('Failed to initialize address autocomplete:', error);
+        }
       }
+    };
+
+    script.onload = () => {
+      (window as any).initGoogleMapsAutocomplete?.();
     };
 
     script.onerror = () => {
@@ -82,36 +122,16 @@ export default function Checkout() {
     };
 
     document.head.appendChild(script);
+
+    return () => {
+      delete (window as any).initGoogleMapsAutocomplete;
+    };
   }, []);
 
   useEffect(() => {
-    // Setup autocomplete for shipping address
-    if (formData.useShippingAddress && shippingAddressInputRef.current && (window as any).google?.maps?.places) {
-      const autocomplete = new (window as any).google.maps.places.Autocomplete(shippingAddressInputRef.current, {
-        componentRestrictions: { country: 'se' },
-        types: ['address']
-      });
-
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (place.geometry && place.address_components) {
-          const addressComponents = place.address_components;
-          const address = place.formatted_address || shippingAddressInputRef.current!.value;
-          const streetAddress = addressComponents.find((c: any) => c.types.includes('route'))?.long_name || '';
-          const streetNumber = addressComponents.find((c: any) => c.types.includes('street_number'))?.long_name || '';
-          const postalCode = addressComponents.find((c: any) => c.types.includes('postal_code'))?.long_name || '';
-          const city = addressComponents.find((c: any) => c.types.includes('locality'))?.long_name || '';
-
-          setFormData(prev => ({
-            ...prev,
-            shippingAddress: `${streetAddress} ${streetNumber}`.trim() || address,
-            shippingPostalCode: postalCode,
-            shippingCity: city
-          }));
-        }
-      });
-    }
-  }, [formData.useShippingAddress]);
+    // Fetch initial shipping options for default country
+    fetchShippingOptions(formData.country);
+  }, []);
 
   useEffect(() => {
     // Check if coming from quick checkout (Handla nu button)
@@ -162,7 +182,8 @@ export default function Checkout() {
     }
   }, []);
 
-  const shippingCost = shippingMethod === 'express' ? 99 : 0;
+  const selectedShippingOption = shippingOptions.find(opt => opt.id === shippingMethod);
+  const shippingCost = selectedShippingOption?.amount || 0;
   const totalDiscount = cartItems.reduce((total, item) => {
     if (item.originalPrice) {
       return total + ((item.originalPrice - item.price) * item.quantity);
@@ -171,44 +192,12 @@ export default function Checkout() {
   }, 0);
   const finalTotal = cartTotal + shippingCost;
 
-  const fetchShippingOptions = async (country: string) => {
-    setLoadingShipping(true);
-    try {
-      const response = await fetch(`/api/shipping-options?country=${country}`);
-      const data = await response.json();
-      if (data.shipping_options) {
-        setShippingOptions(data.shipping_options);
-        setShippingMethod(data.shipping_options[0]?.id || 'standard');
-      }
-    } catch (error) {
-      console.error('Failed to fetch shipping options:', error);
-      setShippingOptions([]);
-    } finally {
-      setLoadingShipping(false);
-    }
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
     }));
-
-    if (name === 'country') {
-      fetchShippingOptions(value);
-    }
-
-    if (name === 'useShippingAddress' && !(e.target as HTMLInputElement).checked) {
-      setFormData(prev => ({
-        ...prev,
-        shippingFirstName: '',
-        shippingLastName: '',
-        shippingAddress: '',
-        shippingPostalCode: '',
-        shippingCity: '',
-      }));
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -418,82 +407,7 @@ export default function Checkout() {
                     className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-500"
                   />
                 </div>
-                <select
-                  name="country"
-                  value={formData.country}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-500 bg-white"
-                >
-                  <option>Sverige</option>
-                  <option>Norge</option>
-                  <option>Danmark</option>
-                  <option>Finland</option>
-                </select>
               </div>
-            </section>
-
-            {/* Shipping Address */}
-            <section>
-              <label className="flex items-center gap-3 mb-6">
-                <input
-                  type="checkbox"
-                  name="useShippingAddress"
-                  checked={formData.useShippingAddress}
-                  onChange={handleInputChange}
-                  className="w-4 h-4"
-                />
-                <span className="text-sm font-medium">Leverera till en annan adress</span>
-              </label>
-
-              {formData.useShippingAddress && (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <input
-                      type="text"
-                      name="shippingFirstName"
-                      placeholder="Förnamn"
-                      value={formData.shippingFirstName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-500"
-                    />
-                    <input
-                      type="text"
-                      name="shippingLastName"
-                      placeholder="Efternamn"
-                      value={formData.shippingLastName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-500"
-                    />
-                  </div>
-                  <input
-                    ref={shippingAddressInputRef}
-                    type="text"
-                    name="shippingAddress"
-                    placeholder="Gata och husnummer"
-                    value={formData.shippingAddress}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-500"
-                  />
-                  <div className="grid grid-cols-2 gap-4">
-                    <input
-                      type="text"
-                      name="shippingPostalCode"
-                      placeholder="Postnummer"
-                      value={formData.shippingPostalCode}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-500"
-                    />
-                    <input
-                      type="text"
-                      name="shippingCity"
-                      placeholder="Stad"
-                      value={formData.shippingCity}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-500"
-                    />
-                  </div>
-                </div>
-              )}
             </section>
 
             {/* Shipping Method */}
@@ -515,10 +429,12 @@ export default function Checkout() {
                       />
                       <div className="flex-1">
                         <p className="font-medium">{option.name}</p>
-                        <p className="text-sm text-gray-600">{option.data?.description || 'Leveransalternativ'}</p>
+                        <p className="text-sm text-gray-600">
+                          {option.type === 'standard' ? '2-3 arbetsdagar' : option.type === 'express' ? '1 arbetsdag' : 'Leveransalternativ'}
+                        </p>
                       </div>
                       <span className="font-semibold">
-                        {option.amount ? `${(option.amount / 100).toFixed(2)} SEK` : 'Gratis'}
+                        {option.amount && option.amount > 0 ? `${option.amount} SEK` : 'Gratis'}
                       </span>
                     </label>
                   ))}
