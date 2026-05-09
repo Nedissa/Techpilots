@@ -29,6 +29,7 @@ export function CartAside() {
         setCartItems(items);
         const total = items.reduce((sum: number, item: CartItem) => sum + (item.price * item.quantity), 0);
         setCartTotal(total);
+        console.log('Loaded cart items from sessionStorage:', items);
       } catch (e) {
         console.error('Failed to load cart items from sessionStorage', e);
       }
@@ -61,8 +62,9 @@ export function CartAside() {
         } else {
           updated = [...prev, { id, title, price: priceNum, originalPrice: originalPriceNum, quantity: quantity || 1, image }];
         }
-        // Save to localStorage
+        // Save to sessionStorage
         sessionStorage.setItem('cartItems', JSON.stringify(updated));
+        console.log('Cart updated:', updated);
         return updated;
       });
 
