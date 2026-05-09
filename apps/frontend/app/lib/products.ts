@@ -16,6 +16,7 @@ export interface Product {
   features?: string[];
   isNew?: boolean;
   category?: string;
+  sectionCategory?: string;
 }
 
 export const MAIN_CATEGORIES: Record<string, string> = {
@@ -73,7 +74,7 @@ async function fetchProductsFromMedusa(): Promise<Product[]> {
 
     const data = await response.json();
     cachedProducts = data.products || [];
-    return cachedProducts;
+    return cachedProducts as Product[];
   } catch (error) {
     console.error('Error fetching products:', error);
   }

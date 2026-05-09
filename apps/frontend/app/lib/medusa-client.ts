@@ -22,6 +22,7 @@ export interface Product {
   reviews?: number;
   category?: string;
   brand?: string;
+  sectionCategory?: string;
 }
 
 export async function fetchProductsFromMedusa(): Promise<Product[]> {
@@ -52,7 +53,7 @@ export async function fetchProductsFromMedusa(): Promise<Product[]> {
       price: product.price || 0,
       originalPrice: product.originalPrice,
       image: product.images?.[0]?.url || '/assets/placeholder.webp',
-      images: product.images?.map(img => img.url) || [],
+      images: product.images?.map((img: any) => img.url) || [],
       rating: 4.5,
       reviews: 0,
       category: 'General',
