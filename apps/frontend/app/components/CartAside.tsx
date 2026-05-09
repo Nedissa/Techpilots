@@ -176,17 +176,15 @@ export function CartAside() {
                   <li key={item.id} className="border-b border-gray-200 last:border-b-0">
                     <div className="grid grid-cols-12 gap-4 items-center py-4">
                       {/* Product image */}
-                      <div className="col-span-2 flex-shrink-0">
+                      <div className="col-span-2 flex-shrink-0 w-20 h-20 bg-gray-100 rounded flex items-center justify-center">
                         {item.image ? (
                           <img
                             src={item.image}
                             alt={item.title}
-                            className="w-20 h-20 object-contain rounded"
+                            className="w-full h-full object-contain"
                           />
                         ) : (
-                          <div className="w-20 h-20 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
-                            Bild
-                          </div>
+                          <span className="text-gray-400 text-xs">Bild</span>
                         )}
                       </div>
 
