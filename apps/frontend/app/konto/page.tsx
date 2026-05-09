@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MainLayout } from '../components/MainLayout';
 import { Logo } from '../components/Logo';
 
@@ -15,6 +15,8 @@ export default function AccountPage() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [activeTab, setActiveTab] = useState('profil');
+  const [expandedAccordion, setExpandedAccordion] = useState<string | null>('kunduppgifter');
+  const [userData, setUserData] = useState<any>(null);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,8 +27,24 @@ export default function AccountPage() {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('handleRegister called', { firstName, lastName, registerEmail, registerPassword });
     if (firstName && lastName && registerEmail && registerPassword) {
+      // Spara användardatan
+      const userData = {
+        firstName,
+        lastName,
+        email: registerEmail,
+        createdAt: new Date().toISOString()
+      };
+      console.log('Saving userData:', userData);
+      localStorage.setItem('userData', JSON.stringify(userData));
+      setUserData(userData);
       setIsLoggedIn(true);
+      // Clear form fields
+      setFirstName('');
+      setLastName('');
+      setRegisterEmail('');
+      setRegisterPassword('');
     }
   };
 
@@ -34,7 +52,24 @@ export default function AccountPage() {
     setIsLoggedIn(false);
     setEmail('');
     setPassword('');
+    localStorage.removeItem('userData');
   };
+
+  // Ladda sparad userData när sidan öppnas
+  useEffect(() => {
+    const savedData = localStorage.getItem('userData');
+    if (savedData) {
+      try {
+        const userData = JSON.parse(savedData);
+        setFirstName(userData.firstName);
+        setLastName(userData.lastName);
+        setRegisterEmail(userData.email);
+        setIsLoggedIn(true);
+      } catch (e) {
+        console.error('Failed to load user data', e);
+      }
+    }
+  }, []);
 
   return (
     <MainLayout bordered={false}>
@@ -153,6 +188,7 @@ export default function AccountPage() {
                   {showLogin ? 'Skapa ett här' : 'Logga in här'}
                 </button>
               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -161,7 +197,7 @@ export default function AccountPage() {
             {/* Welcome Section */}
             <div className="bg-gray-50 p-8 rounded-lg mb-8 shadow-sm flex justify-between items-center" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
               <div>
-                <h2 className="text-2xl font-bold mb-2">Välkommen, Johan!</h2>
+                <h2 className="text-2xl font-bold mb-2">Välkommen, {firstName || 'Johan'}!</h2>
                 <p className="text-gray-600">Hantera ditt konto och se dina beställningar</p>
               </div>
               <button
@@ -218,72 +254,106 @@ export default function AccountPage() {
 
             {/* Tab Content */}
             {activeTab === 'profil' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Profile Information */}
-              <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-                <h3 className="text-xl font-bold mb-4">Profilinformation</h3>
-                <div className="space-y-3 text-gray-700">
-                  <p><span className="font-semibold">Namn:</span> Johan Andersson</p>
-                  <p><span className="font-semibold">E-post:</span> johan@example.com</p>
-                  <p><span className="font-semibold">Telefon:</span> +46 70 123 45 67</p>
-                </div>
-                <button className="mt-6 px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-50 font-semibold">
-                  Redigera profil
-                </button>
-              </div>
+            <div className="space-y-3">
+              {/* Accordion Items */}
+              {[
+                { id: 'kunduppgifter', title: 'Mina kunduppgifter' },
+                { id: 'ordrar', title: 'Ordrar' },
+                { id: 'kophistorik', title: 'Köphistorik' },
+                { id: 'felanmalan', title: 'Felanmälan' },
+                { id: 'erbjudanden', title: 'Erbjudanden' },
+                { id: 'sparade', title: 'Sparade favoriter' }
+              ].map((item) => (
+                <div key={item.id} className="rounded-lg overflow-hidden" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+                  <button
+                    onClick={() => setExpandedAccordion(expandedAccordion === item.id ? null : item.id)}
+                    className="w-full flex items-center justify-between p-6 bg-transparent hover:bg-transparent transition-colors"
+                  >
+                    <h3 className="text-lg font-bold text-gray-900">{item.title}</h3>
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black">
+                      <svg
+                        className={`w-4 h-4 text-white transition-transform ${
+                          expandedAccordion === item.id ? '-rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </button>
 
-              {/* Recent Orders */}
-              <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-                <h3 className="text-xl font-bold mb-4">Senaste beställningar</h3>
-                <div className="space-y-3">
-                  <div className="pb-3 border-b">
-                    <p className="font-semibold">Beställning #12345</p>
-                    <p className="text-sm text-gray-600">2024-05-01 • 24,998 SEK</p>
-                    <p className="text-sm text-green-600 font-semibold">Levererad</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold">Beställning #12340</p>
-                    <p className="text-sm text-gray-600">2024-04-15 • 14,998 SEK</p>
-                    <p className="text-sm text-green-600 font-semibold">Levererad</p>
-                  </div>
-                </div>
-                <Link href="/konto/bestallningar">
-                  <button className="mt-6 w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-50 font-semibold">
-                    Se alla beställningar
-                  </button>
-                </Link>
-              </div>
+                  {expandedAccordion === item.id && (
+                    <div className="px-6 py-6 bg-white">
+                      {item.id === 'kunduppgifter' && (
+                        <div className="space-y-4">
+                          <div><span className="font-semibold">Namn:</span> {firstName && lastName ? `${firstName} ${lastName}` : '—'}</div>
+                          <div><span className="font-semibold">E-post:</span> {registerEmail || '—'}</div>
+                          <div><span className="font-semibold">Telefon:</span> +46 70 123 45 67</div>
+                          <div><span className="font-semibold">Adress:</span> Storgatan 1, 123 45 Stockholm</div>
+                          <button className="mt-4 px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                            Redigera uppgifter
+                          </button>
+                        </div>
+                      )}
 
-              {/* Addresses */}
-              <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-                <h3 className="text-xl font-bold mb-4">Adresser</h3>
-                <div className="mb-4">
-                  <p className="font-semibold text-sm">Hemadress</p>
-                  <p className="text-sm text-gray-600">Storgatan 1</p>
-                  <p className="text-sm text-gray-600">123 45 Stockholm</p>
-                </div>
-                <Link href="/konto/adresser">
-                  <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-50 font-semibold">
-                    Hantera adresser
-                  </button>
-                </Link>
-              </div>
+                      {item.id === 'ordrar' && (
+                        <div className="space-y-3">
+                          <div className="pb-3 border-b">
+                            <p className="font-semibold">Beställning #12345</p>
+                            <p className="text-sm text-gray-600">2024-05-01 • 24,998 SEK</p>
+                            <p className="text-sm text-green-600 font-semibold">Levererad</p>
+                          </div>
+                          <Link href="/konto/bestallningar">
+                            <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                              Se alla ordrar
+                            </button>
+                          </Link>
+                        </div>
+                      )}
 
-              {/* Account Settings */}
-              <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-                <h3 className="text-xl font-bold mb-4">Kontoinställningar</h3>
-                <div className="space-y-2">
-                  <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded font-semibold">
-                    Ändra lösenord
-                  </button>
-                  <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded font-semibold">
-                    Notifikationsinställningar
-                  </button>
-                  <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded font-semibold">
-                    Integritetsenheter
-                  </button>
+                      {item.id === 'kophistorik' && (
+                        <div className="space-y-3 text-gray-700">
+                          <p>Du har köpt 15 produkter totalt</p>
+                          <p className="text-sm">Total värde: 156,243 SEK</p>
+                          <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                            Se komplett köphistorik
+                          </button>
+                        </div>
+                      )}
+
+                      {item.id === 'felanmalan' && (
+                        <div className="space-y-3 text-gray-700">
+                          <p>Du har ingen aktiv felanmälan</p>
+                          <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                            Anmäl ett fel
+                          </button>
+                        </div>
+                      )}
+
+                      {item.id === 'erbjudanden' && (
+                        <div className="space-y-3 text-gray-700">
+                          <p>Du har 3 aktiva erbjudanden</p>
+                          <p className="text-sm">Se dina personliga erbjudanden baserat på dina köp</p>
+                          <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                            Se alla erbjudanden
+                          </button>
+                        </div>
+                      )}
+
+                      {item.id === 'sparade' && (
+                        <div className="space-y-3 text-gray-700">
+                          <p>Du har 5 sparade favoriter</p>
+                          <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                            Se dina favoriter
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
-              </div>
+              ))}
             </div>
             )}
 
