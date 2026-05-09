@@ -408,7 +408,7 @@ export default function Checkout() {
                   ref={addressInputRef}
                   type="text"
                   name="address"
-                  placeholder="Gata och husnummer"
+                  placeholder="Adress"
                   value={formData.address}
                   onChange={handleInputChange}
                   required
