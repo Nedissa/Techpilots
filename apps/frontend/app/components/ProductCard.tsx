@@ -23,7 +23,7 @@ export interface ProductData {
   sectionCategory?: string;
 }
 
-type ProductCardVariant = 'popular' | 'recommended' | 'new' | 'related';
+type ProductCardVariant = 'popular' | 'recommended' | 'new' | 'related' | 'grid';
 
 interface ProductCardProps {
   product: ProductData;
@@ -38,6 +38,7 @@ const VARIANT_CONFIG: Record<ProductCardVariant, { showFeatures: boolean; imageH
   recommended: { showFeatures: true, imageHeight: 'aspect-square' },
   new: { showFeatures: false, imageHeight: 'aspect-square' },
   related: { showFeatures: false, imageHeight: 'aspect-square' },
+  grid: { showFeatures: false, imageHeight: 'h-48' },
 };
 
 export function ProductCard({

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { MainLayout } from '@/app/components/MainLayout';
-import { ProductGridCard } from '@/app/components/ProductGridCard';
+import { ProductCard } from '@/app/components/ProductCard';
 import { fetchProductsFromMedusa, type Product } from '@/app/lib/medusa-client';
 
 const CATEGORIES = ['Alla', 'Laptops', 'Komponenter', 'Datorer', 'Tillbehör'];
@@ -132,7 +132,7 @@ export default function ProductsPage() {
             {/* Products Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {paginatedProducts.map((product) => (
-                <ProductGridCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} variant="grid" />
               ))}
             </div>
 
