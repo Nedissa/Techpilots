@@ -83,7 +83,7 @@ export default function TermsPage() {
             För leverans debiteras fraktkostnader enligt vår fraktprislista:
           </p>
           <ul className="space-y-2 ml-6 text-gray-700 mb-3">
-            <li>• Standardleverans: 99 SEK (gratis över 500 SEK)</li>
+            <li>• Standardleverans: Gratis</li>
             <li>• Express-leverans: 199 SEK (beställ före 12:00)</li>
           </ul>
           <p className="text-gray-700 leading-relaxed">
