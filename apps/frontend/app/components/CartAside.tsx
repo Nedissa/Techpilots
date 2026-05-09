@@ -181,10 +181,10 @@ export function CartAside() {
                           <img
                             src={item.image}
                             alt={item.title}
-                            className="w-16 h-16 object-contain rounded"
+                            className="w-24 h-24 object-contain rounded"
                           />
                         ) : (
-                          <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
+                          <div className="w-24 h-24 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
                             Bild
                           </div>
                         )}
