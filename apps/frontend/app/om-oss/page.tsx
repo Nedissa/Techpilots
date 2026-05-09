@@ -24,13 +24,23 @@ export default function AboutPage() {
           {/* Vår historia */}
           <section>
             <h2 className="text-3xl font-bold mb-8">Vår historia</h2>
-            <div className="space-y-4">
-              <p className="text-gray-700 leading-relaxed">
-                Techpilots grundades 2020 med en vision: att göra högkvalitativ teknik tillgänglig för alla. Vi fokuserar på snabb leverans, transparenta priser och dedikerad kundsupport.
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                Vi arbetar hårt för att bli en pålitlig återförsäljare av datorkomponenter och datortillbehör. Vi börjar nu men har redan nöjda kunder över hela Sverige. Vi tror att bra service gör skillnaden.
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <p className="text-gray-700 mb-4 leading-relaxed">
+                  Techpilots grundades 2020 med en enkel vision: att göra högkvalitativ teknik tillgänglig för alla. Vi såg ett behov på marknaden för en pålitlig och användarvänlig e-handelsplattform som specialiserar sig på datorkomponenter och datorer.
+                </p>
+                <p className="text-gray-700 mb-4 leading-relaxed">
+                  Från dag ett har vi fokuserat på att leverera ett utmärkt kundsamtal genom snabb leverans, transparenta priser och dedikerad kundsupport. Vi tror att bra service gör skillnaden.
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-700 mb-4 leading-relaxed">
+                  Idag arbetar vi hårt för att bli en pålitlig återförsäljare av datorkomponenter och datortillbehör. Vi börjar nu men har redan nöjda kunder över hela Sverige.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  Vi fortsätter att växa och utvecklas för att bättre serva våra kunder med de senaste produkterna, bästa priserna och utmärkt kundsupport. Det är vår vision.
+                </p>
+              </div>
             </div>
           </section>
 
