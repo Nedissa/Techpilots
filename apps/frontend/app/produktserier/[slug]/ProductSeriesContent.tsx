@@ -80,7 +80,7 @@ export function ProductSeriesContent({
     <div style={{ scrollbarGutter: 'stable' }}>
       <Breadcrumb items={breadcrumbItems} />
       <div className="flex">
-        <ProductFilter onFilterChange={setFilters} maxPrice={maxPrice} />
+        <ProductFilter onFilterChange={setFilters} maxPrice={maxPrice} products={products} />
         <div className="flex-1 px-6 pt-6 pb-8">
           <div className="flex items-center justify-between mb-8 gap-6">
             <h1 className="text-3xl font-bold text-gray-900">{categoryTitle}</h1>

@@ -1,7 +1,8 @@
 export async function GET() {
   try {
+    // Fetch products with calculated prices
     const response = await fetch(
-      'https://techpilots.medusajs.app/store/products?limit=100',
+      'https://techpilots.medusajs.app/store/products?limit=100&fields=*variants.calculated_price',
       {
         headers: {
           'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
@@ -22,25 +23,19 @@ export async function GET() {
     const transformedProducts = products.map((product: any, idx: number) => {
       const image = product.images?.[0]?.url || product.thumbnail || '';
 
-      // Get price from first variant if available
+      // Get price from calculated_price
       let price = 0;
       let originalPrice: number | undefined = undefined;
 
+      // Get price from first variant's calculated_price
       if (product.variants && product.variants.length > 0) {
         const firstVariant = product.variants[0];
-        if (firstVariant.prices && firstVariant.prices.length > 0) {
-          const firstPrice = firstVariant.prices[0];
-          price = firstPrice.amount || 0;
+        if (firstVariant.calculated_price?.original_amount) {
+          price = firstVariant.calculated_price.original_amount;
+        } else if (firstVariant.calculated_price?.amount_default) {
+          price = firstVariant.calculated_price.amount_default;
         }
       }
-
-      const colors = ['#000000', '#FFFFFF', '#C0C0C0', '#808080'];
-      const features = [
-        'Intel Core i7 Processor',
-        '16GB RAM Memory',
-        '512GB SSD Storage',
-        'NVIDIA Graphics'
-      ];
 
       // Get sectionCategory from product.collection.title
       let sectionCategory = '';
@@ -64,14 +59,14 @@ export async function GET() {
         originalPrice: originalPrice,
         image: image,
         images: (product.images?.map((img: any) => img.url) || []).slice(0, 3),
-        category: '',
-        brand: ['ASUS', 'Dell', 'HP', 'Lenovo'][idx % 4],
-        colors: colors,
-        stock: 'I lager',
-        rating: 3 + Math.random() * 2,
-        reviews: Math.floor(Math.random() * 50) + 5,
-        features: features,
-        isNew: idx % 3 === 0,
+        category: collectionTitle,
+        brand: product.brand || '',
+        colors: product.colors || [],
+        stock: product.stock || 'I lager',
+        rating: product.rating || 0,
+        reviews: product.reviews || 0,
+        features: product.features || [],
+        isNew: product.isNew || false,
         discountPercent: discountPercent,
         sectionCategory: sectionCategory,
       };

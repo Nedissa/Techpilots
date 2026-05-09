@@ -13,17 +13,17 @@ interface FilterOptions {
 interface ProductFilterProps {
   onFilterChange: (filters: FilterOptions) => void;
   maxPrice?: number;
+  products: any[];
 }
 
-const BRANDS = ['ASUS', 'Canon', 'Nikon', 'Sony', 'Fujifilm', 'Custom', 'Multi'];
-const COLORS = [
-  { name: 'Svart', value: '#000000' },
-  { name: 'Vit', value: '#FFFFFF' },
-  { name: 'Silver', value: '#C0C0C0' },
-  { name: 'Grå', value: '#808080' },
-];
+const COLOR_MAP: { [key: string]: string } = {
+  '#000000': 'Svart',
+  '#FFFFFF': 'Vit',
+  '#C0C0C0': 'Silver',
+  '#808080': 'Grå',
+};
 
-export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilterProps) {
+export function ProductFilter({ onFilterChange, maxPrice = 20000, products = [] }: ProductFilterProps) {
   const [priceRange, setPriceRange] = useState<[number, number]>(() => [0, maxPrice]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
@@ -36,6 +36,14 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
     rating: true,
     stock: true,
   });
+
+  // Extract unique brands and colors from products
+  const uniqueBrands = Array.from(new Set(products.map((p: any) => p.brand).filter(Boolean)));
+  const uniqueColors = Array.from(new Set(
+    products
+      .flatMap((p: any) => p.colors || [])
+      .filter(Boolean)
+  ));
 
   useEffect(() => {
     setPriceRange(prev => {
@@ -228,22 +236,26 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
         </button>
         {expandedSections.brands && (
         <div className="px-6 py-4 space-y-2">
-          {BRANDS.map((brand, idx) => {
-            const blackShades = ['bg-slate-200', 'bg-slate-300', 'bg-slate-400', 'bg-slate-500', 'bg-slate-600', 'bg-slate-700', 'bg-slate-800'];
-            return (
-              <button
-                key={brand}
-                onClick={() => handleBrandToggle(brand)}
-                className={`w-full text-left px-2.5 py-1 text-sm font-medium transition-colors ${
-                  selectedBrands.includes(brand)
-                    ? `${blackShades[idx]} ${idx < 3 ? 'text-black' : 'text-white'}`
-                    : 'text-gray-900'
-                }`}
-              >
-                {brand}
-              </button>
-            );
-          })}
+          {uniqueBrands.length > 0 ? (
+            uniqueBrands.map((brand, idx) => {
+              const blackShades = ['bg-slate-200', 'bg-slate-300', 'bg-slate-400', 'bg-slate-500', 'bg-slate-600', 'bg-slate-700', 'bg-slate-800'];
+              return (
+                <button
+                  key={brand}
+                  onClick={() => handleBrandToggle(brand)}
+                  className={`w-full text-left px-2.5 py-1 text-sm font-medium transition-colors ${
+                    selectedBrands.includes(brand)
+                      ? `${blackShades[idx % blackShades.length]} ${idx < 3 ? 'text-black' : 'text-white'}`
+                      : 'text-gray-900'
+                  }`}
+                >
+                  {brand}
+                </button>
+              );
+            })
+          ) : (
+            <p className="text-xs text-gray-500">Inga märken tillgängliga</p>
+          )}
         </div>
         )}
       </div>
@@ -261,29 +273,34 @@ export function ProductFilter({ onFilterChange, maxPrice = 20000 }: ProductFilte
         </button>
         {expandedSections.colors && (
         <div className="px-6 py-4 space-y-2">
-          {COLORS.map((color, idx) => {
-            const blackShades = ['bg-slate-400', 'bg-slate-500', 'bg-slate-600', 'bg-slate-700'];
-            return (
-              <button
-                key={color.value}
-                onClick={() => handleColorToggle(color.value)}
-                className={`w-full text-left px-2.5 py-1 text-sm font-medium transition-colors flex items-center gap-2 ${
-                  selectedColors.includes(color.value)
-                    ? `${blackShades[idx]} ${idx < 2 ? 'text-white' : 'text-white'}`
-                    : 'text-gray-900'
-                }`}
-              >
-                <div
-                  className="w-3 h-3"
-                  style={{
-                    backgroundColor: color.value,
-                    border: color.value === '#FFFFFF' ? '1px solid #ccc' : 'none',
-                  }}
-                />
-                {color.name}
-              </button>
-            );
-          })}
+          {uniqueColors.length > 0 ? (
+            uniqueColors.map((color, idx) => {
+              const blackShades = ['bg-slate-400', 'bg-slate-500', 'bg-slate-600', 'bg-slate-700'];
+              const colorName = COLOR_MAP[color] || color;
+              return (
+                <button
+                  key={color}
+                  onClick={() => handleColorToggle(color)}
+                  className={`w-full text-left px-2.5 py-1 text-sm font-medium transition-colors flex items-center gap-2 ${
+                    selectedColors.includes(color)
+                      ? `${blackShades[idx % blackShades.length]} ${idx < 2 ? 'text-white' : 'text-white'}`
+                      : 'text-gray-900'
+                  }`}
+                >
+                  <div
+                    className="w-3 h-3"
+                    style={{
+                      backgroundColor: color,
+                      border: color === '#FFFFFF' ? '1px solid #ccc' : 'none',
+                    }}
+                  />
+                  {colorName}
+                </button>
+              );
+            })
+          ) : (
+            <p className="text-xs text-gray-500">Inga färger tillgängliga</p>
+          )}
         </div>
         )}
       </div>

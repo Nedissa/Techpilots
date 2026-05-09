@@ -36,18 +36,6 @@ interface MenuCategory {
   items?: MenuSection[];
 }
 
-const MOCK_PRODUCTS = [
-  { id: '1', title: 'ASUS RT-BE82U BE6500', category: 'Router', price: '2 489 kr', rating: 5, reviews: 12, stock: 'I lager', image: '/assets/Produkt bilder/LAPTOP/1978563_1.webp' },
-  { id: '2', title: 'ASUS Prime X870-P', category: 'Moderkort', price: '2 690 kr', rating: 4, reviews: 34, stock: 'I lager', image: '/assets/Produkt bilder/STATIONÄR/1.webp' },
-  { id: '3', title: 'ASUS ROG Crosshair X870E Hero', category: 'Moderkort', price: '6 749 kr', rating: 5, reviews: 37, stock: 'I lager', image: '/assets/Produkt bilder/LAPTOP/1978563_2.webp' },
-  { id: '4', title: 'ASUS RT-BE90U', category: 'Router', price: '2 990 kr', rating: 4, reviews: 9, stock: 'I lager', image: '/assets/Produkt bilder/STATIONÄR/6907594_t7dv07.webp' },
-  { id: '5', title: 'ASUS ROG Keris II Origin KJP Edition', category: 'Möss', price: '2 299 kr', rating: 5, reviews: 5, stock: 'I lager', image: '/assets/Produkt bilder/LAPTOP/1978563_3.webp' },
-  { id: '6', title: 'ASUS ROG Strix X870-F Gaming WIFI', category: 'Moderkort', price: '3 890 kr', rating: 5, reviews: 50, stock: 'I lager', image: '/assets/Produkt bilder/STATIONÄR/6907594_jzbn2q.webp' },
-  { id: '7', title: 'ASUS ROG Delta II KJP Edition', category: 'Headset', price: '3 999 kr', rating: 4, reviews: 7, stock: 'I lager', image: '/assets/Produkt bilder/STATIONÄR/6907594_ebnf7f.webp' },
-  { id: '8', title: 'Uppgraderingspaket - ASUS 9800X3D', category: 'Paket', price: '31 499 kr', rating: 5, reviews: 15, stock: 'I lager', image: '/assets/Produkt bilder/LAPTOP/6907594_v5urxz.webp' },
-  { id: '9', title: 'ASUS Ryujin III 360 A-RGB Extreme', category: 'CPU Kylare', price: '4 349 kr', rating: 4, reviews: 12, stock: 'I lager', image: '/assets/Produkt bilder/STATIONÄR/6907594_7fuptp.webp' },
-  { id: '10', title: 'Uppgraderingspaket - ASUS 9600X', category: 'Paket', price: '17 890 kr', rating: 5, reviews: 5, stock: 'I lager', image: '/assets/Produkt bilder/STATIONÄR/6907594_ikylm6 (1).webp' },
-];
 
 const MENU_DATA: MenuCategory[] = [
   {
@@ -314,6 +302,17 @@ const MENU_DATA: MenuCategory[] = [
   },
 ];
 
+interface SearchProduct {
+  id: string;
+  title: string;
+  handle?: string;
+  image: string;
+  category: string;
+  price: number;
+  rating?: number;
+  reviews?: number;
+}
+
 export function HeaderWrapper() {
   const { open } = useAside();
   const pathname = usePathname();
@@ -327,6 +326,7 @@ export function HeaderWrapper() {
   const [isVibrating, setIsVibrating] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [searchProducts, setSearchProducts] = useState<SearchProduct[]>([]);
   const lastScrollY = useRef(0);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -358,6 +358,32 @@ export function HeaderWrapper() {
 
     checkLoginStatus();
     setIsHydrated(true);
+
+    // Fetch products from API for search
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          const products = data.products || [];
+          const formattedProducts: SearchProduct[] = products.map((p: any) => ({
+            id: p.id,
+            title: p.title,
+            handle: p.handle,
+            image: p.image,
+            category: p.category,
+            price: p.price,
+            rating: p.rating || 0,
+            reviews: p.reviews || 0,
+          }));
+          setSearchProducts(formattedProducts);
+        }
+      } catch (error) {
+        console.error('Error fetching products for search:', error);
+      }
+    };
+
+    fetchProducts();
 
     // Listen for login event
     window.addEventListener('userLogin', checkLoginStatus);
@@ -493,7 +519,7 @@ export function HeaderWrapper() {
                 onMouseDown={(e) => e.preventDefault()}
               >
                 {(() => {
-                  const results = MOCK_PRODUCTS.filter(product =>
+                  const results = searchProducts.filter(product =>
                     product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     product.category.toLowerCase().includes(searchTerm.toLowerCase())
                   ).slice(0, 5);
@@ -501,38 +527,52 @@ export function HeaderWrapper() {
                   return results.length > 0 ? (
                     <div className="divide-y divide-gray-100">
                       {results.map((product) => (
-                        <Link key={product.id} href={`/produkt/${product.id}`}>
-                          <div className="px-4 py-3 hover:bg-gray-50 cursor-pointer flex items-center gap-4">
+                        <div key={product.id} className="px-4 py-3 hover:bg-gray-50 flex items-center gap-4 group">
+                          <Link href={`/produktserier/${product.handle || product.id}`} className="flex-1 flex items-center gap-4 cursor-pointer min-w-0">
                             <img src={product.image} alt={product.title} className="w-12 h-12 object-contain flex-shrink-0 bg-gray-100" />
                             <div className="flex-1 min-w-0">
                               <div className="font-semibold text-sm text-black">{product.title}</div>
                               <div className="text-xs text-gray-600">
-                                {product.category} | Frekvensband: Dual-band
+                                {product.category}
                               </div>
                             </div>
-                            <div className="flex items-center gap-4 flex-shrink-0">
-                              <div className="flex gap-1.5">
-                                {[...Array(5)].map((_, i) => (
-                                  <svg key={i} className={`w-3 h-3 ${i < product.rating ? 'fill-black' : 'fill-gray-300'}`} viewBox="0 0 20 20">
-                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                                  </svg>
-                                ))}
-                              </div>
-                              <span className="text-xs text-gray-600 whitespace-nowrap">● {product.reviews} st</span>
-                              <div className="text-sm font-bold text-red-600 whitespace-nowrap">{product.price}</div>
-                              <button className="bg-black text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-gray-800 flex-shrink-0">
-                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+                          </Link>
+                          <div className="flex items-center gap-4 flex-shrink-0">
+                            <div className="flex gap-1.5">
+                              {[...Array(5)].map((_, i) => (
+                                <svg key={i} className={`w-3 h-3 ${i < (product.rating || 0) ? 'fill-black' : 'fill-gray-300'}`} viewBox="0 0 20 20">
+                                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                                 </svg>
-                              </button>
+                              ))}
                             </div>
+                            <span className="text-xs text-gray-600 whitespace-nowrap">● {product.reviews || 0} st</span>
+                            <div className="text-sm font-bold text-red-600 whitespace-nowrap">{product.price.toLocaleString('sv-SE')} kr</div>
+                            <button
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                window.dispatchEvent(new CustomEvent('addToCart', {
+                                  detail: {
+                                    id: product.id,
+                                    title: product.title,
+                                    price: product.price,
+                                    image: product.image,
+                                    quantity: 1
+                                  }
+                                }));
+                              }}
+                              className="bg-black text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-gray-800 flex-shrink-0">
+                              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+                              </svg>
+                            </button>
                           </div>
-                        </Link>
+                        </div>
                       ))}
                     </div>
                   ) : (
                     <div className="p-3 text-sm text-gray-600">
-                      Inga resultat för "{searchTerm}"
+                      {searchProducts.length === 0 ? 'Laddar produkter...' : `Inga resultat för "${searchTerm}"`}
                     </div>
                   );
                 })()}
