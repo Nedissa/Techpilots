@@ -346,7 +346,7 @@ export default function Checkout() {
                     value={formData.firstName}
                     onChange={handleInputChange}
                     required
-                    className={`w-full px-4 py-3 focus:outline-none ${formData.firstName ? 'bg-gray-50' : ''}`}
+                    className={`w-full px-4 py-3 focus:outline-none ${formData.firstName ? 'bg-gray-200' : ''}`}
                     style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                   />
                   <input
