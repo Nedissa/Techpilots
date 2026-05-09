@@ -80,6 +80,15 @@ function CallToAction() {
 export default async function Home() {
   const products = await fetchProductsFromAPI();
 
+  const repeatProducts = (items: any[], count: number) => {
+    if (items.length === 0) return [];
+    const result = [];
+    for (let i = 0; i < count; i++) {
+      result.push(items[i % items.length]);
+    }
+    return result;
+  };
+
   return (
     <div className="relative">
       <MainLayout bordered={true} noPadding={true}>
@@ -92,28 +101,24 @@ export default async function Home() {
               <div className="px-6">
                 <ProductsSection
                   variant="popular"
-                  products={products.slice(0, 4)}
+                  products={repeatProducts(products, 4)}
                 />
               </div>
               <div className="px-6">
                 <ProductBanner />
               </div>
-              {products.length > 4 && (
-                <div className="px-6">
-                  <ProductsSection
-                    variant="recommended"
-                    products={products.slice(4, 8)}
-                  />
-                </div>
-              )}
-              {products.length > 8 && (
-                <div className="px-6">
-                  <ProductsSection
-                    variant="new"
-                    products={products.slice(8, 12)}
-                  />
-                </div>
-              )}
+              <div className="px-6">
+                <ProductsSection
+                  variant="recommended"
+                  products={repeatProducts(products, 4)}
+                />
+              </div>
+              <div className="px-6">
+                <ProductsSection
+                  variant="new"
+                  products={repeatProducts(products, 4)}
+                />
+              </div>
             </>
           )}
           <div className="-mx-6">
