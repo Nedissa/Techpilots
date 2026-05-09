@@ -98,7 +98,7 @@ export default function LoginPage() {
                         style={{
                           WebkitAutofillBoxShadow: '0 0 0 1000px #f3f4f6 inset',
                           WebkitAutofillTextFillColor: '#000'
-                        }}
+                        } as React.CSSProperties}
                         required
                       />
                     </div>
@@ -112,7 +112,7 @@ export default function LoginPage() {
                         style={{
                           WebkitAutofillBoxShadow: '0 0 0 1000px #f3f4f6 inset',
                           WebkitAutofillTextFillColor: '#000'
-                        }}
+                        } as React.CSSProperties}
                         required
                       />
                     </div>

@@ -81,8 +81,8 @@ export default function AccountPage() {
     document.head.appendChild(script);
 
     script.onload = () => {
-      if (window.google && addressInputRef.current) {
-        const autocomplete = new window.google.maps.places.Autocomplete(addressInputRef.current, {
+      if ((window as any).google && addressInputRef.current) {
+        const autocomplete = new (window as any).google.maps.places.Autocomplete(addressInputRef.current, {
           types: ['geocode'],
           componentRestrictions: { country: 'se' }
         });
