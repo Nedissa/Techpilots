@@ -301,18 +301,14 @@ export default function Checkout() {
             ))}
           </div>
           {/* Order Summary Preview */}
-          <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Delsumma</span>
-              <span className="font-semibold">{cartTotal.toLocaleString('sv-SE')} SEK</span>
-            </div>
-            {totalDiscount > 0 && (
+          {totalDiscount > 0 && (
+            <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
               <div className="flex justify-between text-sm text-green-600">
                 <span>Rabatt</span>
                 <span className="font-semibold">-{totalDiscount.toLocaleString('sv-SE')} SEK</span>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </section>
 
         {/* Form and Summary */}
