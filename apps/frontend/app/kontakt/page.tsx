@@ -15,7 +15,7 @@ export default function ContactPage() {
       </div>
 
       <div className="max-w-[1280px] mx-auto px-6 pb-16">
-        <div className="border border-gray-200 rounded-lg shadow-sm p-12">
+        <div className="rounded-lg p-12" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
 
             {/* Contact Form */}
@@ -24,19 +24,19 @@ export default function ContactPage() {
               <form className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Namn</label>
-                  <input type="text" className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Ditt namn" />
+                  <input type="text" className="w-full rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black bg-gray-100" placeholder="Ditt namn" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">E-post</label>
-                  <input type="email" className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="din@email.se" />
+                  <input type="email" className="w-full rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black bg-gray-100" placeholder="din@email.se" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Ämne</label>
-                  <input type="text" className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Vad handlar det om?" />
+                  <input type="text" className="w-full rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black bg-gray-100" placeholder="Vad handlar det om?" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Meddelande</label>
-                  <textarea rows={6} className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" placeholder="Beskriv ditt ärende här..." />
+                  <textarea rows={6} className="w-full rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black bg-gray-100" placeholder="Beskriv ditt ärende här..." />
                 </div>
                 <button className="w-full bg-black text-white px-6 py-3 font-semibold hover:bg-gray-800 rounded transition-colors">
                   Skicka meddelande
@@ -79,7 +79,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mt-8">
+              <div className="bg-blue-50 rounded-lg p-6 mt-8" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
                 <h4 className="font-bold mb-2">Vad är du mest bekväm med?</h4>
                 <p className="text-gray-700 text-sm">
                   Vi svarar snabbast på e-mail och är tillgängliga på telefon under våra öppettider. Välj den metod som passar dig bäst!
