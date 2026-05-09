@@ -35,10 +35,10 @@ export default function AboutPage() {
               </div>
               <div>
                 <p className="text-gray-700 mb-4 leading-relaxed">
-                  Idag är vi en av Sveriges ledande återförsäljare av datorkomponenter, med tusentals nöjda kunder och ett omfattande produktsortiment. Vi levererar till kunder över hela Sverige.
+                  Idag arbetar vi hårt för att bli en pålitlig återförsäljare av datorkomponenter och datortillbehör. Vi börjar nu men har redan nöjda kunder över hela Sverige.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Vi fortsätter att växa och innovera för att bättre serva våra kunder med de senaste produkterna, bästa priserna och utmärkt kundsupport.
+                  Vi fortsätter att växa och utvecklas för att bättre serva våra kunder med de senaste produkterna, bästa priserna och utmärkt kundsupport. Det är vår vision.
                 </p>
               </div>
             </div>
@@ -59,48 +59,6 @@ export default function AboutPage() {
               <div className=" p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-3">Support</h3>
                 <p className="text-gray-700">Dedikerad kundsupport tillgänglig via email, telefon under affärstid. Vi löser problem snabbt.</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Vårt team */}
-          <section>
-            <h2 className="text-3xl font-bold mb-8">Vårt team</h2>
-            <p className="text-gray-700 mb-8">
-              Techpilots-teamet består av erfarna professionaler inom e-handel, logistik och kundservice som är passionerade om teknik och dedikerade till att ge bästa möjliga upplevelse.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              {['Anders Bergström', 'Berit Larsson', 'Cecilia Andersson', 'David Eklund'].map((name, i) => (
-                <div key={i} className="bg-white p-6 rounded-lg text-center ">
-                  <div className="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center text-gray-500 text-sm">
-                    Profil
-                  </div>
-                  <h3 className="font-bold text-lg">{name}</h3>
-                  <p className="text-gray-600 text-sm">Teammedlem</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Statistik */}
-          <section>
-            <h2 className="text-3xl font-bold mb-8">Av siffror</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-              <div className=" p-6 rounded-lg">
-                <p className="text-4xl font-bold mb-2">5000+</p>
-                <p className="text-gray-600">Nöjda kunder</p>
-              </div>
-              <div className=" p-6 rounded-lg">
-                <p className="text-4xl font-bold mb-2">2000+</p>
-                <p className="text-gray-600">Produkter i lager</p>
-              </div>
-              <div className=" p-6 rounded-lg">
-                <p className="text-4xl font-bold mb-2">4.8/5</p>
-                <p className="text-gray-600">Medelbetyg</p>
-              </div>
-              <div className=" p-6 rounded-lg">
-                <p className="text-4xl font-bold mb-2">1-2 dagar</p>
-                <p className="text-gray-600">Genomsnittlig leverans</p>
               </div>
             </div>
           </section>
