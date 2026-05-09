@@ -80,14 +80,13 @@ function CallToAction() {
 export default async function Home() {
   const products = await fetchProductsFromAPI();
 
-  const repeatProducts = (items: any[], count: number) => {
-    if (items.length === 0) return [];
-    const result = [];
-    for (let i = 0; i < count; i++) {
-      result.push(items[i % items.length]);
-    }
-    return result;
+  const getProductsBySection = (section: 'popular' | 'recommended' | 'new', allProducts: any[]) => {
+    return allProducts.filter((p: any) => p.sectionCategory === section);
   };
+
+  const popularProducts = getProductsBySection('popular', products);
+  const recommendedProducts = getProductsBySection('recommended', products);
+  const newProducts = getProductsBySection('new', products);
 
   return (
     <div className="relative">
@@ -98,27 +97,33 @@ export default async function Home() {
           </div>
           {products.length > 0 && (
             <>
-              <div className="px-6">
-                <ProductsSection
-                  variant="popular"
-                  products={repeatProducts(products, 4)}
-                />
-              </div>
+              {popularProducts.length > 0 && (
+                <div className="px-6">
+                  <ProductsSection
+                    variant="popular"
+                    products={popularProducts}
+                  />
+                </div>
+              )}
               <div className="px-6">
                 <ProductBanner />
               </div>
-              <div className="px-6">
-                <ProductsSection
-                  variant="recommended"
-                  products={repeatProducts(products, 4)}
-                />
-              </div>
-              <div className="px-6">
-                <ProductsSection
-                  variant="new"
-                  products={repeatProducts(products, 4)}
-                />
-              </div>
+              {recommendedProducts.length > 0 && (
+                <div className="px-6">
+                  <ProductsSection
+                    variant="recommended"
+                    products={recommendedProducts}
+                  />
+                </div>
+              )}
+              {newProducts.length > 0 && (
+                <div className="px-6">
+                  <ProductsSection
+                    variant="new"
+                    products={newProducts}
+                  />
+                </div>
+              )}
             </>
           )}
           <div className="-mx-6">

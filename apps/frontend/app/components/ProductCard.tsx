@@ -20,6 +20,7 @@ export interface ProductData {
   colors?: string[];
   features?: string[];
   stock?: string;
+  sectionCategory?: string;
 }
 
 type ProductCardVariant = 'popular' | 'recommended' | 'new' | 'related';

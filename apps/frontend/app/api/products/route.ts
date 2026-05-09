@@ -42,6 +42,11 @@ export async function GET() {
         'NVIDIA Graphics'
       ];
 
+      // Assign section categories based on product index
+      let sectionCategory = 'popular';
+      if (idx % 3 === 1) sectionCategory = 'recommended';
+      if (idx % 3 === 2) sectionCategory = 'new';
+
       // Calculate discount percentage if we have both prices
       let discountPercent = undefined;
       if (originalPrice && price) {
@@ -56,7 +61,7 @@ export async function GET() {
         originalPrice: originalPrice,
         image: image,
         images: (product.images?.map((img: any) => img.url) || []).slice(0, 3),
-        category: product.collection?.title || '',
+        category: product.collection?.title || sectionCategory,
         brand: ['ASUS', 'Dell', 'HP', 'Lenovo'][idx % 4],
         colors: colors,
         stock: 'I lager',
@@ -65,6 +70,7 @@ export async function GET() {
         features: features,
         isNew: idx % 3 === 0,
         discountPercent: discountPercent,
+        sectionCategory: sectionCategory,
       };
     });
 
