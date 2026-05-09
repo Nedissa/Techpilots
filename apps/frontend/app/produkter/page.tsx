@@ -57,6 +57,9 @@ export default function ProductsPage() {
     }
   });
 
+  // Get products for "Du kanske också gillar" section
+  const alsoLikeProducts = products.filter((product) => product.category === 'also-like');
+
   const productsPerPage = 12;
   const totalPages = Math.ceil(sorted.length / productsPerPage);
   const startIdx = (currentPage - 1) * productsPerPage;
@@ -132,9 +135,21 @@ export default function ProductsPage() {
             {/* Products Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {paginatedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} variant="also-like" />
+                <ProductCard key={product.id} product={product} variant="popular" />
               ))}
             </div>
+
+            {/* Du kanske också gillar section */}
+            {alsoLikeProducts.length > 0 && (
+              <div className="mt-16 pt-8 border-t border-gray-200">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Du kanske också gillar</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {alsoLikeProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} variant="also-like" />
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Pagination */}
             {totalPages > 1 && (
