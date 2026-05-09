@@ -420,7 +420,7 @@ export default function Checkout() {
                     value={formData.postalCode}
                     onChange={handleInputChange}
                     required
-                    className={`w-full px-4 py-3 focus:outline-none focus:ring-4 focus:ring-black ${formData.postalCode ? 'bg-gray-300' : 'bg-white'}`}
+                    className={`w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black ${formData.postalCode ? 'bg-gray-100' : 'bg-white'}`}
                     style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                   />
                   <input
@@ -430,7 +430,7 @@ export default function Checkout() {
                     value={formData.city}
                     onChange={handleInputChange}
                     required
-                    className={`w-full px-4 py-3 focus:outline-none focus:ring-4 focus:ring-black ${formData.city ? 'bg-gray-300' : 'bg-white'}`}
+                    className={`w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black ${formData.city ? 'bg-gray-100' : 'bg-white'}`}
                     style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                   />
                 </div>
