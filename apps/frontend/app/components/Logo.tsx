@@ -4,7 +4,7 @@ export function Logo() {
   return (
     <Image
       src="/logo.png"
-      alt="TechPilots"
+      alt="Techpilots"
       width={36}
       height={36}
       className="flex-shrink-0"

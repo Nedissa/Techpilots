@@ -26,7 +26,7 @@ export default function FAQPage() {
               <div>
                 <h3 className="text-lg font-bold mb-2">Hur gör jag en beställning?</h3>
                 <p className="text-gray-700">
-                  Att beställa hos TechPilots är enkelt. Lägg produkter i din varukorg, gå till kassan, fylla i dina uppgifter och välj betalningsmetod. Du får omedelbar orderbekräftelse via e-mail.
+                  Att beställa hos Techpilots är enkelt. Lägg produkter i din varukorg, gå till kassan, fylla i dina uppgifter och välj betalningsmetod. Du får omedelbar orderbekräftelse via e-mail.
                 </p>
               </div>
 
@@ -187,7 +187,7 @@ export default function FAQPage() {
               <div>
                 <h3 className="text-lg font-bold mb-2">Har produkterna garanti?</h3>
                 <p className="text-gray-700">
-                  Ja, alla produkter från TechPilots kommer med tillverkarens garanti (normalt 2 år). Du har även lagstadgad reklamationsrätt i 3 år för ursprungliga fel.
+                  Ja, alla produkter från Techpilots kommer med tillverkarens garanti (normalt 2 år). Du har även lagstadgad reklamationsrätt i 3 år för ursprungliga fel.
                 </p>
               </div>
 

@@ -21,7 +21,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Tillämplighet</h2>
           <p className="text-gray-700 leading-relaxed">
-            TechPilots AB:s försäljningsvillkor gäller från och med 1 januari 2025 och ersätter tidigare publicerade försäljningsvillkor. Kund som beställer varor av TechPilots AB accepterar genom sin beställning dessa försäljningsvillkor.
+            Techpilots AB:s försäljningsvillkor gäller från och med 1 januari 2025 och ersätter tidigare publicerade försäljningsvillkor. Kund som beställer varor av Techpilots AB accepterar genom sin beställning dessa försäljningsvillkor.
           </p>
         </section>
 
@@ -31,10 +31,10 @@ export default function TermsPage() {
             Samtliga priser i våra prislistor är angivna inklusive moms (25%). Alla priser är exklusive frakt där inget annat anges. Vi reserverar oss för prisfel och prisändringar på grund av ändrad moms, onormalt stora förändringar i valutaläget, inköpspriser, samt ändringar i eller förekomsten av nya lagstadgade avgifter samt andra förändringar utom vår kontroll.
           </p>
           <p className="text-gray-700 mb-3 leading-relaxed">
-            Vid uppenbart felaktigt prissatta varor förbehåller TechPilots AB sig rätten att annullera kundens beställning. Observera att offerter kan innehålla speciella avtal med priser som avviker från våra prislistor.
+            Vid uppenbart felaktigt prissatta varor förbehåller Techpilots AB sig rätten att annullera kundens beställning. Observera att offerter kan innehålla speciella avtal med priser som avviker från våra prislistor.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            Levererade varor förblir TechPilots AB:s egendom till dess full likvid erlagts.
+            Levererade varor förblir Techpilots AB:s egendom till dess full likvid erlagts.
           </p>
         </section>
 
@@ -97,14 +97,14 @@ export default function TermsPage() {
             Det åligger kunden att kontrollera leveransen vid mottagandet. Om godset verkar skadat på grund av skadat emballage, packa alltid upp och kontrollera själva varan.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            Vid transportskadad vara (fysisk skada på varan) ska kunden omgående kontakta PostNord och reklamera godset. Kontakta sedan TechPilots AB på +46 10 880 09 81 eller support@techpilots.se och uppge order- eller fakturanummer samt reklamationsnummer från speditören.
+            Vid transportskadad vara (fysisk skada på varan) ska kunden omgående kontakta PostNord och reklamera godset. Kontakta sedan Techpilots AB på +46 10 880 09 81 eller support@techpilots.se och uppge order- eller fakturanummer samt reklamationsnummer från speditören.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-bold mb-4">Ångerrätt (konsument)</h2>
           <p className="text-gray-700 mb-3 leading-relaxed">
-            I enlighet med svensk lagstiftning om konsumentskydd vid distansavtal har konsument 14 dagar på sig att frånträda sitt köp från det att kunden har mottagit produkten. TechPilots AB har valt att tillämpa öppet köp och ångerrätt i 30 dagar från det att en vara har tagits emot.
+            I enlighet med svensk lagstiftning om konsumentskydd vid distansavtal har konsument 14 dagar på sig att frånträda sitt köp från det att kunden har mottagit produkten. Techpilots AB har valt att tillämpa öppet köp och ångerrätt i 30 dagar från det att en vara har tagits emot.
           </p>
           <p className="text-gray-700 mb-3 leading-relaxed">
             En konsument har rätt att öppna och kontrollera varan i den utsträckning som krävs för att bedöma om konsumenten är nöjd med varan. Ångerrätt gäller inte förbrukningsvaror, kroppsnära produkter, hygienartiklar (t.ex. in-ear hörlurar), spel, digitala produkter eller presentkort.
@@ -143,10 +143,10 @@ export default function TermsPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Ansvar och ansvarsbegränsningar</h2>
           <p className="text-gray-700 mb-3 leading-relaxed">
-            Föreligger det fel som TechPilots AB ansvarar för, åtar sig TechPilots AB att avhjälpa felet genom antingen avhjälpande av fel, omleverans eller i vissa fall prisavdrag eller hävning.
+            Föreligger det fel som Techpilots AB ansvarar för, åtar sig Techpilots AB att avhjälpa felet genom antingen avhjälpande av fel, omleverans eller i vissa fall prisavdrag eller hävning.
           </p>
           <p className="text-gray-700 mb-3 leading-relaxed">
-            TechPilots AB:s ansvar gentemot kund är begränsat till det belopp som motsvarar inköpspriset för aktuell vara och maximalt 2000 SEK. TechPilots AB ansvarar inte för indirekta skador eller följdskador.
+            Techpilots AB:s ansvar gentemot kund är begränsat till det belopp som motsvarar inköpspriset för aktuell vara och maximalt 2000 SEK. Techpilots AB ansvarar inte för indirekta skador eller följdskador.
           </p>
           <p className="text-gray-700 leading-relaxed">
             Vid eventuell tvist följer vi beslut från Allmänna Reklamationsnämnden (ARN) eller motsvarande tvistlösningsorgan.
@@ -163,14 +163,14 @@ export default function TermsPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Immateriell egendom</h2>
           <p className="text-gray-700 leading-relaxed">
-            All innehåll på TechPilots webbplats, inklusive texter, bilder, logotyper och grafik, är skyddat av upphovsrätt och andra intellektuella rättigheter. Du får inte reproducera, distribuera eller använda något innehål från vår webbplats utan vårt skriftliga tillstånd.
+            All innehåll på Techpilots webbplats, inklusive texter, bilder, logotyper och grafik, är skyddat av upphovsrätt och andra intellektuella rättigheter. Du får inte reproducera, distribuera eller använda något innehål från vår webbplats utan vårt skriftliga tillstånd.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-bold mb-4">Force majeure</h2>
           <p className="text-gray-700 leading-relaxed">
-            TechPilots AB är inte ansvarigt för skada till följd av strejk, eldsvåda, myndighetsutövning, arbetstvister, olyckshändelser, fel eller försening av underleverantör, driftstopp eller andra omständigheter utanför TechPilots AB:s kontroll. Om force majeure kvarstår under en period som överstiger 2 månader har såväl kunden som TechPilots AB rätt att säga upp avtalet utan påföljder.
+            Techpilots AB är inte ansvarigt för skada till följd av strejk, eldsvåda, myndighetsutövning, arbetstvister, olyckshändelser, fel eller försening av underleverantör, driftstopp eller andra omständigheter utanför Techpilots AB:s kontroll. Om force majeure kvarstår under en period som överstiger 2 månader har såväl kunden som Techpilots AB rätt att säga upp avtalet utan påföljder.
           </p>
         </section>
 
@@ -180,14 +180,14 @@ export default function TermsPage() {
             Dessa villkor regleras av svensk lag. Tvist gällande tolkningen eller tillämpningen av dessa villkor ska tolkas i enlighet med svensk rätt.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            Om en tvist inte kan lösas i samförstånd mellan konsument och TechPilots AB kan konsumenten vända sig till Allmänna Reklamationsnämnden (ARN), Box 174, 101 23 Stockholm, eller online via europa.eu/consumers/odr
+            Om en tvist inte kan lösas i samförstånd mellan konsument och Techpilots AB kan konsumenten vända sig till Allmänna Reklamationsnämnden (ARN), Box 174, 101 23 Stockholm, eller online via europa.eu/consumers/odr
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-bold mb-4">Kontaktinformation</h2>
           <div className="bg-gray-50 p-6 rounded border border-gray-200 space-y-3 text-gray-700">
-            <p><span className="font-bold">TechPilots AB</span></p>
+            <p><span className="font-bold">Techpilots AB</span></p>
             <p>Skogshyddegatan 37<br />506 31 Borås<br />Sverige</p>
             <p><span className="font-bold">Telefon:</span> +46 10 880 09 81</p>
             <p><span className="font-bold">E-post:</span> support@techpilots.se</p>

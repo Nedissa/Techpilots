@@ -11,7 +11,7 @@ export default function AboutPage() {
 
       {/* Header */}
       <div className="max-w-[1280px] mx-auto px-6 py-16">
-        <h1 className="text-5xl font-bold mb-4">Om TechPilots</h1>
+        <h1 className="text-5xl font-bold mb-4">Om Techpilots</h1>
         <p className="text-xl text-gray-600 max-w-3xl">
           Vi är en e-handelsplattform dedikerad till att leverera högkvalitativa datorer, komponenter och tillbehör till bästa pris.
         </p>
@@ -27,7 +27,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <p className="text-gray-700 mb-4 leading-relaxed">
-                  TechPilots grundades 2020 med en enkel vision: att göra högkvalitativ teknik tillgänglig för alla. Vi såg ett behov på marknaden för en pålitlig och användarvänlig e-handelsplattform som specialiserar sig på datorkomponenter och datorer.
+                  Techpilots grundades 2020 med en enkel vision: att göra högkvalitativ teknik tillgänglig för alla. Vi såg ett behov på marknaden för en pålitlig och användarvänlig e-handelsplattform som specialiserar sig på datorkomponenter och datorer.
                 </p>
                 <p className="text-gray-700 mb-4 leading-relaxed">
                   Från dag ett har vi fokuserat på att leverera ett utmärkt kundsamtal genom snabb leverans, transparenta priser och dedikerad kundsupport. Vi tror att bra service gör skillnaden.
@@ -67,7 +67,7 @@ export default function AboutPage() {
           <section>
             <h2 className="text-3xl font-bold mb-8">Vårt team</h2>
             <p className="text-gray-700 mb-8">
-              TechPilots-teamet består av erfarna professionaler inom e-handel, logistik och kundservice som är passionerade om teknik och dedikerade till att ge bästa möjliga upplevelse.
+              Techpilots-teamet består av erfarna professionaler inom e-handel, logistik och kundservice som är passionerade om teknik och dedikerade till att ge bästa möjliga upplevelse.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {['Anders Bergström', 'Berit Larsson', 'Cecilia Andersson', 'David Eklund'].map((name, i) => (
@@ -107,7 +107,7 @@ export default function AboutPage() {
 
           {/* Varför välja oss */}
           <section className="bg-gray-50 p-8 rounded-lg">
-            <h2 className="text-3xl font-bold mb-8">Varför välja TechPilots?</h2>
+            <h2 className="text-3xl font-bold mb-8">Varför välja Techpilots?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <div className="flex gap-4">

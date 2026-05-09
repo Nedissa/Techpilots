@@ -36,7 +36,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-gray-700 pt-8 text-sm text-gray-400 text-center">
-          <p>&copy; 2024 TechPilots. All rights reserved.</p>
+          <p>&copy; 2024 Techpilots. All rights reserved.</p>
         </div>
       </div>
     </footer>

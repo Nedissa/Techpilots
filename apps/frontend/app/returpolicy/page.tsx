@@ -174,7 +174,7 @@ export default function ReturnPolicyPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Garantikrav & defekta produkter</h2>
           <p className="text-gray-700 mb-4">
-            Alla produkter från TechPilots kommer med tillverkarens officiella garanti. Du har även rätt att reklamera fel i upp till 3 år från köpet.
+            Alla produkter från Techpilots kommer med tillverkarens officiella garanti. Du har även rätt att reklamera fel i upp till 3 år från köpet.
           </p>
           <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg space-y-3">
             <h4 className="font-bold">Vad gör jag om produkten är defekt?</h4>
