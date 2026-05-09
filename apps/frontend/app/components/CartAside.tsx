@@ -174,7 +174,7 @@ export function CartAside() {
               <ul className="space-y-0 py-4 flex-1">
                 {cartItems.map(item => (
                   <li key={item.id} className="border-b border-gray-200 last:border-b-0">
-                    <div className="grid grid-cols-12 gap-4 items-center py-4">
+                    <div className="grid grid-cols-12 gap-6 items-center py-4">
                       {/* Product image */}
                       <div className="col-span-2 flex-shrink-0 w-16 h-16 rounded flex items-center justify-center">
                         {item.image ? (
