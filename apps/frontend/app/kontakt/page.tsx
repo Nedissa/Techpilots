@@ -15,7 +15,7 @@ export default function ContactPage() {
       </div>
 
       <div className="max-w-[1280px] mx-auto px-6 pb-16">
-        <div className="rounded-lg p-12" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+        <div className="p-12" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
 
             {/* Contact Form */}
@@ -79,12 +79,6 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 rounded-lg p-6 mt-8" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-                <h4 className="font-bold mb-2">Vad är du mest bekväm med?</h4>
-                <p className="text-gray-700 text-sm">
-                  Vi svarar snabbast på e-mail och är tillgängliga på telefon under våra öppettider. Välj den metod som passar dig bäst!
-                </p>
-              </div>
             </div>
 
           </div>
