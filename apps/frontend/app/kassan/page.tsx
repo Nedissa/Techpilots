@@ -82,37 +82,42 @@ export default function Checkout() {
     window.initGoogleMapsAutocomplete = () => {
       if (addressInputRef.current && (window as any).google?.maps?.places) {
         try {
-          new (window as any).google.maps.places.Autocomplete(addressInputRef.current, {
+          const autocomplete = new (window as any).google.maps.places.Autocomplete(addressInputRef.current, {
             types: ['address'],
             componentRestrictions: { country: ['se', 'no', 'dk', 'fi'] }
-          }).addListener('place_changed', function() {
-            const place = this.getPlace();
-            if (place.geometry && place.address_components) {
-              const addressComponents = place.address_components;
-              const address = place.formatted_address || addressInputRef.current!.value;
-              const streetAddress = addressComponents.find((c: any) => c.types.includes('route'))?.long_name || '';
-              const streetNumber = addressComponents.find((c: any) => c.types.includes('street_number'))?.long_name || '';
-              const postalCode = addressComponents.find((c: any) => c.types.includes('postal_code'))?.long_name || '';
-              const city = addressComponents.find((c: any) => c.types.includes('locality'))?.long_name || '';
-              const countryCode = addressComponents.find((c: any) => c.types.includes('country'))?.short_name || '';
+          });
 
-              const countryMap: Record<string, string> = {
-                'SE': 'Sverige',
-                'NO': 'Norge',
-                'DK': 'Danmark',
-                'FI': 'Finland'
-              };
+          autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace();
 
-              setFormData(prev => ({
-                ...prev,
-                address: `${streetAddress} ${streetNumber}`.trim() || address,
-                postalCode,
-                city,
-                country: countryMap[countryCode] || prev.country
-              }));
-
-              fetchShippingOptions(countryMap[countryCode] || formData.country);
+            if (!place?.geometry || !place?.address_components) {
+              return;
             }
+
+            const addressComponents = place.address_components;
+            const address = place.formatted_address || addressInputRef.current!.value;
+            const streetAddress = addressComponents.find((c: any) => c.types.includes('route'))?.long_name || '';
+            const streetNumber = addressComponents.find((c: any) => c.types.includes('street_number'))?.long_name || '';
+            const postalCode = addressComponents.find((c: any) => c.types.includes('postal_code'))?.long_name || '';
+            const city = addressComponents.find((c: any) => c.types.includes('locality'))?.long_name || '';
+            const countryCode = addressComponents.find((c: any) => c.types.includes('country'))?.short_name || '';
+
+            const countryMap: Record<string, string> = {
+              'SE': 'Sverige',
+              'NO': 'Norge',
+              'DK': 'Danmark',
+              'FI': 'Finland'
+            };
+
+            setFormData(prev => ({
+              ...prev,
+              address: `${streetAddress} ${streetNumber}`.trim() || address,
+              postalCode,
+              city,
+              country: countryMap[countryCode] || prev.country
+            }));
+
+            fetchShippingOptions(countryMap[countryCode] || formData.country);
           });
         } catch (error) {
           console.warn('Failed to initialize address autocomplete:', error);
