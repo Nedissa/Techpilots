@@ -16,13 +16,13 @@ export default function ShippingPage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="border border-gray-200 rounded-lg shadow-sm p-12 space-y-8">
+        <div className="rounded-lg p-12 space-y-8" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
 
         {/* Leveransalternativ */}
         <section>
           <h2 className="text-2xl font-bold mb-6">Leveransalternativ</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border border-gray-200 p-6 rounded-lg">
+            <div className="p-6 rounded-lg" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
               <h3 className="text-xl font-bold mb-2">Standardleverans</h3>
               <p className="text-gray-700 mb-4">
                 Leverans 1-2 arbetsdagar när produkten är i lager. Gratis frakt inom Sverige.
@@ -31,7 +31,7 @@ export default function ShippingPage() {
               <p className="text-sm text-gray-600">Hela Sverige</p>
             </div>
 
-            <div className="border border-gray-200 p-6 rounded-lg">
+            <div className="p-6 rounded-lg" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
               <h3 className="text-xl font-bold mb-2">Express-leverans</h3>
               <p className="text-gray-700 mb-4">
                 Leverans samma dag eller nästa dag för brådskande ordrar.
@@ -46,11 +46,11 @@ export default function ShippingPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Leveranstider</h2>
           <div className="border border-gray-200 p-6 rounded-lg space-y-4">
-            <div className="flex justify-between items-center py-3 border-b">
+            <div className="flex justify-between items-center py-3 border-b border-gray-200">
               <span className="font-semibold">I lager</span>
               <span className="text-gray-700">1-2 arbetsdagar</span>
             </div>
-            <div className="flex justify-between items-center py-3 border-b">
+            <div className="flex justify-between items-center py-3 border-b border-gray-200">
               <span className="font-semibold">Ej i lager (beställning från leverantör)</span>
               <span className="text-gray-700">3-5 arbetsdagar</span>
             </div>
@@ -58,7 +58,7 @@ export default function ShippingPage() {
               <span className="font-semibold">Specialorder</span>
               <span className="text-gray-700">5-10 arbetsdagar</span>
             </div>
-            <p className="text-sm text-gray-600 mt-4 pt-4 border-t">
+            <p className="text-sm text-gray-600 mt-4 pt-4 border-t border-gray-200">
               Leveranstider räknas från och med arbetsdagen efter beställning. Helger och helgdagar räknas inte. Leveranstiderna är vägledande och inte garanterade.
             </p>
           </div>
@@ -133,7 +133,7 @@ export default function ShippingPage() {
           <h2 className="text-2xl font-bold mb-6">Förpackning & Säkerhet</h2>
 
           <div className="space-y-6">
-            <div className="border border-gray-200 p-6 rounded-lg">
+            <div className="p-6 rounded-lg" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
               <h3 className="text-lg font-bold mb-4">Vår förpackning</h3>
               <p className="text-gray-700 mb-4">
                 Vi är mycket noga med förpackningen för att säkerställa att dina produkter anländer i perfekt skick:
@@ -159,7 +159,7 @@ export default function ShippingPage() {
             </div>
 
             {/* Skadade paket */}
-            <div className="border border-gray-200 p-6 rounded-lg">
+            <div className="p-6 rounded-lg" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
               <h3 className="text-lg font-bold mb-4">Vad gör jag om paketet är skadat?</h3>
               <p className="text-gray-700 mb-6">
                 Om du mottar ett skadat paket, följ dessa steg så löser vi det snabbt och enkelt:
@@ -207,7 +207,7 @@ export default function ShippingPage() {
                 </div>
               </div>
 
-              <div className="bg-red-50 border border-red-200 p-4 rounded-lg mt-6">
+              <div className="bg-red-50 p-4 rounded-lg mt-6" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
                 <p className="text-sm text-gray-700">
                   <strong>Viktigt:</strong> Rapportera skador inom 48 timmar från mottagandet. Detta säkerställer att vi kan göra ett försäkringskrav hos transportören.
                 </p>
@@ -215,7 +215,7 @@ export default function ShippingPage() {
             </div>
 
             {/* Vanliga returer */}
-            <div className="border border-gray-200 p-6 rounded-lg">
+            <div className="p-6 rounded-lg" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
               <h3 className="text-lg font-bold mb-4">Vanliga returer (ångra köp)</h3>
               <p className="text-gray-700 mb-6">
                 Du har rätt att ångra ditt köp inom <strong>14 dagar</strong> enligt lag, eller upp till <strong>30 dagar</strong> enligt vår frivilliga returpolicy.
@@ -263,7 +263,7 @@ export default function ShippingPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mt-6">
+              <div className="bg-blue-50 p-4 rounded-lg mt-6" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
                 <p className="text-sm text-gray-700">
                   <strong>Villkor:</strong> Produkten måste vara oanvänd, i originalskick, med originalförpackning och allt tillbehör. Se vår <Link href="/returpolicy" className="text-blue-600 hover:underline">detaljerad returpolicy</Link> för alla villkor.
                 </p>
@@ -273,7 +273,7 @@ export default function ShippingPage() {
         </section>
 
         {/* FAQ länk */}
-        <section className="bg-gray-50 p-8 rounded-lg border border-gray-200 text-center">
+        <section className="bg-gray-50 p-8 rounded-lg text-center" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
           <h3 className="text-xl font-bold mb-4">Har du fler frågor om frakt?</h3>
           <p className="text-gray-700 mb-6">
             Besök vår FAQ-sida för att hitta svar på vanliga frågor.
