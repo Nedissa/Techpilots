@@ -84,21 +84,27 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <div className="flex gap-4">
-                  <span className="text-2xl">✓</span>
+                  <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                   <div>
                     <h4 className="font-bold">Certifierade produkter</h4>
                     <p className="text-gray-700 text-sm">Alla produkter är originalprodukter med fullständig garanti</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <span className="text-2xl">✓</span>
+                  <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                   <div>
                     <h4 className="font-bold">Snabb leverans</h4>
                     <p className="text-gray-700 text-sm">Lagerförda produkter levereras inom 1-2 arbetsdagar</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <span className="text-2xl">✓</span>
+                  <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                   <div>
                     <h4 className="font-bold">30 dagars returrätt</h4>
                     <p className="text-gray-700 text-sm">Du kan returnera utan risk inom 30 dagar</p>
@@ -107,21 +113,27 @@ export default function AboutPage() {
               </div>
               <div className="space-y-4">
                 <div className="flex gap-4">
-                  <span className="text-2xl">✓</span>
+                  <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                   <div>
                     <h4 className="font-bold">Säker betalning</h4>
                     <p className="text-gray-700 text-sm">SSL-kryptering och PCI DSS-certifierad betalning</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <span className="text-2xl">✓</span>
+                  <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                   <div>
                     <h4 className="font-bold">Dedikerad support</h4>
                     <p className="text-gray-700 text-sm">Vi svarar på telefon och e-mail under affärstid</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <span className="text-2xl">✓</span>
+                  <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                   <div>
                     <h4 className="font-bold">Bästa pris</h4>
                     <p className="text-gray-700 text-sm">Konkurrenskraftiga priser och regelbundna erbjudanden</p>

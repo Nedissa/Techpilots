@@ -20,13 +20,6 @@ const RECOMMENDED_ACCESSORIES = [
   { id: 'acc3', name: 'USB-C Hub', price: '149.00', image: '/assets/Produkt bilder/LAPTOP/1978563_2.webp' },
 ];
 
-const RELATED_PRODUCTS = [
-  { id: '1', title: 'ASUS ROG Gaming Laptop', handle: 'asus-rog-gaming-laptop', price: 14999, originalPrice: 18099, brand: 'ASUS', discount: 'Upp till 17% rabatt', rating: 5, reviews: 128, image: '/assets/Produkt bilder/LAPTOP/1978563_1.webp', images: ['/assets/Produkt bilder/LAPTOP/1978563_1.webp', '/assets/Produkt bilder/LAPTOP/1978563_2.webp', '/assets/Produkt bilder/LAPTOP/1978563_3.webp'], colors: ['#000000', '#808080'], stock: 'I lager (128 st)', features: ['Högsta prestanda', 'Världsklass design', 'Garanterad kvalitet'] },
-  { id: '3', title: 'Premium Gaming Laptop Pro', handle: 'premium-gaming-laptop-pro', price: 11999, originalPrice: 13999, brand: 'ASUS', discount: 'Upp till 14% rabatt', rating: 5, reviews: 156, image: '/assets/Produkt bilder/LAPTOP/1978563_2.webp', images: ['/assets/Produkt bilder/LAPTOP/1978563_2.webp', '/assets/Produkt bilder/LAPTOP/1978563_3.webp', '/assets/Produkt bilder/LAPTOP/1978563_1.webp'], colors: ['#000000', '#808080'], stock: 'I lager (156 st)', features: ['Högsta prestanda', 'Världsklass design', 'Garanterad kvalitet'] },
-  { id: '5', title: 'High Performance Laptop', handle: 'high-performance-laptop', price: 12999, originalPrice: 14999, brand: 'ASUS', discount: 'Upp till 13% rabatt', rating: 5, reviews: 112, image: '/assets/Produkt bilder/LAPTOP/1978563_3.webp', images: ['/assets/Produkt bilder/LAPTOP/1978563_3.webp', '/assets/Produkt bilder/LAPTOP/1978563_1.webp', '/assets/Produkt bilder/LAPTOP/1978563_2.webp'], colors: ['#000000', '#808080'], stock: 'I lager (112 st)', features: ['Högsta prestanda', 'Världsklass design', 'Garanterad kvalitet'] },
-  { id: '8', title: 'Ultrabook Slim Laptop', handle: 'ultrabook-slim-laptop', price: 1299, originalPrice: 1699, brand: 'ASUS', discount: 'Upp till 24% rabatt', rating: 5, reviews: 234, image: '/assets/Produkt bilder/LAPTOP/6907594_v5urxz.webp', images: ['/assets/Produkt bilder/LAPTOP/6907594_v5urxz.webp', '/assets/Produkt bilder/LAPTOP/1978563_2.webp', '/assets/Produkt bilder/LAPTOP/1978563_1.webp'], colors: ['#000000', '#808080'], stock: 'I lager (234 st)', features: ['Högsta prestanda', 'Världsklass design', 'Garanterad kvalitet'] },
-];
-
 interface BreadcrumbTrail {
   mainCategorySlug: string;
   mainCategoryTitle: string;
@@ -614,13 +607,6 @@ export default function ProductDetailClient({
         onClose={() => setShowZoom(false)}
       />
 
-      {/* Related Products Section */}
-      <div className="px-6 mt-12 pt-8 border-t border-gray-200">
-        <ProductsSection
-          variant="related"
-          products={RELATED_PRODUCTS}
-        />
-      </div>
     </div>
   );
 }

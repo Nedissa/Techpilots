@@ -45,11 +45,12 @@ export async function fetchProductsFromMedusa(): Promise<Product[]> {
     }
 
     console.log('Found', data.products.length, 'products');
-    return data.products.map((product: MedusaProduct) => ({
+    return data.products.map((product: any) => ({
       id: product.id,
       title: product.title,
       handle: product.handle || product.title.toLowerCase().replace(/\s+/g, '-'),
       price: product.price || 0,
+      originalPrice: product.originalPrice,
       image: product.images?.[0]?.url || '/assets/placeholder.webp',
       images: product.images?.map(img => img.url) || [],
       rating: 4.5,
@@ -84,6 +85,7 @@ export async function fetchProductByHandle(handle: string): Promise<Product | nu
       title: product.title,
       handle: product.handle || product.title.toLowerCase().replace(/\s+/g, '-'),
       price: product.price || 0,
+      originalPrice: product.originalPrice,
       image: product.images?.[0]?.url || '/assets/placeholder.webp',
       images: product.images?.map((img: { url: string }) => img.url) || [],
       rating: 4.5,

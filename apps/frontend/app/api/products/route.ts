@@ -1,7 +1,7 @@
 export async function GET() {
   try {
     const response = await fetch(
-      'https://techpilots.medusajs.app/store/products?limit=100&expand=variants.prices',
+      'https://techpilots.medusajs.app/store/products?limit=100',
       {
         headers: {
           'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
@@ -21,7 +21,19 @@ export async function GET() {
 
     const transformedProducts = products.map((product: any, idx: number) => {
       const image = product.images?.[0]?.url || product.thumbnail || '';
-      const hashPrice = parseInt(product.id.substring(0, 5), 36) % 20000 + 5000;
+
+      // Get price from first variant if available
+      let price = 0;
+      let originalPrice: number | undefined = undefined;
+
+      if (product.variants && product.variants.length > 0) {
+        const firstVariant = product.variants[0];
+        if (firstVariant.prices && firstVariant.prices.length > 0) {
+          const firstPrice = firstVariant.prices[0];
+          price = firstPrice.amount || 0;
+        }
+      }
+
       const colors = ['#000000', '#FFFFFF', '#C0C0C0', '#808080'];
       const features = [
         'Intel Core i7 Processor',
@@ -30,12 +42,18 @@ export async function GET() {
         'NVIDIA Graphics'
       ];
 
+      // Calculate discount percentage if we have both prices
+      let discountPercent = undefined;
+      if (originalPrice && price) {
+        discountPercent = Math.floor(((originalPrice - price) / originalPrice) * 100);
+      }
+
       return {
         id: product.id,
         title: product.title,
         handle: product.handle,
-        price: hashPrice,
-        originalPrice: hashPrice + Math.random() * 2000,
+        price: price,
+        originalPrice: originalPrice,
         image: image,
         images: (product.images?.map((img: any) => img.url) || []).slice(0, 3),
         category: product.collection?.title || '',
@@ -46,7 +64,7 @@ export async function GET() {
         reviews: Math.floor(Math.random() * 50) + 5,
         features: features,
         isNew: idx % 3 === 0,
-        discountPercent: idx % 2 === 0 ? Math.floor(Math.random() * 30) + 5 : undefined,
+        discountPercent: discountPercent,
       };
     });
 

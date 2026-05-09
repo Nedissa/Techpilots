@@ -7,30 +7,18 @@ import { fetchProductsFromMedusa, type Product } from '@/app/lib/medusa-client';
 
 const CATEGORIES = ['Alla', 'Laptops', 'Komponenter', 'Datorer', 'Tillbehör'];
 
-const FALLBACK_PRODUCTS = [
-  { id: '1', title: 'ASUS ROG Gaming Laptop 16"', handle: 'asus-rog-gaming-laptop', price: 14999, originalPrice: 17999, rating: 4.8, reviews: 128, category: 'Laptops', image: '/assets/Produkt bilder/LAPTOP/1978563_1.webp' },
-  { id: '2', title: 'Intel Core i9-13900H', handle: 'intel-core-i9', price: 8999, originalPrice: 9999, rating: 4.7, reviews: 89, category: 'Komponenter', image: 'https://via.placeholder.com/300?text=Intel+i9' },
-  { id: '3', title: 'NVIDIA RTX 4080', handle: 'nvidia-rtx-4080', price: 11999, originalPrice: 13999, rating: 4.9, reviews: 156, category: 'Komponenter', image: 'https://via.placeholder.com/300?text=RTX+4080' },
-  { id: '4', title: 'Corsair Headset', handle: 'corsair-headset', price: 1499, originalPrice: 1899, rating: 4.6, reviews: 67, category: 'Tillbehör', image: 'https://via.placeholder.com/300?text=Corsair+Headset' },
-  { id: '5', title: 'Dell XPS 13', handle: 'dell-xps-13', price: 12999, originalPrice: 14999, rating: 4.8, reviews: 112, category: 'Laptops', image: 'https://via.placeholder.com/300?text=Dell+XPS' },
-  { id: '6', title: 'AMD Ryzen 9', handle: 'amd-ryzen-9', price: 7999, originalPrice: 8999, rating: 4.7, reviews: 95, category: 'Komponenter', image: 'https://via.placeholder.com/300?text=AMD+Ryzen' },
-];
-
 export default function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>(FALLBACK_PRODUCTS);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('Alla');
   const [sortBy, setSortBy] = useState('relevant');
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    console.log('ProductsPage useEffect running');
     const loadProducts = async () => {
-      console.log('loadProducts called');
       setLoading(true);
       const fetchedProducts = await fetchProductsFromMedusa();
-      console.log('fetchedProducts result:', fetchedProducts);
-      setProducts(fetchedProducts.length > 0 ? fetchedProducts : FALLBACK_PRODUCTS);
+      setProducts(fetchedProducts);
       setLoading(false);
     };
     loadProducts();
@@ -47,6 +35,10 @@ export default function ProductsPage() {
 
   if (loading) {
     return <MainLayout><div className="text-center py-10">Laddar produkter...</div></MainLayout>;
+  }
+
+  if (products.length === 0) {
+    return <MainLayout><div className="text-center py-10">Ingen produkter tillgänglig</div></MainLayout>;
   }
 
   const sorted = [...filtered].sort((a, b) => {

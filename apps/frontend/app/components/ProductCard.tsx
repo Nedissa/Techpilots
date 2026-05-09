@@ -56,6 +56,7 @@ export function ProductCard({
         id: product.id,
         title: product.title,
         price: product.price,
+        originalPrice: product.originalPrice,
         image: product.image,
         quantity: 1,
       },
