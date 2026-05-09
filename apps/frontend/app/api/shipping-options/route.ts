@@ -33,14 +33,26 @@ export async function GET(request: Request) {
     }
 
     const data = await response.json();
+    console.log('Full Medusa response:', JSON.stringify(data, null, 2));
 
-    // Filter shipping options by country
-    const filteredOptions = data.shipping_options?.filter((option: any) => {
-      // Check if the shipping option is available for the selected country
-      return option.service_zone?.geo_zones?.some((zone: any) =>
-        zone.country_code === country.toLowerCase()
-      );
-    }) || [];
+    // Get all shipping options and flatten them
+    const allOptions = data.shipping_options || [];
+
+    // Filter options by country and map to simplified format
+    const filteredOptions = allOptions
+      .filter((option: any) => {
+        return option.service_zone?.geo_zones?.some((zone: any) =>
+          zone.country_code === country.toLowerCase()
+        );
+      })
+      .map((option: any) => ({
+        id: option.id,
+        name: option.name,
+        amount: option.amount || 0,
+        type: option.type?.id || 'standard'
+      }));
+
+    console.log('Filtered options for', country, ':', filteredOptions);
 
     return Response.json({
       shipping_options: filteredOptions
