@@ -488,7 +488,7 @@ export default function Checkout() {
                   />
                   <div className="flex-1">
                     <p className="font-medium">Standardfrakt</p>
-                    <p className="text-sm text-gray-600">Leverans inom 3-5 arbetsdagar</p>
+                    <p className="text-sm text-gray-600">Leverans 1-3 arbetsdagar inom Sverige</p>
                   </div>
                   <span className="font-semibold">Gratis</span>
                 </label>
@@ -503,7 +503,7 @@ export default function Checkout() {
                   />
                   <div className="flex-1">
                     <p className="font-medium">Expressfrakt</p>
-                    <p className="text-sm text-gray-600">Leverans nästa arbetsdag</p>
+                    <p className="text-sm text-gray-600">Leverans nästa arbetsdag (beställ före 12:00)</p>
                   </div>
                   <span className="font-semibold">199 SEK</span>
                 </label>
