@@ -5,7 +5,7 @@ import { RootLayoutClient } from './components/RootLayoutClient';
 import { HeaderWrapper } from './components/HeaderWrapper';
 
 export const metadata: Metadata = {
-  title: 'TechPilots - Datorkomponenter och Datorer',
+  title: 'Techpilots - Datorkomponenter och Datorer',
   description: 'Köp högkvalitativa datorer, komponenter och tillbehör',
 };
 

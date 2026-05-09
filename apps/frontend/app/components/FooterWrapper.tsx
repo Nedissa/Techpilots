@@ -10,7 +10,7 @@ export function FooterWrapper() {
           <div className="grid grid-cols-5 gap-12 mb-12 pb-8 border-b border-gray-800 text-white">
             {/* Logo section */}
             <div>
-              <h2 className="text-lg font-bold mb-6">TechPilots</h2>
+              <h2 className="text-lg font-bold mb-6">Techpilots</h2>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -120,7 +120,7 @@ export function FooterWrapper() {
 
           {/* Footer bottom */}
           <div className="flex justify-between items-center text-xs text-gray-400 pt-8">
-            <p>© 2026 TechPilots. Alla rättigheter förbehållna.</p>
+            <p>© 2026 Techpilots. Alla rättigheter förbehållna.</p>
             <a href="/villkor">Villkor och policyer</a>
           </div>
         </div>
