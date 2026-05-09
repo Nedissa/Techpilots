@@ -42,10 +42,14 @@ export async function GET() {
         'NVIDIA Graphics'
       ];
 
-      // Assign section categories based on product index
-      let sectionCategory = 'popular';
-      if (idx % 3 === 1) sectionCategory = 'recommended';
-      if (idx % 3 === 2) sectionCategory = 'new';
+      // Get sectionCategory from product collection if available
+      // Only set if product belongs to a known collection
+      let sectionCategory = '';
+      const collectionTitle = product.collection?.title || '';
+      if (collectionTitle === 'Populära produkter') sectionCategory = 'popular';
+      else if (collectionTitle === 'Rekommenderade produkter') sectionCategory = 'recommended';
+      else if (collectionTitle === 'Nya produkter') sectionCategory = 'new';
+      else if (collectionTitle === 'Du kanske också gillar') sectionCategory = 'also-like';
 
       // Calculate discount percentage if we have both prices
       let discountPercent = undefined;
@@ -61,7 +65,7 @@ export async function GET() {
         originalPrice: originalPrice,
         image: image,
         images: (product.images?.map((img: any) => img.url) || []).slice(0, 3),
-        category: product.collection?.title || sectionCategory,
+        category: collectionTitle,
         brand: ['ASUS', 'Dell', 'HP', 'Lenovo'][idx % 4],
         colors: colors,
         stock: 'I lager',
