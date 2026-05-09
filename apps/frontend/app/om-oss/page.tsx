@@ -19,7 +19,7 @@ export default function AboutPage() {
 
       {/* Story */}
       <div className="max-w-[1280px] mx-auto px-6 pb-16">
-        <div className="border border-gray-200 rounded-lg shadow-sm p-12 space-y-12">
+        <div className="p-12 space-y-12" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
 
           {/* Vår historia */}
           <section>
@@ -48,15 +48,15 @@ export default function AboutPage() {
           <section>
             <h2 className="text-3xl font-bold mb-8">Våra värden</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="border border-gray-200 p-6 rounded-lg">
+              <div className=" p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-3">Kvalitet</h3>
                 <p className="text-gray-700">Vi erbjuder endast autentiska produkter från etablerade märken med fullständig garanti och certifiering.</p>
               </div>
-              <div className="border border-gray-200 p-6 rounded-lg">
+              <div className=" p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-3">Snabbhet</h3>
                 <p className="text-gray-700">Snabb leverans 1-2 dagar när produkten är i lager, direkt till din dörr. Vi respekterar din tid.</p>
               </div>
-              <div className="border border-gray-200 p-6 rounded-lg">
+              <div className=" p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-3">Support</h3>
                 <p className="text-gray-700">Dedikerad kundsupport tillgänglig via email, telefon under affärstid. Vi löser problem snabbt.</p>
               </div>
@@ -71,7 +71,7 @@ export default function AboutPage() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {['Anders Bergström', 'Berit Larsson', 'Cecilia Andersson', 'David Eklund'].map((name, i) => (
-                <div key={i} className="bg-white p-6 rounded-lg text-center border border-gray-200">
+                <div key={i} className="bg-white p-6 rounded-lg text-center ">
                   <div className="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center text-gray-500 text-sm">
                     Profil
                   </div>
@@ -86,19 +86,19 @@ export default function AboutPage() {
           <section>
             <h2 className="text-3xl font-bold mb-8">Av siffror</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-              <div className="border border-gray-200 p-6 rounded-lg">
+              <div className=" p-6 rounded-lg">
                 <p className="text-4xl font-bold mb-2">5000+</p>
                 <p className="text-gray-600">Nöjda kunder</p>
               </div>
-              <div className="border border-gray-200 p-6 rounded-lg">
+              <div className=" p-6 rounded-lg">
                 <p className="text-4xl font-bold mb-2">2000+</p>
                 <p className="text-gray-600">Produkter i lager</p>
               </div>
-              <div className="border border-gray-200 p-6 rounded-lg">
+              <div className=" p-6 rounded-lg">
                 <p className="text-4xl font-bold mb-2">4.8/5</p>
                 <p className="text-gray-600">Medelbetyg</p>
               </div>
-              <div className="border border-gray-200 p-6 rounded-lg">
+              <div className=" p-6 rounded-lg">
                 <p className="text-4xl font-bold mb-2">1-2 dagar</p>
                 <p className="text-gray-600">Genomsnittlig leverans</p>
               </div>

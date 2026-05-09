@@ -16,7 +16,7 @@ export default function TermsPage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="border border-gray-200 rounded-lg shadow-sm p-12 space-y-8">
+        <div className="p-12 space-y-8" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
 
         <section>
           <h2 className="text-2xl font-bold mb-4">Tillämplighet</h2>
@@ -186,7 +186,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="text-2xl font-bold mb-4">Kontaktinformation</h2>
-          <div className="bg-gray-50 p-6 rounded border border-gray-200 space-y-3 text-gray-700">
+          <div className="bg-gray-50 p-6 rounded  space-y-3 text-gray-700">
             <p><span className="font-bold">Techpilots AB</span></p>
             <p>Skogshyddegatan 37<br />506 31 Borås<br />Sverige</p>
             <p><span className="font-bold">Telefon:</span> +46 10 880 09 81</p>

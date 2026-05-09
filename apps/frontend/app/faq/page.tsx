@@ -16,7 +16,7 @@ export default function FAQPage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="border border-gray-200 rounded-lg shadow-sm p-12 space-y-8">
+        <div className="p-12 space-y-8" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
 
           {/* Beställning */}
           <section>
@@ -215,7 +215,7 @@ export default function FAQPage() {
           </section>
 
           {/* Kontakt */}
-          <section className="bg-gray-50 p-8 rounded-lg border border-gray-200">
+          <section className="bg-gray-50 p-8 rounded-lg ">
             <h2 className="text-2xl font-bold mb-4">Finns det något mer vi kan hjälpa till med?</h2>
             <p className="text-gray-700 mb-6">
               Om din fråga inte besvarades här, kontakta oss direkt så hjälper vi dig!

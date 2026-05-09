@@ -16,12 +16,12 @@ export default function ReturnPolicyPage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="border border-gray-200 rounded-lg shadow-sm p-12 space-y-8">
+        <div className="p-12 space-y-8" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
 
         {/* Laglig rätt */}
         <section>
           <h2 className="text-2xl font-bold mb-4">Dina rättigheter enligt lag</h2>
-          <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+          <div className="bg-blue-50 p-6 rounded-lg" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
             <p className="text-gray-700 mb-3">
               Du har lagstadgad rätt att ångra ditt köp inom <strong>14 dagar</strong> enligt Distansavtalslagen. Detta gäller oavsett vår 30-dagars frivilliga returrätt nedan.
             </p>
@@ -38,7 +38,7 @@ export default function ReturnPolicyPage() {
             Du har rätt att returnera en produkt inom <strong>30 dagar</strong> från mottagandet om produkten är oanvänd och i originalskick. För att en returering ska godkännas måste följande villkor uppfyllas:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="border border-gray-200 p-4 rounded">
+            <div className=" p-4 rounded">
               <h4 className="font-bold mb-2">Produkten måste vara:</h4>
               <ul className="space-y-2 text-gray-700 text-sm">
                 <li>— I originalskick och oanvänd</li>
@@ -47,7 +47,7 @@ export default function ReturnPolicyPage() {
                 <li>— Utan synlig skada</li>
               </ul>
             </div>
-            <div className="border border-gray-200 p-4 rounded">
+            <div className=" p-4 rounded">
               <h4 className="font-bold mb-2">Du måste:</h4>
               <ul className="space-y-2 text-gray-700 text-sm">
                 <li>— Initiera retur inom 30 dagar</li>
@@ -188,7 +188,7 @@ export default function ReturnPolicyPage() {
         </section>
 
         {/* Kontakt */}
-        <section className="bg-gray-50 p-8 rounded-lg border border-gray-200">
+        <section className="bg-gray-50 p-8 rounded-lg ">
           <h3 className="text-2xl font-bold mb-4">Behöver du hjälp med en retur?</h3>
           <p className="text-gray-700 mb-6">
             Kontakta vår support-team så hjälper vi dig genom processen.
