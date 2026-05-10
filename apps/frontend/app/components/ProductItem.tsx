@@ -50,6 +50,7 @@ export function ProductItem({
           price: product.price,
           originalPrice: product.originalPrice,
           quantity: 1,
+          image: product.image,
         },
       });
       window.dispatchEvent(event);

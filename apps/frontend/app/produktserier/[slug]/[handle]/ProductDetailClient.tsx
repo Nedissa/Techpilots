@@ -69,13 +69,20 @@ export default function ProductDetailClient({
   }, [product.id]);
 
   const handleFavoriteToggle = () => {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
     if (isFavorite) {
-      const updated = favorites.filter((id: string) => id !== product.id);
-      localStorage.setItem('favorites', JSON.stringify(updated));
+      const updated = favoritesList.filter((item: any) => item.id !== product.id);
+      localStorage.setItem('favoritesList', JSON.stringify(updated));
     } else {
-      favorites.push(product.id);
-      localStorage.setItem('favorites', JSON.stringify(favorites));
+      favoritesList.push({
+        id: product.id,
+        title: product.title,
+        handle: product.handle,
+        price: product.price,
+        originalPrice: product.originalPrice,
+        image: product.image,
+      });
+      localStorage.setItem('favoritesList', JSON.stringify(favoritesList));
     }
     setIsFavorite(!isFavorite);
   };
@@ -556,6 +563,7 @@ export default function ProductDetailClient({
                   price: product.price,
                   originalPrice: product.originalPrice,
                   quantity: quantity,
+                  image: product.image,
                 },
               });
               window.dispatchEvent(event);

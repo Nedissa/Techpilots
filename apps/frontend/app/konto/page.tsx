@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { MainLayout } from '../components/MainLayout';
-import { fetchProductsFromMedusa } from '@/app/lib/medusa-client';
 import { ProductCard, type ProductData } from '@/app/components/ProductCard';
 
 export default function AccountPage() {
@@ -48,14 +47,10 @@ export default function AccountPage() {
     }
 
     // Ladda favoriter
-    const loadFavorites = async () => {
-      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-      if (favorites.length > 0) {
-        const allProducts = await fetchProductsFromMedusa();
-        const liked = allProducts.filter((p: any) => favorites.includes(p.id));
-        console.log('Favorite products:', liked);
-        setFavoriteProducts(liked);
-      }
+    const loadFavorites = () => {
+      const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
+      console.log('Loaded favoritesList:', favoritesList);
+      setFavoriteProducts(favoritesList);
     };
     loadFavorites();
 
@@ -376,20 +371,11 @@ export default function AccountPage() {
                 <div key={product.id} className="grid grid-cols-12 gap-6 items-center py-4 border-b border-gray-200 last:border-b-0">
                   {/* Product image */}
                   <div className="col-span-2 flex-shrink-0">
-                    {product.image && product.image !== '/assets/placeholder.webp' ? (
-                      <img
-                        src={product.image}
-                        alt={product.title}
-                        className="w-16 h-16 object-contain rounded"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                        }}
-                      />
-                    ) : null}
-                    <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
-                      Bild
-                    </div>
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-16 h-16 object-contain rounded"
+                    />
                   </div>
 
                   {/* Product title and availability */}
@@ -419,9 +405,9 @@ export default function AccountPage() {
                   <div className="col-span-3 flex justify-end">
                     <button
                       onClick={() => {
-                        const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                        const updated = favorites.filter((id: string) => id !== product.id);
-                        localStorage.setItem('favorites', JSON.stringify(updated));
+                        const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
+                        const updated = favoritesList.filter((item: any) => item.id !== product.id);
+                        localStorage.setItem('favoritesList', JSON.stringify(updated));
                         setFavoriteProducts(favoriteProducts.filter(p => p.id !== product.id));
                       }}
                       className="text-gray-500 hover:text-red-500 transition-colors flex items-center justify-center"

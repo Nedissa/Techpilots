@@ -174,25 +174,21 @@ export function CartAside() {
               <ul className="space-y-0 py-4 flex-1">
                 {cartItems.map(item => (
                   <li key={item.id} className="border-b border-gray-200 last:border-b-0">
-                    <div className="grid grid-cols-12 gap-6 items-center py-4">
+                    <div className="flex items-center gap-6 py-4">
                       {/* Product image */}
-                      <div className="col-span-2 flex-shrink-0 w-16 h-16 rounded flex items-center justify-center mr-8">
-                        {item.image ? (
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="w-full h-full object-contain"
-                          />
-                        ) : (
-                          <span className="text-gray-400 text-xs">Bild</span>
-                        )}
+                      <div className="flex-shrink-0 w-16 h-16 rounded">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-contain"
+                        />
                       </div>
 
                       {/* Product title and availability */}
-                      <div className="col-span-4 min-w-0">
+                      <div className="flex-shrink-0">
                         <Link
                           href={`/produkter/${item.id}`}
-                          className="text-gray-900 font-semibold text-sm hover:text-gray-700 line-clamp-2 block"
+                          className="text-gray-900 font-semibold text-sm hover:text-gray-700 whitespace-nowrap block"
                         >
                           {item.title}
                         </Link>
@@ -205,35 +201,33 @@ export function CartAside() {
                       </div>
 
                       {/* Quantity controls */}
-                      <div className="col-span-3 flex justify-center">
-                        <div className="flex items-center gap-1">
-                          <button
-                            onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
-                            disabled={item.quantity <= 1}
-                            className="text-gray-700 disabled:text-gray-300 hover:text-gray-900 flex items-center justify-center text-base font-bold"
-                          >
-                            −
-                          </button>
-                          <span className="text-gray-900 text-sm font-medium w-8 text-center">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
-                            className="text-gray-700 hover:text-gray-900 flex items-center justify-center text-sm font-medium"
-                          >
-                            +
-                          </button>
-                        </div>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <button
+                          onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
+                          disabled={item.quantity <= 1}
+                          className="text-gray-700 disabled:text-gray-300 hover:text-gray-900 flex items-center justify-center text-base font-bold"
+                        >
+                          −
+                        </button>
+                        <span className="text-gray-900 text-sm font-medium w-8 text-center">
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+                          className="text-gray-700 hover:text-gray-900 flex items-center justify-center text-sm font-medium"
+                        >
+                          +
+                        </button>
                       </div>
 
                       {/* Price and remove */}
-                      <div className="col-span-3 flex flex-col items-end gap-2">
-                        <p className="text-sm font-semibold text-gray-900">
+                      <div className="flex-shrink-0 flex items-center gap-4">
+                        <p className="text-sm font-semibold text-gray-900 whitespace-nowrap">
                           {(item.price * item.quantity).toLocaleString('sv-SE')} kr
                         </p>
                         <button
                           onClick={() => handleRemoveItem(item.id)}
-                          className="text-gray-500 hover:text-red-500 transition-colors flex-shrink-0 flex items-center justify-center"
+                          className="text-gray-500 hover:text-red-500 transition-colors"
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path d="M19 7l-1 12a2 2 0 01-2 2H8a2 2 0 01-2-2L5 7m3 0V4a1 1 0 011-1h6a1 1 0 011 1v3m-6 4v6m4-6v6" strokeLinecap="round" strokeLinejoin="round"/>
