@@ -24,9 +24,11 @@ export default function AccountPage() {
   const [complaints, setComplaints] = useState<any[]>([]);
   const [promotions, setPromotions] = useState<any[]>([]);
   const [loyalty, setLoyalty] = useState<any>(null);
+  const [orders, setOrders] = useState<any[]>([]);
   const [loadingComplaintsError, setLoadingComplaintsError] = useState('');
   const [loadingPromotionsError, setLoadingPromotionsError] = useState('');
   const [loadingLoyaltyError, setLoadingLoyaltyError] = useState('');
+  const [loadingOrdersError, setLoadingOrdersError] = useState('');
   const addressInputRef = useRef<HTMLInputElement>(null);
 
   // Ladda sparad userData när sidan öppnas
@@ -65,22 +67,34 @@ export default function AccountPage() {
       setActiveTab(savedTab);
     }
 
-    // Load complaints
-    const loadComplaints = async () => {
+    const loadData = async () => {
+      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+      const customerId = userData.id || userData.email;
+
+      // Load orders
       try {
-        const response = await fetch('/api/complaints?customer_id=test-customer');
+        const response = await fetch(`/api/order-details?customer_id=${customerId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setOrders(data.orders || []);
+        }
+      } catch (error) {
+        console.error('Failed to load orders:', error);
+        setLoadingOrdersError('Kunde inte ladda orderhistorik');
+      }
+
+      // Load complaints
+      try {
+        const response = await fetch(`/api/complaints?customer_id=${customerId}`);
         if (response.ok) {
           const data = await response.json();
           setComplaints(data.complaints || []);
         }
       } catch (error) {
         console.error('Failed to load complaints:', error);
-        setLoadingComplaintsError('Kunde inte ladda felanmälningar');
       }
-    };
 
-    // Load promotions
-    const loadPromotions = async () => {
+      // Load promotions
       try {
         const response = await fetch('/api/promotions');
         if (response.ok) {
@@ -89,27 +103,21 @@ export default function AccountPage() {
         }
       } catch (error) {
         console.error('Failed to load promotions:', error);
-        setLoadingPromotionsError('Kunde inte ladda erbjudanden');
       }
-    };
 
-    // Load loyalty
-    const loadLoyalty = async () => {
+      // Load loyalty
       try {
-        const response = await fetch('/api/loyalty?customer_id=test-customer');
+        const response = await fetch(`/api/loyalty?customer_id=${customerId}`);
         if (response.ok) {
           const data = await response.json();
           setLoyalty(data.loyalty);
         }
       } catch (error) {
         console.error('Failed to load loyalty data:', error);
-        setLoadingLoyaltyError('Kunde inte ladda kundklubbinformation');
       }
     };
 
-    loadComplaints();
-    loadPromotions();
-    loadLoyalty();
+    loadData();
 
     setIsLoading(false);
     setIsHydrated(true);
@@ -409,23 +417,35 @@ export default function AccountPage() {
         {activeTab === 'orderhistorik' && (
         <div className="p-6  shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
           <h3 className="text-xl font-bold mb-6">Orderhistorik</h3>
-          <div className="space-y-4">
-            <div className="pb-4 border-b">
-              <p className="font-semibold">Beställning #12345</p>
-              <p className="text-sm text-gray-600">2024-05-01 • 24,998 SEK</p>
-              <p className="text-sm text-green-600 font-semibold">Levererad</p>
+          {loadingOrdersError && (
+            <div className="mb-4 p-4 bg-red-50 text-red-700 rounded">
+              {loadingOrdersError}
             </div>
-            <div className="pb-4 border-b">
-              <p className="font-semibold">Beställning #12340</p>
-              <p className="text-sm text-gray-600">2024-04-15 • 14,998 SEK</p>
-              <p className="text-sm text-green-600 font-semibold">Levererad</p>
+          )}
+          {orders.length > 0 ? (
+            <div className="space-y-4">
+              {orders.map((order) => (
+                <div key={order.id} className="pb-4 border-b last:border-b-0">
+                  <p className="font-semibold">Beställning #{order.display_id}</p>
+                  <p className="text-sm text-gray-600">
+                    {new Date(order.created_at).toLocaleDateString('sv-SE')} • {(order.total / 100).toLocaleString('sv-SE')} SEK
+                  </p>
+                  <p className={`text-sm font-semibold mt-1 ${order.status === 'completed' ? 'text-green-600' : 'text-blue-600'}`}>
+                    {order.status === 'completed' ? 'Levererad' : 'Bearbetas'}
+                  </p>
+                </div>
+              ))}
+              <Link href="/konto/bestallningar">
+                <button className="w-full px-6 py-2 bg-black text-white  hover:bg-gray-800 font-semibold mt-4">
+                  Se alla ordrar
+                </button>
+              </Link>
             </div>
-            <Link href="/konto/bestallningar">
-              <button className="w-full px-6 py-2 bg-black text-white  hover:bg-gray-800 font-semibold">
-                Se alla ordrar
-              </button>
-            </Link>
-          </div>
+          ) : (
+            <div className="text-gray-700">
+              <p>Du har inga beställningar än</p>
+            </div>
+          )}
         </div>
         )}
 
