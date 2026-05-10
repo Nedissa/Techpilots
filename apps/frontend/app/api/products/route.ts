@@ -1,4 +1,4 @@
-import { getMedusaURL, MEDUSA_PUBLISHABLE_KEY } from '@/lib/medusa-client';
+import { getMedusaURL } from '@/lib/medusa-client';
 
 export async function GET() {
   try {
@@ -7,7 +7,7 @@ export async function GET() {
       getMedusaURL('/store/products?limit=100&fields=*variants.calculated_price,*variants.prices'),
       {
         headers: {
-          'x-publishable-api-key': MEDUSA_PUBLISHABLE_KEY,
+          'x-publishable-api-key': 'pk_36e601e5ae7f344b990cd62847fba7b6b951c4336b9e4d4445642fc2948f2279',
         },
       }
     );
