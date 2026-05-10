@@ -369,7 +369,7 @@ export default function AccountPage() {
               <p className="text-sm text-green-600 font-semibold">Levererad</p>
             </div>
             <Link href="/konto/bestallningar">
-              <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+              <button className="w-full px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 font-semibold">
                 Se alla ordrar
               </button>
             </Link>
@@ -478,7 +478,7 @@ export default function AccountPage() {
           <h3 className="text-xl font-bold mb-6">Felanmälan</h3>
           <div className="space-y-3 text-gray-700">
             <p>Du har ingen aktiv felanmälan</p>
-            <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+            <button className="w-full px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 font-semibold">
               Anmäl ett fel
             </button>
           </div>
@@ -491,7 +491,7 @@ export default function AccountPage() {
           <div className="space-y-3 text-gray-700">
             <p>Du har 3 aktiva erbjudanden</p>
             <p className="text-sm">Se dina personliga erbjudanden baserat på dina köp</p>
-            <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+            <button className="w-full px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 font-semibold">
               Se alla erbjudanden
             </button>
           </div>
