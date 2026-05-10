@@ -369,14 +369,67 @@ export default function AccountPage() {
         <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
           <h3 className="text-xl font-bold mb-6">Favoriter</h3>
           {favoriteProducts.length > 0 ? (
-            <>
+            <div className="space-y-4">
               <p className="text-gray-700 mb-6">Du har {favoriteProducts.length} sparade favoriter</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {favoriteProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} variant="popular" />
-                ))}
-              </div>
-            </>
+              {favoriteProducts.map((product) => (
+                <div key={product.id} className="grid grid-cols-12 gap-6 items-center py-4 border-b border-gray-200 last:border-b-0">
+                  {/* Product image */}
+                  <div className="col-span-2 flex-shrink-0">
+                    {product.image ? (
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="w-16 h-16 object-contain rounded"
+                      />
+                    ) : (
+                      <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
+                        Bild
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Product title and availability */}
+                  <div className="col-span-4 min-w-0">
+                    <Link
+                      href={`/produkter/${product.handle}`}
+                      className="text-gray-900 font-semibold text-sm hover:text-gray-700 line-clamp-2 block"
+                    >
+                      {product.title}
+                    </Link>
+                    <div className="flex items-center gap-1 mt-1">
+                      <svg className="w-2 h-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <circle cx="10" cy="10" r="10" />
+                      </svg>
+                      <span className="text-xs text-gray-600">I lager</span>
+                    </div>
+                  </div>
+
+                  {/* Price */}
+                  <div className="col-span-3 text-right flex-shrink-0">
+                    <p className="text-sm font-semibold text-gray-900">
+                      {product.price.toLocaleString('sv-SE')} kr
+                    </p>
+                  </div>
+
+                  {/* Remove button */}
+                  <div className="col-span-3 flex justify-end">
+                    <button
+                      onClick={() => {
+                        const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                        const updated = favorites.filter((id: string) => id !== product.id);
+                        localStorage.setItem('favorites', JSON.stringify(updated));
+                        setFavoriteProducts(favoriteProducts.filter(p => p.id !== product.id));
+                      }}
+                      className="text-gray-500 hover:text-red-500 transition-colors flex items-center justify-center"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path d="M19 7l-1 12a2 2 0 01-2 2H8a2 2 0 01-2-2L5 7m3 0V4a1 1 0 011-1h6a1 1 0 011 1v3m-6 4v6m4-6v6" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="space-y-3 text-gray-700">
               <p>Du har ingen sparade favoriter än</p>
