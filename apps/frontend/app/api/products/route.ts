@@ -2,11 +2,13 @@ import { getMedusaURL } from '@/lib/medusa-client';
 
 export async function GET() {
   try {
-    // Fetch products with calculated prices and price list info
+    // Fetch products with publishable API key
     const response = await fetch(
-      getMedusaURL('/store/products?limit=100&fields=*variants.calculated_price,*variants.prices'),
+      getMedusaURL('/store/products?limit=100'),
       {
+        method: 'GET',
         headers: {
+          'Content-Type': 'application/json',
           'x-publishable-api-key': 'pk_36e601e5ae7f344b990cd62847fba7b6b951c4336b9e4d4445642fc2948f2279',
         },
       }
