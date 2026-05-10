@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useCallback } from 'react';
 
 export interface ProductData {
@@ -139,12 +140,21 @@ export function ProductCard({
               animation: fadeIn 0.3s ease-out forwards;
             }
           `}</style>
-          <img
-            key={imageIndex}
-            src={product.images?.[imageIndex] || product.image}
-            alt={product.title}
-            className={`w-full h-full object-contain p-8 ${imageIndex > 0 ? 'fade-in' : ''}`}
-          />
+          {(product.images?.[imageIndex] || product.image) ? (
+            <img
+              key={imageIndex}
+              src={product.images?.[imageIndex] || product.image}
+              alt={product.title}
+              className={`w-full h-full object-contain p-8 ${imageIndex > 0 ? 'fade-in' : ''}`}
+              onError={(e) => {
+                console.error('Image failed to load:', e.currentTarget.src);
+              }}
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400">Ingen bild</span>
+            </div>
+          )}
         </Link>
       </div>
 
