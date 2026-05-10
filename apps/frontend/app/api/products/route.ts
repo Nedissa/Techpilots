@@ -1,8 +1,8 @@
 export async function GET() {
   try {
-    // Fetch products with calculated prices
+    // Fetch products with calculated prices and price list info
     const response = await fetch(
-      'https://techpilots.medusajs.app/store/products?limit=100&fields=*variants.calculated_price',
+      'https://techpilots.medusajs.app/store/products?limit=100&fields=*variants.calculated_price,*variants.prices',
       {
         headers: {
           'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
@@ -30,10 +30,24 @@ export async function GET() {
       // Get price from first variant's calculated_price
       if (product.variants && product.variants.length > 0) {
         const firstVariant = product.variants[0];
-        if (firstVariant.calculated_price?.original_amount) {
-          price = firstVariant.calculated_price.original_amount;
-        } else if (firstVariant.calculated_price?.amount_default) {
-          price = firstVariant.calculated_price.amount_default;
+        const calcPrice = firstVariant.calculated_price;
+
+        if (calcPrice) {
+          // The calculated_price should already include price list overrides
+          // Use the lowest price available (could be from price list)
+          if (calcPrice.calculated_amount !== undefined) {
+            price = calcPrice.calculated_amount;
+          } else if (calcPrice.amount) {
+            price = calcPrice.amount;
+          } else if (calcPrice.amount_default) {
+            price = calcPrice.amount_default;
+          }
+
+          // Use original_amount as the original price for discount calculation
+          // This is the base price before any price list overrides
+          if (calcPrice.original_amount && calcPrice.original_amount !== price) {
+            originalPrice = calcPrice.original_amount;
+          }
         }
       }
 
