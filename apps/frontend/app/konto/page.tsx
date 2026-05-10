@@ -254,7 +254,7 @@ export default function AccountPage() {
 
               <button
                 onClick={() => setIsEditing(true)}
-                className="mt-6 px-8 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold"
+                className="mt-6 px-8 py-2 bg-black text-white rounded-lg hover:bg-gray-800 font-semibold"
               >
                 Redigera uppgifter
               </button>
@@ -338,13 +338,13 @@ export default function AccountPage() {
               <div className="flex gap-2 mt-6">
                 <button
                   onClick={handleSaveChanges}
-                  className="px-8 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold"
+                  className="px-8 py-2 bg-black text-white rounded-lg hover:bg-gray-800 font-semibold"
                 >
                   Spara
                 </button>
                 <button
                   onClick={() => setIsEditing(false)}
-                  className="px-8 py-2 border-2 border-gray-300 text-gray-900 rounded-lg hover:bg-gray-100 font-semibold"
+                  className="px-8 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold"
                 >
                   Avbryt
                 </button>
