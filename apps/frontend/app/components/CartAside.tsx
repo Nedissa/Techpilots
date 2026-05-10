@@ -75,8 +75,10 @@ export function CartAside() {
         } else {
           updated = [...prev, { id, title, price: priceNum, originalPrice: originalPriceNum, quantity: quantity || 1, image }];
         }
-        // Save to localStorage
+        // Save to both localStorage and sessionStorage
         localStorage.setItem('cartItems', JSON.stringify(updated));
+      sessionStorage.setItem('cartItems', JSON.stringify(updated));
+        sessionStorage.setItem('cartItems', JSON.stringify(updated));
         console.log('Cart updated:', updated);
         return updated;
       });
@@ -106,6 +108,7 @@ export function CartAside() {
       setCartTotal(newTotal);
       setCartItems(updated);
       localStorage.setItem('cartItems', JSON.stringify(updated));
+      sessionStorage.setItem('cartItems', JSON.stringify(updated));
       window.dispatchEvent(new CustomEvent('cartUpdated', {
         detail: { totalAmount: newTotal, itemCount: cartItems.length - 1 }
       }));
@@ -135,6 +138,7 @@ export function CartAside() {
       setCartTotal(newTotal);
       setCartItems(updated);
       localStorage.setItem('cartItems', JSON.stringify(updated));
+      sessionStorage.setItem('cartItems', JSON.stringify(updated));
       window.dispatchEvent(new CustomEvent('cartUpdated', {
         detail: { totalAmount: newTotal, itemCount: cartItems.length }
       }));
