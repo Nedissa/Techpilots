@@ -110,10 +110,13 @@ export default function AccountPage() {
         const response = await fetch(`/api/loyalty?customer_id=${customerId}`);
         if (response.ok) {
           const data = await response.json();
-          setLoyalty(data.loyalty);
+          setLoyalty(data.loyalty || {});
+        } else {
+          setLoyalty({});
         }
       } catch (error) {
         console.error('Failed to load loyalty data:', error);
+        setLoyalty({});
       }
     };
 
@@ -629,7 +632,7 @@ export default function AccountPage() {
               {loadingLoyaltyError}
             </div>
           )}
-          {loyalty ? (
+          {loyalty && Object.keys(loyalty).length > 0 && loyalty.total_points !== undefined ? (
             <div className="space-y-6">
               <div>
                 <div className="flex justify-between items-center mb-3">
@@ -679,7 +682,7 @@ export default function AccountPage() {
             </div>
           ) : (
             <div className="space-y-3 text-gray-700">
-              <p>Laddar kundklubbinformation...</p>
+              <p>Du är inte ännu registrerad i vår kundklubb. Vi uppdaterar detta när du skapar ditt första konto i Medusa.</p>
             </div>
           )}
         </div>
