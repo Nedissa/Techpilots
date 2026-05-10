@@ -628,13 +628,13 @@ export default function ProductDetailClient({
               <div className="flex justify-center mb-3">
                 <button
                   onClick={handleFavoriteToggle}
-                  className="text-gray-400 hover:text-red-500 transition-colors"
+                  className={`transition-colors ${isFavorite ? 'text-red-500' : 'text-gray-400 hover:text-red-500'}`}
                   title={isFavorite ? 'Ta bort från favoriter' : 'Lägg till i favoriter'}
                 >
                   <svg
                     className="w-6 h-6"
                     fill={isFavorite ? 'currentColor' : 'none'}
-                    stroke="currentColor"
+                    stroke={isFavorite ? 'none' : 'currentColor'}
                     strokeWidth={isFavorite ? 0 : 2}
                     viewBox="0 0 24 24"
                   >

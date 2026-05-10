@@ -13,6 +13,7 @@ export default function AccountPage() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [activeTab, setActiveTab] = useState('profil');
   const [expandedAccordion, setExpandedAccordion] = useState<string | null>('kunduppgifter');
+  const [isHydrated, setIsHydrated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editFirstName, setEditFirstName] = useState('');
@@ -29,33 +30,39 @@ export default function AccountPage() {
     if (!savedData) {
       // Om inte inloggad, omdirigera till logga-in
       router.push('/logga-in');
-    } else {
-      try {
-        const userData = JSON.parse(savedData);
-        setFirstName(userData.firstName);
-        setLastName(userData.lastName);
-        setRegisterEmail(userData.email);
-        setEditFirstName(userData.firstName);
-        setEditLastName(userData.lastName);
-        setEditEmail(userData.email);
-        setEditPhone(userData.phone || '');
-        setEditAddress(userData.address || '');
-      } catch (e) {
-        console.error('Failed to load user data', e);
-        router.push('/logga-in');
-      }
+      return;
+    }
+
+    try {
+      const userData = JSON.parse(savedData);
+      setFirstName(userData.firstName);
+      setLastName(userData.lastName);
+      setRegisterEmail(userData.email);
+      setEditFirstName(userData.firstName);
+      setEditLastName(userData.lastName);
+      setEditEmail(userData.email);
+      setEditPhone(userData.phone || '');
+      setEditAddress(userData.address || '');
+    } catch (e) {
+      console.error('Failed to load user data', e);
+      router.push('/logga-in');
+      return;
     }
 
     // Ladda favoriter
-    const loadFavorites = () => {
-      const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
-      console.log('Loaded favoritesList:', favoritesList);
-      setFavoriteProducts(favoritesList);
-    };
-    loadFavorites();
+    const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
+    console.log('Loaded favoritesList:', favoritesList);
+    setFavoriteProducts(favoritesList);
+
+    // Ladda sparad tab
+    const savedTab = localStorage.getItem('accountTab');
+    if (savedTab) {
+      setActiveTab(savedTab);
+    }
 
     setIsLoading(false);
-  }, [router]);
+    setIsHydrated(true);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('userData');
@@ -112,7 +119,10 @@ export default function AccountPage() {
         {/* Tabs */}
         <div className="flex gap-0 mb-8 border-b border-gray-200">
           <button
-            onClick={() => setActiveTab('profil')}
+            onClick={() => {
+              setActiveTab('profil');
+              localStorage.setItem('accountTab', 'profil');
+            }}
             className={`px-6 py-3 font-semibold text-sm border-b-2 transition-colors ${
               activeTab === 'profil'
                 ? 'border-black text-black'
@@ -122,7 +132,10 @@ export default function AccountPage() {
             Profil
           </button>
           <button
-            onClick={() => setActiveTab('orderhistorik')}
+            onClick={() => {
+              setActiveTab('orderhistorik');
+              localStorage.setItem('accountTab', 'orderhistorik');
+            }}
             className={`px-6 py-3 font-semibold text-sm border-b-2 transition-colors ${
               activeTab === 'orderhistorik'
                 ? 'border-black text-black'
@@ -132,7 +145,10 @@ export default function AccountPage() {
             Orderhistorik
           </button>
           <button
-            onClick={() => setActiveTab('favoriter')}
+            onClick={() => {
+              setActiveTab('favoriter');
+              localStorage.setItem('accountTab', 'favoriter');
+            }}
             className={`px-6 py-3 font-semibold text-sm border-b-2 transition-colors ${
               activeTab === 'favoriter'
                 ? 'border-black text-black'
@@ -142,7 +158,10 @@ export default function AccountPage() {
             Favoriter
           </button>
           <button
-            onClick={() => setActiveTab('kundklubb')}
+            onClick={() => {
+              setActiveTab('kundklubb');
+              localStorage.setItem('accountTab', 'kundklubb');
+            }}
             className={`px-6 py-3 font-semibold text-sm border-b-2 transition-colors ${
               activeTab === 'kundklubb'
                 ? 'border-black text-black'
@@ -401,8 +420,29 @@ export default function AccountPage() {
                     </p>
                   </div>
 
-                  {/* Remove button */}
-                  <div className="col-span-3 flex justify-end">
+                  {/* Add to cart and remove buttons */}
+                  <div className="col-span-3 flex justify-between items-center">
+                    <button
+                      onClick={() => {
+                        const event = new CustomEvent('addToCart', {
+                          detail: {
+                            id: product.id,
+                            title: product.title,
+                            price: product.price,
+                            originalPrice: product.originalPrice,
+                            quantity: 1,
+                            image: product.image,
+                          },
+                        });
+                        window.dispatchEvent(event);
+                      }}
+                      className="text-gray-500 hover:text-black transition-colors flex items-center justify-center"
+                      title="Lägg till i kundvagn"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+                      </svg>
+                    </button>
                     <button
                       onClick={() => {
                         const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
@@ -411,6 +451,7 @@ export default function AccountPage() {
                         setFavoriteProducts(favoriteProducts.filter(p => p.id !== product.id));
                       }}
                       className="text-gray-500 hover:text-red-500 transition-colors flex items-center justify-center"
+                      title="Ta bort från favoriter"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M19 7l-1 12a2 2 0 01-2 2H8a2 2 0 01-2-2L5 7m3 0V4a1 1 0 011-1h6a1 1 0 011 1v3m-6 4v6m4-6v6" strokeLinecap="round" strokeLinejoin="round"/>
