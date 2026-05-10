@@ -145,6 +145,32 @@ export default function AccountPage() {
           </button>
           <button
             onClick={() => {
+              setActiveTab('felanmalan');
+              localStorage.setItem('accountTab', 'felanmalan');
+            }}
+            className={`px-6 py-3 font-semibold text-sm border-b-2 transition-colors ${
+              activeTab === 'felanmalan'
+                ? 'border-black text-black'
+                : 'border-transparent text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Felanmälan
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('erbjudanden');
+              localStorage.setItem('accountTab', 'erbjudanden');
+            }}
+            className={`px-6 py-3 font-semibold text-sm border-b-2 transition-colors ${
+              activeTab === 'erbjudanden'
+                ? 'border-black text-black'
+                : 'border-transparent text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Erbjudanden
+          </button>
+          <button
+            onClick={() => {
               setActiveTab('favoriter');
               localStorage.setItem('accountTab', 'favoriter');
             }}
@@ -173,128 +199,85 @@ export default function AccountPage() {
 
         {/* Tab Content */}
         {activeTab === 'profil' && (
-        <div className="space-y-8">
-          {/* Mina kunduppgifter */}
-          <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-            <h3 className="text-xl font-bold mb-6">Mina kunduppgifter</h3>
-            {!isEditing ? (
-              <div className="space-y-4">
-                <div><span className="font-semibold">Namn:</span> {firstName && lastName ? `${firstName} ${lastName}` : '—'}</div>
-                <div><span className="font-semibold">E-post:</span> {registerEmail || '—'}</div>
-                <div><span className="font-semibold">Telefon:</span> {editPhone || '—'}</div>
-                <div><span className="font-semibold">Adress:</span> {editAddress || '—'}</div>
+        <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+          <h3 className="text-xl font-bold mb-6">Mina kunduppgifter</h3>
+          {!isEditing ? (
+            <div className="space-y-4">
+              <div><span className="font-semibold">Namn:</span> {firstName && lastName ? `${firstName} ${lastName}` : '—'}</div>
+              <div><span className="font-semibold">E-post:</span> {registerEmail || '—'}</div>
+              <div><span className="font-semibold">Telefon:</span> {editPhone || '—'}</div>
+              <div><span className="font-semibold">Adress:</span> {editAddress || '—'}</div>
+              <button
+                onClick={() => setIsEditing(true)}
+                className="mt-4 px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold"
+              >
+                Redigera uppgifter
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold mb-2">Förnamn</label>
+                <input
+                  type="text"
+                  value={editFirstName}
+                  onChange={(e) => setEditFirstName(e.target.value)}
+                  className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-2">Efternamn</label>
+                <input
+                  type="text"
+                  value={editLastName}
+                  onChange={(e) => setEditLastName(e.target.value)}
+                  className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-2">E-post</label>
+                <input
+                  type="email"
+                  value={editEmail}
+                  onChange={(e) => setEditEmail(e.target.value)}
+                  className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-2">Telefon</label>
+                <input
+                  type="tel"
+                  value={editPhone}
+                  onChange={(e) => setEditPhone(e.target.value)}
+                  className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-2">Adress</label>
+                <input
+                  ref={addressInputRef}
+                  type="text"
+                  value={editAddress}
+                  onChange={(e) => setEditAddress(e.target.value)}
+                  className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
+                />
+              </div>
+              <div className="flex gap-2 mt-4">
                 <button
-                  onClick={() => setIsEditing(true)}
-                  className="mt-4 px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold"
+                  onClick={handleSaveChanges}
+                  className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 font-semibold"
                 >
-                  Redigera uppgifter
+                  Spara
+                </button>
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className="px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold"
+                >
+                  Avbryt
                 </button>
               </div>
-            ) : (
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-semibold mb-2">Förnamn</label>
-                  <input
-                    type="text"
-                    value={editFirstName}
-                    onChange={(e) => setEditFirstName(e.target.value)}
-                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2">Efternamn</label>
-                  <input
-                    type="text"
-                    value={editLastName}
-                    onChange={(e) => setEditLastName(e.target.value)}
-                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2">E-post</label>
-                  <input
-                    type="email"
-                    value={editEmail}
-                    onChange={(e) => setEditEmail(e.target.value)}
-                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2">Telefon</label>
-                  <input
-                    type="tel"
-                    value={editPhone}
-                    onChange={(e) => setEditPhone(e.target.value)}
-                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2">Adress</label>
-                  <input
-                    ref={addressInputRef}
-                    type="text"
-                    value={editAddress}
-                    onChange={(e) => setEditAddress(e.target.value)}
-                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
-                  />
-                </div>
-                <div className="flex gap-2 mt-4">
-                  <button
-                    onClick={handleSaveChanges}
-                    className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 font-semibold"
-                  >
-                    Spara
-                  </button>
-                  <button
-                    onClick={() => setIsEditing(false)}
-                    className="px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold"
-                  >
-                    Avbryt
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Ordrar */}
-          <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-            <h3 className="text-xl font-bold mb-6">Ordrar</h3>
-            <div className="space-y-3">
-              <div className="pb-3 border-b">
-                <p className="font-semibold">Beställning #12345</p>
-                <p className="text-sm text-gray-600">2024-05-01 • 24,998 SEK</p>
-                <p className="text-sm text-green-600 font-semibold">Levererad</p>
-              </div>
-              <Link href="/konto/bestallningar">
-                <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
-                  Se alla ordrar
-                </button>
-              </Link>
             </div>
-          </div>
-
-          {/* Felanmälan */}
-          <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-            <h3 className="text-xl font-bold mb-6">Felanmälan</h3>
-            <div className="space-y-3 text-gray-700">
-              <p>Du har ingen aktiv felanmälan</p>
-              <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
-                Anmäl ett fel
-              </button>
-            </div>
-          </div>
-
-          {/* Erbjudanden */}
-          <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-            <h3 className="text-xl font-bold mb-6">Erbjudanden</h3>
-            <div className="space-y-3 text-gray-700">
-              <p>Du har 3 aktiva erbjudanden</p>
-              <p className="text-sm">Se dina personliga erbjudanden baserat på dina köp</p>
-              <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
-                Se alla erbjudanden
-              </button>
-            </div>
-          </div>
+          )}
         </div>
         )}
 
@@ -312,6 +295,11 @@ export default function AccountPage() {
               <p className="text-sm text-gray-600">2024-04-15 • 14,998 SEK</p>
               <p className="text-sm text-green-600 font-semibold">Levererad</p>
             </div>
+            <Link href="/konto/bestallningar">
+              <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                Se alla ordrar
+              </button>
+            </Link>
           </div>
         </div>
         )}
@@ -409,6 +397,31 @@ export default function AccountPage() {
               </Link>
             </div>
           )}
+        </div>
+        )}
+
+        {activeTab === 'felanmalan' && (
+        <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+          <h3 className="text-xl font-bold mb-6">Felanmälan</h3>
+          <div className="space-y-3 text-gray-700">
+            <p>Du har ingen aktiv felanmälan</p>
+            <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+              Anmäl ett fel
+            </button>
+          </div>
+        </div>
+        )}
+
+        {activeTab === 'erbjudanden' && (
+        <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+          <h3 className="text-xl font-bold mb-6">Erbjudanden</h3>
+          <div className="space-y-3 text-gray-700">
+            <p>Du har 3 aktiva erbjudanden</p>
+            <p className="text-sm">Se dina personliga erbjudanden baserat på dina köp</p>
+            <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+              Se alla erbjudanden
+            </button>
+          </div>
         </div>
         )}
 
