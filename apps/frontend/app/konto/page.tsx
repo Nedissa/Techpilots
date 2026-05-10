@@ -12,7 +12,6 @@ export default function AccountPage() {
   const [lastName, setLastName] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
   const [activeTab, setActiveTab] = useState('profil');
-  const [expandedAccordion, setExpandedAccordion] = useState<string | null>('kunduppgifter');
   const [isHydrated, setIsHydrated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -174,166 +173,140 @@ export default function AccountPage() {
 
         {/* Tab Content */}
         {activeTab === 'profil' && (
-        <div className="space-y-3">
-          {/* Accordion Items */}
-          {[
-            { id: 'kunduppgifter', title: 'Mina kunduppgifter' },
-            { id: 'ordrar', title: 'Ordrar' },
-            { id: 'kophistorik', title: 'Köphistorik' },
-            { id: 'felanmalan', title: 'Felanmälan' },
-            { id: 'erbjudanden', title: 'Erbjudanden' }
-          ].map((item) => (
-            <div key={item.id} className="rounded-lg overflow-hidden" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-              <button
-                onClick={() => setExpandedAccordion(expandedAccordion === item.id ? null : item.id)}
-                className="w-full flex items-center justify-between p-6 bg-transparent hover:bg-transparent transition-colors"
-              >
-                <h3 className="text-lg font-bold text-gray-900">{item.title}</h3>
-                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black">
-                  <svg
-                    className={`w-4 h-4 text-white transition-transform ${
-                      expandedAccordion === item.id ? '-rotate-180' : ''
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+        <div className="space-y-8">
+          {/* Mina kunduppgifter */}
+          <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+            <h3 className="text-xl font-bold mb-6">Mina kunduppgifter</h3>
+            {!isEditing ? (
+              <div className="space-y-4">
+                <div><span className="font-semibold">Namn:</span> {firstName && lastName ? `${firstName} ${lastName}` : '—'}</div>
+                <div><span className="font-semibold">E-post:</span> {registerEmail || '—'}</div>
+                <div><span className="font-semibold">Telefon:</span> {editPhone || '—'}</div>
+                <div><span className="font-semibold">Adress:</span> {editAddress || '—'}</div>
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="mt-4 px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold"
+                >
+                  Redigera uppgifter
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Förnamn</label>
+                  <input
+                    type="text"
+                    value={editFirstName}
+                    onChange={(e) => setEditFirstName(e.target.value)}
+                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Efternamn</label>
+                  <input
+                    type="text"
+                    value={editLastName}
+                    onChange={(e) => setEditLastName(e.target.value)}
+                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2">E-post</label>
+                  <input
+                    type="email"
+                    value={editEmail}
+                    onChange={(e) => setEditEmail(e.target.value)}
+                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Telefon</label>
+                  <input
+                    type="tel"
+                    value={editPhone}
+                    onChange={(e) => setEditPhone(e.target.value)}
+                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Adress</label>
+                  <input
+                    ref={addressInputRef}
+                    type="text"
+                    value={editAddress}
+                    onChange={(e) => setEditAddress(e.target.value)}
+                    className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
+                  />
+                </div>
+                <div className="flex gap-2 mt-4">
+                  <button
+                    onClick={handleSaveChanges}
+                    className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 font-semibold"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                    Spara
+                  </button>
+                  <button
+                    onClick={() => setIsEditing(false)}
+                    className="px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold"
+                  >
+                    Avbryt
+                  </button>
                 </div>
-              </button>
+              </div>
+            )}
+          </div>
 
-              {expandedAccordion === item.id && (
-                <div className="px-6 py-6 bg-white">
-                  {item.id === 'kunduppgifter' && (
-                    <div className="space-y-4">
-                      {!isEditing ? (
-                        <>
-                          <div><span className="font-semibold">Namn:</span> {firstName && lastName ? `${firstName} ${lastName}` : '—'}</div>
-                          <div><span className="font-semibold">E-post:</span> {registerEmail || '—'}</div>
-                          <div><span className="font-semibold">Telefon:</span> {editPhone || '—'}</div>
-                          <div><span className="font-semibold">Adress:</span> {editAddress || '—'}</div>
-                          <button
-                            onClick={() => setIsEditing(true)}
-                            className="mt-4 px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold"
-                          >
-                            Redigera uppgifter
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <div>
-                            <label className="block text-sm font-semibold mb-2">Förnamn</label>
-                            <input
-                              type="text"
-                              value={editFirstName}
-                              onChange={(e) => setEditFirstName(e.target.value)}
-                              className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-semibold mb-2">Efternamn</label>
-                            <input
-                              type="text"
-                              value={editLastName}
-                              onChange={(e) => setEditLastName(e.target.value)}
-                              className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-semibold mb-2">E-post</label>
-                            <input
-                              type="email"
-                              value={editEmail}
-                              onChange={(e) => setEditEmail(e.target.value)}
-                              className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-semibold mb-2">Telefon</label>
-                            <input
-                              type="tel"
-                              value={editPhone}
-                              onChange={(e) => setEditPhone(e.target.value)}
-                              className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100 mb-4"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-semibold mb-2">Adress</label>
-                            <input
-                              ref={addressInputRef}
-                              type="text"
-                              value={editAddress}
-                              onChange={(e) => setEditAddress(e.target.value)}
-                              className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
-                            />
-                          </div>
-                          <div className="flex gap-2 mt-4">
-                            <button
-                              onClick={handleSaveChanges}
-                              className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 font-semibold"
-                            >
-                              Spara
-                            </button>
-                            <button
-                              onClick={() => setIsEditing(false)}
-                              className="px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold"
-                            >
-                              Avbryt
-                            </button>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  )}
-
-                  {item.id === 'ordrar' && (
-                    <div className="space-y-3">
-                      <div className="pb-3 border-b">
-                        <p className="font-semibold">Beställning #12345</p>
-                        <p className="text-sm text-gray-600">2024-05-01 • 24,998 SEK</p>
-                        <p className="text-sm text-green-600 font-semibold">Levererad</p>
-                      </div>
-                      <Link href="/konto/bestallningar">
-                        <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
-                          Se alla ordrar
-                        </button>
-                      </Link>
-                    </div>
-                  )}
-
-                  {item.id === 'kophistorik' && (
-                    <div className="space-y-3 text-gray-700">
-                      <p>Du har köpt 15 produkter totalt</p>
-                      <p className="text-sm">Total värde: 156,243 SEK</p>
-                      <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
-                        Se komplett köphistorik
-                      </button>
-                    </div>
-                  )}
-
-                  {item.id === 'felanmalan' && (
-                    <div className="space-y-3 text-gray-700">
-                      <p>Du har ingen aktiv felanmälan</p>
-                      <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
-                        Anmäl ett fel
-                      </button>
-                    </div>
-                  )}
-
-                  {item.id === 'erbjudanden' && (
-                    <div className="space-y-3 text-gray-700">
-                      <p>Du har 3 aktiva erbjudanden</p>
-                      <p className="text-sm">Se dina personliga erbjudanden baserat på dina köp</p>
-                      <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
-                        Se alla erbjudanden
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
+          {/* Ordrar */}
+          <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+            <h3 className="text-xl font-bold mb-6">Ordrar</h3>
+            <div className="space-y-3">
+              <div className="pb-3 border-b">
+                <p className="font-semibold">Beställning #12345</p>
+                <p className="text-sm text-gray-600">2024-05-01 • 24,998 SEK</p>
+                <p className="text-sm text-green-600 font-semibold">Levererad</p>
+              </div>
+              <Link href="/konto/bestallningar">
+                <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                  Se alla ordrar
+                </button>
+              </Link>
             </div>
-          ))}
+          </div>
+
+          {/* Köphistorik */}
+          <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+            <h3 className="text-xl font-bold mb-6">Köphistorik</h3>
+            <div className="space-y-3 text-gray-700">
+              <p>Du har köpt 15 produkter totalt</p>
+              <p className="text-sm">Total värde: 156,243 SEK</p>
+              <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                Se komplett köphistorik
+              </button>
+            </div>
+          </div>
+
+          {/* Felanmälan */}
+          <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+            <h3 className="text-xl font-bold mb-6">Felanmälan</h3>
+            <div className="space-y-3 text-gray-700">
+              <p>Du har ingen aktiv felanmälan</p>
+              <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                Anmäl ett fel
+              </button>
+            </div>
+          </div>
+
+          {/* Erbjudanden */}
+          <div className="p-6 rounded-lg shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+            <h3 className="text-xl font-bold mb-6">Erbjudanden</h3>
+            <div className="space-y-3 text-gray-700">
+              <p>Du har 3 aktiva erbjudanden</p>
+              <p className="text-sm">Se dina personliga erbjudanden baserat på dina köp</p>
+              <button className="w-full px-6 py-2 border-2 border-black text-black rounded-lg hover:bg-gray-100 font-semibold">
+                Se alla erbjudanden
+              </button>
+            </div>
+          </div>
         </div>
         )}
 
