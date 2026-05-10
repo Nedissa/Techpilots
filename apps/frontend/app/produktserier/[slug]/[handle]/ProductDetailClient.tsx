@@ -63,28 +63,64 @@ export default function ProductDetailClient({
     };
     loadAlsoLikeProducts();
 
-    // Load favorite status from localStorage
+    // Load favorite status from localStorage (cache)
     const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
     setIsFavorite(favoritesList.some((item: any) => item.id === product.id));
   }, [product.id]);
 
-  const handleFavoriteToggle = () => {
-    const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
-    if (isFavorite) {
-      const updated = favoritesList.filter((item: any) => item.id !== product.id);
-      localStorage.setItem('favoritesList', JSON.stringify(updated));
+  const handleFavoriteToggle = async () => {
+    const userData = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('userData') || '{}') : {};
+    const customerId = userData.id;
+
+    if (customerId) {
+      // User is logged in - save to Medusa
+      try {
+        const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
+        let updated;
+
+        if (isFavorite) {
+          updated = favoritesList.filter((item: any) => item.id !== product.id);
+        } else {
+          updated = [...favoritesList, {
+            id: product.id,
+            title: product.title,
+            handle: product.handle,
+            price: product.price,
+            originalPrice: product.originalPrice,
+            image: product.image,
+          }];
+        }
+
+        await fetch('/api/favorites', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ customerId, wishlist: updated }),
+        });
+
+        localStorage.setItem('favoritesList', JSON.stringify(updated));
+        setIsFavorite(!isFavorite);
+      } catch (error) {
+        console.error('Failed to update favorite:', error);
+      }
     } else {
-      favoritesList.push({
-        id: product.id,
-        title: product.title,
-        handle: product.handle,
-        price: product.price,
-        originalPrice: product.originalPrice,
-        image: product.image,
-      });
-      localStorage.setItem('favoritesList', JSON.stringify(favoritesList));
+      // User not logged in - save to localStorage only
+      const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
+      if (isFavorite) {
+        const updated = favoritesList.filter((item: any) => item.id !== product.id);
+        localStorage.setItem('favoritesList', JSON.stringify(updated));
+      } else {
+        favoritesList.push({
+          id: product.id,
+          title: product.title,
+          handle: product.handle,
+          price: product.price,
+          originalPrice: product.originalPrice,
+          image: product.image,
+        });
+        localStorage.setItem('favoritesList', JSON.stringify(favoritesList));
+      }
+      setIsFavorite(!isFavorite);
     }
-    setIsFavorite(!isFavorite);
   };
 
   // Mock product details for display

@@ -1,11 +1,13 @@
+import { getMedusaURL, MEDUSA_PUBLISHABLE_KEY } from '@/lib/medusa-client';
+
 export async function GET() {
   try {
     // Fetch products with calculated prices and price list info
     const response = await fetch(
-      'https://techpilots.medusajs.app/store/products?limit=100&fields=*variants.calculated_price,*variants.prices',
+      getMedusaURL('/store/products?limit=100&fields=*variants.calculated_price,*variants.prices'),
       {
         headers: {
-          'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
+          'x-publishable-api-key': MEDUSA_PUBLISHABLE_KEY,
         },
       }
     );

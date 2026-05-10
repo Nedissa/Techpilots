@@ -16,55 +16,108 @@ export default function LoginPage() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [loginError, setLoginError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError('');
-    if (email && password) {
-      // Check if user exists in localStorage
-      const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-      const user = savedUsers.find((u: any) => u.email === email && u.password === password);
+    setIsLoading(true);
 
-      if (user) {
-        localStorage.setItem('userData', JSON.stringify({
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          createdAt: user.createdAt
-        }));
-        window.dispatchEvent(new Event('userLogin'));
-        router.push('/konto');
-      } else {
-        setLoginError('E-postadressen eller lösenordet är felaktig');
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        setLoginError(error.error || 'E-postadressen eller lösenordet är felaktig');
+        return;
       }
+
+      const data = await response.json();
+      const customer = data.customer;
+
+      localStorage.setItem('userData', JSON.stringify({
+        id: customer.id,
+        firstName: customer.first_name,
+        lastName: customer.last_name,
+        email: customer.email,
+      }));
+
+      try {
+        const favoritesResponse = await fetch(`/api/favorites?customer_id=${customer.id}`);
+        if (favoritesResponse.ok) {
+          const favoritesData = await favoritesResponse.json();
+          localStorage.setItem('favoritesList', JSON.stringify(favoritesData.wishlist || []));
+        }
+      } catch (error) {
+        console.error('Failed to load favorites:', error);
+      }
+
+      window.dispatchEvent(new Event('userLogin'));
+      router.push('/konto');
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError('Ett fel uppstod. Försök igen senare.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (firstName && lastName && registerEmail && registerPassword) {
-      const newUser = {
-        firstName,
-        lastName,
-        email: registerEmail,
-        password: registerPassword,
-        createdAt: new Date().toISOString()
-      };
+    setIsLoading(true);
 
-      // Save to registered users list
-      const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-      savedUsers.push(newUser);
-      localStorage.setItem('registeredUsers', JSON.stringify(savedUsers));
+    try {
+      const registerResponse = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email: registerEmail,
+          password: registerPassword,
+        }),
+      });
 
-      // Log the user in
+      if (!registerResponse.ok) {
+        const error = await registerResponse.json();
+        setLoginError(error.error || 'Registreringen misslyckades. Försök igen.');
+        return;
+      }
+
+      const loginResponse = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: registerEmail, password: registerPassword }),
+      });
+
+      if (!loginResponse.ok) {
+        setLoginError('Kontot skapades men login misslyckades. Försök logga in manuellt.');
+        return;
+      }
+
+      const data = await loginResponse.json();
+      const customer = data.customer;
+
       localStorage.setItem('userData', JSON.stringify({
-        firstName,
-        lastName,
-        email: registerEmail,
-        createdAt: newUser.createdAt
+        id: customer.id,
+        firstName: customer.first_name,
+        lastName: customer.last_name,
+        email: customer.email,
       }));
+
+      localStorage.setItem('favoritesList', JSON.stringify([]));
+
       window.dispatchEvent(new Event('userLogin'));
       router.push('/konto');
+    } catch (error) {
+      console.error('Registration error:', error);
+      setLoginError('Ett fel uppstod. Försök igen senare.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -116,8 +169,8 @@ export default function LoginPage() {
                         required
                       />
                     </div>
-                    <button type="submit" className="w-full bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800 mt-6">
-                      Logga in
+                    <button type="submit" disabled={isLoading} className="w-full bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800 mt-6 disabled:opacity-50 disabled:cursor-not-allowed">
+                      {isLoading ? 'Loggar in...' : 'Logga in'}
                     </button>
                   </form>
                   <div className="text-center mt-4">
@@ -173,8 +226,8 @@ export default function LoginPage() {
                         required
                       />
                     </div>
-                    <button type="submit" className="w-full bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800 mt-6">
-                      Skapa konto
+                    <button type="submit" disabled={isLoading} className="w-full bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800 mt-6 disabled:opacity-50 disabled:cursor-not-allowed">
+                      {isLoading ? 'Skapar konto...' : 'Skapa konto'}
                     </button>
                   </form>
                 </div>

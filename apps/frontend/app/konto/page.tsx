@@ -35,7 +35,6 @@ export default function AccountPage() {
   useEffect(() => {
     const savedData = localStorage.getItem('userData');
     if (!savedData) {
-      // Om inte inloggad, omdirigera till logga-in
       router.push('/logga-in');
       return;
     }
@@ -56,9 +55,8 @@ export default function AccountPage() {
       return;
     }
 
-    // Ladda favoriter
+    // Ladda favoriter från localStorage (cache)
     const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
-    console.log('Loaded favoritesList:', favoritesList);
     setFavoriteProducts(favoritesList);
 
     // Ladda sparad tab
@@ -68,8 +66,31 @@ export default function AccountPage() {
     }
 
     const loadData = async () => {
-      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-      const customerId = userData.id || userData.email;
+      try {
+        const savedData = localStorage.getItem('userData');
+        if (!savedData) {
+          console.error('No user data found in localStorage');
+          return;
+        }
+
+        const userData = JSON.parse(savedData);
+        const customerId = userData.id;
+
+        if (!customerId) {
+          console.error('No customer ID found');
+          return;
+        }
+
+      // Verify session with Medusa
+      try {
+        const meResponse = await fetch('/api/auth/me');
+        if (!meResponse.ok) {
+          router.push('/logga-in');
+          return;
+        }
+      } catch (error) {
+        console.error('Session verification failed:', error);
+      }
 
       // Load orders
       try {
@@ -118,6 +139,22 @@ export default function AccountPage() {
         console.error('Failed to load loyalty data:', error);
         setLoyalty({});
       }
+
+      // Load favorites from Medusa
+      try {
+        const favResponse = await fetch(`/api/favorites?customer_id=${customerId}`);
+        if (favResponse.ok) {
+          const favData = await favResponse.json();
+          const wishlist = favData.wishlist || [];
+          setFavoriteProducts(wishlist);
+          localStorage.setItem('favoritesList', JSON.stringify(wishlist));
+        }
+      } catch (error) {
+        console.error('Failed to load favorites:', error);
+      }
+      } catch (error) {
+        console.error('Error in loadData:', error);
+      }
     };
 
     loadData();
@@ -126,25 +163,56 @@ export default function AccountPage() {
     setIsHydrated(true);
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
     localStorage.removeItem('userData');
+    localStorage.removeItem('favoritesList');
     window.dispatchEvent(new Event('userLogout'));
     router.push('/logga-in');
   };
 
-  const handleSaveChanges = () => {
-    const savedData = localStorage.getItem('userData');
-    if (savedData) {
-      const userData = JSON.parse(savedData);
-      userData.firstName = editFirstName;
-      userData.lastName = editLastName;
-      userData.email = editEmail;
-      userData.phone = editPhone;
-      userData.address = editAddress;
-      localStorage.setItem('userData', JSON.stringify(userData));
-      setFirstName(editFirstName);
-      setLastName(editLastName);
-      setRegisterEmail(editEmail);
+  const handleSaveChanges = async () => {
+    try {
+      const response = await fetch('/api/auth/me', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: editFirstName,
+          lastName: editLastName,
+          phone: editPhone,
+          address: editAddress,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error('Failed to update profile');
+        return;
+      }
+
+      const data = await response.json();
+      const customer = data.customer;
+
+      const savedData = localStorage.getItem('userData');
+      if (savedData) {
+        const userData = JSON.parse(savedData);
+        userData.firstName = customer.first_name;
+        userData.lastName = customer.last_name;
+        userData.email = customer.email;
+        userData.phone = customer.phone;
+        userData.metadata = customer.metadata;
+        localStorage.setItem('userData', JSON.stringify(userData));
+      }
+
+      setFirstName(customer.first_name);
+      setLastName(customer.last_name);
+      setRegisterEmail(customer.email);
+      setEditPhone(customer.phone || '');
+    } catch (error) {
+      console.error('Profile update error:', error);
     }
     setIsEditing(false);
   };
@@ -518,11 +586,24 @@ export default function AccountPage() {
                       </svg>
                     </button>
                     <button
-                      onClick={() => {
-                        const favoritesList = JSON.parse(localStorage.getItem('favoritesList') || '[]');
-                        const updated = favoritesList.filter((item: any) => item.id !== product.id);
-                        localStorage.setItem('favoritesList', JSON.stringify(updated));
-                        setFavoriteProducts(favoriteProducts.filter(p => p.id !== product.id));
+                      onClick={async () => {
+                        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+                        const customerId = userData.id;
+
+                        if (customerId) {
+                          try {
+                            const updated = favoriteProducts.filter(p => p.id !== product.id);
+                            await fetch('/api/favorites', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ customerId, wishlist: updated }),
+                            });
+                            setFavoriteProducts(updated);
+                            localStorage.setItem('favoritesList', JSON.stringify(updated));
+                          } catch (error) {
+                            console.error('Failed to remove favorite:', error);
+                          }
+                        }
                       }}
                       className="text-gray-500 hover:text-red-500 transition-colors flex items-center justify-center"
                       title="Ta bort från favoriter"

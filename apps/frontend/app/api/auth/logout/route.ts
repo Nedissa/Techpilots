@@ -1,0 +1,19 @@
+export async function POST(request: Request) {
+  try {
+    const response = Response.json({ success: true });
+
+    // Clear the authentication cookie
+    response.headers.set(
+      'Set-Cookie',
+      'medusa_token=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0'
+    );
+
+    return response;
+  } catch (error) {
+    console.error('Logout error:', error);
+    return Response.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}

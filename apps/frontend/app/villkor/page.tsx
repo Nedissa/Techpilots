@@ -38,7 +38,7 @@ export default function TermsPage() {
           </p>
         </section>
 
-        <section>
+        <section id="beställning">
           <h2 className="text-2xl font-bold mb-4">Beställning</h2>
           <p className="text-gray-700 mb-3 leading-relaxed">
             En beställning avlägges genom att fylla i beställningsformuläret på vår webbplats och genomföra en godkänd betalning. Vi skickar en orderbekräftelse per e-post.
@@ -51,7 +51,7 @@ export default function TermsPage() {
           </p>
         </section>
 
-        <section>
+        <section id="betalning">
           <h2 className="text-2xl font-bold mb-4">Betalning och betalningsvillkor</h2>
           <p className="text-gray-700 mb-3 leading-relaxed">
             För konsumenter sker betalning med betalkort (Visa, Mastercard, American Express), Swish, eller PayPal. Betalningen måste genomföras för att beställningen ska behandlas.
@@ -153,7 +153,7 @@ export default function TermsPage() {
           </p>
         </section>
 
-        <section>
+        <section id="dataskydd">
           <h2 className="text-2xl font-bold mb-4">Dataskydd</h2>
           <p className="text-gray-700 leading-relaxed">
             Vi behandlar din personliga data enligt EU:s dataskyddsförordning (GDPR). Din information används endast för att genomföra dina beställningar och förbättra vår service. Vi delar aldrig din personliga data med tredjeparter utan ditt samtycke, förutom vid leverans och betalningshantering.
