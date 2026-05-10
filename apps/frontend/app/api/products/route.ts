@@ -12,7 +12,7 @@ export async function GET() {
 
     // Fetch products with publishable API key
     const response = await fetch(
-      `${medusaUrl}/store/products?limit=100&region_id=reg_01KR9R4SFABTKM0CVFN7AVZ4RW&fields=*variants.calculated_price,*images`,
+      `${medusaUrl}/store/products?limit=100&region_id=reg_01KR9R4SFABTKM0CVFN7AVZ4RW&fields=*variants.prices,*images`,
       {
         method: 'GET',
         headers: {
@@ -40,31 +40,26 @@ export async function GET() {
       }
       const image = imageUrl;
 
-      // Get price from calculated_price
+      // Get price from variant prices array
       let price = 0;
       let originalPrice: number | undefined = undefined;
 
-      // Get price from first variant's calculated_price
+      // Get price from first variant's prices
       if (product.variants && product.variants.length > 0) {
         const firstVariant = product.variants[0];
-        const calcPrice = firstVariant.calculated_price;
 
-        if (calcPrice) {
-          // The calculated_price should already include price list overrides
-          // Use the lowest price available (could be from price list)
+        // Try calculated_price first, then fall back to prices array
+        if (firstVariant.calculated_price) {
+          const calcPrice = firstVariant.calculated_price;
           if (calcPrice.calculated_amount !== undefined) {
             price = calcPrice.calculated_amount;
           } else if (calcPrice.amount) {
             price = calcPrice.amount;
-          } else if (calcPrice.amount_default) {
-            price = calcPrice.amount_default;
           }
-
-          // Use original_amount as the original price for discount calculation
-          // This is the base price before any price list overrides
-          if (calcPrice.original_amount && calcPrice.original_amount !== price) {
-            originalPrice = calcPrice.original_amount;
-          }
+        } else if (firstVariant.prices && firstVariant.prices.length > 0) {
+          // Use the first price in the array
+          const priceObj = firstVariant.prices[0];
+          price = priceObj.amount || 0;
         }
       }
 
