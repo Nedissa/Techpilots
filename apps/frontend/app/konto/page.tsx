@@ -387,41 +387,43 @@ export default function AccountPage() {
             <div className="space-y-4">
               <p className="text-gray-700 mb-6">Du har {favoriteProducts.length} sparade favoriter</p>
               {favoriteProducts.map((product) => (
-                <div key={product.id} className="grid grid-cols-12 gap-6 items-center py-4 border-b border-gray-200 last:border-b-0">
+                <div key={product.id} className="flex items-stretch gap-0 py-8 border-b border-gray-200 last:border-b-0">
                   {/* Product image */}
-                  <div className="col-span-2 flex-shrink-0">
+                  <div className="flex-1 flex items-center justify-center">
                     <img
                       src={product.image}
                       alt={product.title}
-                      className="w-16 h-16 object-contain rounded"
+                      className="w-32 h-32 object-contain rounded"
                     />
                   </div>
 
                   {/* Product title and availability */}
-                  <div className="col-span-4 min-w-0">
-                    <Link
-                      href={`/produkter/${product.handle}`}
-                      className="text-gray-900 font-semibold text-sm hover:text-gray-700 line-clamp-2 block"
-                    >
-                      {product.title}
-                    </Link>
-                    <div className="flex items-center gap-1 mt-1">
-                      <svg className="w-2 h-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <circle cx="10" cy="10" r="10" />
-                      </svg>
-                      <span className="text-xs text-gray-600">I lager</span>
+                  <div className="flex-1 flex items-center justify-center">
+                    <div>
+                      <Link
+                        href={`/produkter/${product.handle}`}
+                        className="text-gray-900 font-semibold text-sm hover:text-gray-700 line-clamp-1 block"
+                      >
+                        {product.title}
+                      </Link>
+                      <div className="flex items-center gap-1 mt-1">
+                        <svg className="w-2 h-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                          <circle cx="10" cy="10" r="10" />
+                        </svg>
+                        <span className="text-xs text-gray-600">I lager</span>
+                      </div>
                     </div>
                   </div>
 
                   {/* Price */}
-                  <div className="col-span-3 text-right flex-shrink-0">
+                  <div className="flex-1 flex items-center justify-center">
                     <p className="text-sm font-semibold text-gray-900">
                       {product.price.toLocaleString('sv-SE')} kr
                     </p>
                   </div>
 
                   {/* Add to cart and remove buttons */}
-                  <div className="col-span-3 flex justify-between items-center">
+                  <div className="flex-1 flex items-center justify-center gap-8">
                     <button
                       onClick={() => {
                         const event = new CustomEvent('addToCart', {
