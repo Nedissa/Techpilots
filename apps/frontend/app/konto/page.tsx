@@ -682,7 +682,7 @@ export default function AccountPage() {
             </div>
           ) : (
             <div className="space-y-3 text-gray-700">
-              <p>Du är inte ännu registrerad i vår kundklubb. Vi uppdaterar detta när du skapar ditt första konto i Medusa.</p>
+              <p>Din kundklubbinformation är inte tillgänglig just nu. Försök igen senare.</p>
             </div>
           )}
         </div>
