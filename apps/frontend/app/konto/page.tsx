@@ -53,6 +53,7 @@ export default function AccountPage() {
       if (favorites.length > 0) {
         const allProducts = await fetchProductsFromMedusa();
         const liked = allProducts.filter((p: any) => favorites.includes(p.id));
+        console.log('Favorite products:', liked);
         setFavoriteProducts(liked);
       }
     };
@@ -375,17 +376,20 @@ export default function AccountPage() {
                 <div key={product.id} className="grid grid-cols-12 gap-6 items-center py-4 border-b border-gray-200 last:border-b-0">
                   {/* Product image */}
                   <div className="col-span-2 flex-shrink-0">
-                    {product.image ? (
+                    {product.image && product.image !== '/assets/placeholder.webp' ? (
                       <img
                         src={product.image}
                         alt={product.title}
                         className="w-16 h-16 object-contain rounded"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                        }}
                       />
-                    ) : (
-                      <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
-                        Bild
-                      </div>
-                    )}
+                    ) : null}
+                    <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
+                      Bild
+                    </div>
                   </div>
 
                   {/* Product title and availability */}
