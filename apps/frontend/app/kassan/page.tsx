@@ -85,10 +85,15 @@ export default function Checkout() {
       return;
     }
 
+    // Check if script is already in DOM
+    if (document.querySelector('script[src*="maps.googleapis.com"]')) {
+      return;
+    }
+
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
     script.async = false;
-    script.defer = true;
+    script.defer = false;
 
     window.initGoogleMapsAutocomplete = () => {
       if (addressInputRef.current && (window as any).google?.maps?.places) {
