@@ -7,7 +7,9 @@ export async function GET(request: Request) {
       return new Response('Missing url parameter', { status: 400 });
     }
 
-    const response = await fetch(imageUrl);
+    const response = await fetch(imageUrl, {
+      next: { revalidate: 86400 }
+    });
 
     if (!response.ok) {
       return new Response('Failed to fetch image', { status: response.status });
@@ -19,7 +21,7 @@ export async function GET(request: Request) {
     return new Response(buffer, {
       headers: {
         'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=31536000',
+        'Cache-Control': 'public, max-age=86400, s-maxage=86400',
         'Access-Control-Allow-Origin': '*',
       },
     });
