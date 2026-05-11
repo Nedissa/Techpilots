@@ -141,10 +141,11 @@ export function ProductCard({
             }
           `}</style>
           {(product.images?.[imageIndex] || product.image) ? (
-            <img
+            <Image
               key={imageIndex}
               src={product.images?.[imageIndex] || product.image}
               alt={product.title}
+              fill
               className={`w-full h-full object-contain p-8 ${imageIndex > 0 ? 'fade-in' : ''}`}
               onError={(e) => {
                 console.error('Image failed to load:', e.currentTarget.src);
