@@ -1,7 +1,5 @@
-import { notFound } from 'next/navigation';
-import { MainLayout } from '@/app/components/MainLayout';
+import { redirect, notFound } from 'next/navigation';
 import { getProductByHandle } from '@/app/lib/products';
-import ProductDetailClient from './ProductDetailClient';
 
 interface PageProps {
   params: Promise<{
@@ -17,9 +15,6 @@ export default async function ProductPage({ params }: PageProps) {
     notFound();
   }
 
-  return (
-    <MainLayout>
-      <ProductDetailClient product={product} />
-    </MainLayout>
-  );
+  const categorySlug = product.category || 'laptops';
+  redirect(`/produktserier/${categorySlug}/${handle}`);
 }
