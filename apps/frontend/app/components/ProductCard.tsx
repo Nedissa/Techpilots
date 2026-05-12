@@ -76,9 +76,7 @@ export function ProductCard({
     setTimeout(() => setAdded(false), 2000);
   };
 
-  const productLink = categorySlug
-    ? `/produktserier/${categorySlug}/${product.handle}`
-    : `/produkter/${product.handle}`;
+  const productLink = `/produkter/${product.handle}`;
 
   const getProxiedImageUrl = (url: string) => {
     return `/api/image?url=${encodeURIComponent(url)}`;
