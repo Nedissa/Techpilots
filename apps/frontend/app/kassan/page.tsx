@@ -165,6 +165,11 @@ export default function Checkout() {
   }, []);
 
   useEffect(() => {
+    console.log('=== KASSAN PAGE LOADED ===');
+    console.log('localStorage keys:', Object.keys(localStorage));
+    console.log('cartItems in storage:', localStorage.getItem('cartItems'));
+    console.log('checkoutStateBeforePayment in storage:', localStorage.getItem('checkoutStateBeforePayment'));
+
     // Check if we're returning from Stripe payment
     const checkoutState = localStorage.getItem('checkoutStateBeforePayment');
     if (checkoutState) {
@@ -183,14 +188,6 @@ export default function Checkout() {
       }
     }
 
-    // If no cart items, this is either a fresh visit or return from Stripe
-    // Either way, clear checkout data and redirect to home
-    const savedCartItems = localStorage.getItem('cartItems');
-    if (!savedCartItems || (savedCartItems && JSON.parse(savedCartItems).length === 0)) {
-      localStorage.removeItem('checkoutFormData');
-      localStorage.removeItem('checkoutStateBeforePayment');
-      router.push('/');
-    }
 
     // Load form data from localStorage if available (survives full page redirects)
     const savedFormData = localStorage.getItem('checkoutFormData');
