@@ -53,7 +53,6 @@ export default function Checkout() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [shippingOptions, setShippingOptions] = useState<any[]>([]);
   const [loadingShipping, setLoadingShipping] = useState(false);
-  const [isHydrated, setIsHydrated] = useState(false);
   const addressInputRef = useRef<HTMLInputElement>(null);
 
   const handleContinueShopping = () => {
@@ -187,7 +186,6 @@ export default function Checkout() {
       setCartItems([{ id: item.id, title: item.title, price: priceNum, originalPrice: originalPriceNum, quantity: item.quantity }]);
       setCartTotal(priceNum * item.quantity);
       localStorage.removeItem('quickCheckout');
-      setIsHydrated(true);
     } else {
       // Load from localStorage (CartAside uses this)
       const savedCartItems = localStorage.getItem('cartItems');
@@ -222,17 +220,16 @@ export default function Checkout() {
       };
 
       window.addEventListener('addToCart', handleAddToCart);
-      setIsHydrated(true);
       return () => window.removeEventListener('addToCart', handleAddToCart);
     }
   }, []);
 
   // Save cart items to localStorage whenever they change
   useEffect(() => {
-    if (isHydrated && cartItems.length > 0) {
+    if (cartItems.length > 0) {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
-  }, [cartItems, isHydrated]);
+  }, [cartItems]);
 
   useEffect(() => {
     if (cartItems.length > 0) {
@@ -299,16 +296,6 @@ export default function Checkout() {
       alert('Det gick inte att starta checkout. Försök igen senare.');
     }
   };
-
-  if (!isHydrated) {
-    return (
-      <MainLayout bordered={false}>
-        <div className="flex justify-center pt-12 pb-16">
-          <div className="text-center">Laddar...</div>
-        </div>
-      </MainLayout>
-    );
-  }
 
   return (
     <MainLayout bordered={false}>
