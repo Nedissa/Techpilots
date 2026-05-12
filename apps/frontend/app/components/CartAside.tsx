@@ -160,20 +160,10 @@ export function CartAside() {
     }
   };
 
-  if (!isHydrated) {
-    return (
-      <Aside type="cart" heading="Din varukorg">
-        <div className="flex flex-col h-full bg-white items-center justify-center">
-          <p className="text-gray-600">Laddar...</p>
-        </div>
-      </Aside>
-    );
-  }
-
   return (
     <Aside type="cart" heading="Din varukorg">
       <div className="flex flex-col h-full bg-white">
-        {cartItems.length === 0 ? (
+        {!isHydrated || cartItems.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center px-6 py-8">
             <p className="text-gray-600 text-sm mb-6 text-center">Inte säker på var du ska börja?<br />Prova dessa kategorier:</p>
 
