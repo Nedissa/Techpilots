@@ -165,6 +165,24 @@ export default function Checkout() {
   }, []);
 
   useEffect(() => {
+    // Check if we're returning from Stripe payment
+    const checkoutState = localStorage.getItem('checkoutStateBeforePayment');
+    if (checkoutState) {
+      try {
+        const state = JSON.parse(checkoutState);
+        setCartItems(state.cartItems);
+        setFormData(state.formData);
+        setShippingMethod(state.shippingMethod);
+        setCustomerType(state.customerType);
+        const total = state.cartItems.reduce((sum: number, item: CartItem) => sum + (item.price * item.quantity), 0);
+        setCartTotal(total);
+        localStorage.removeItem('checkoutStateBeforePayment');
+        return;
+      } catch (e) {
+        console.error('Failed to restore checkout state', e);
+      }
+    }
+
     // Load form data from localStorage if available (survives full page redirects)
     const savedFormData = localStorage.getItem('checkoutFormData');
     if (savedFormData) {
@@ -284,7 +302,13 @@ export default function Checkout() {
       }
 
       if (data.url) {
-        // Note: Do NOT clear form data - keep it in case user comes back from payment
+        // Save checkout state before redirecting to Stripe
+        localStorage.setItem('checkoutStateBeforePayment', JSON.stringify({
+          cartItems,
+          formData,
+          shippingMethod,
+          customerType
+        }));
         window.location.href = data.url;
       } else {
         throw new Error('No checkout URL returned');
