@@ -2,6 +2,8 @@ import { MainLayout } from '@/app/components/MainLayout';
 import { getProductByHandle, getCategoryTitle, getBreadcrumbTrail } from '@/app/lib/products';
 import ProductDetailClient from './ProductDetailClient';
 
+export const revalidate = 0;
+
 interface PageProps {
   params: Promise<{
     slug: string;
