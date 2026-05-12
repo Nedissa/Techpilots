@@ -379,6 +379,16 @@ export function HeaderWrapper() {
 
     window.addEventListener('cartUpdated', handleCartUpdated);
 
+    // Backup: poll localStorage every 500ms to ensure cart count stays in sync
+    const pollInterval = setInterval(() => {
+      handleCartUpdated();
+    }, 500);
+
+    return () => {
+      window.removeEventListener('cartUpdated', handleCartUpdated);
+      clearInterval(pollInterval);
+    };
+
     // Fetch products from API for search
     const fetchProducts = async () => {
       try {
