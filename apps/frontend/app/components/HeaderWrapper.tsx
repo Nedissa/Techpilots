@@ -371,7 +371,7 @@ export function HeaderWrapper() {
     if (savedCartItems) {
       try {
         const items = JSON.parse(savedCartItems);
-        const count = items.length;
+        const count = items.reduce((sum: number, item: any) => sum + (item.quantity || 1), 0);
         const total = items.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
         setCartCount(count);
         setCartTotal(total);
@@ -395,7 +395,7 @@ export function HeaderWrapper() {
       if (savedCartItems) {
         try {
           const items = JSON.parse(savedCartItems);
-          const count = items.length;
+          const count = items.reduce((sum: number, item: any) => sum + (item.quantity || 1), 0);
           const total = items.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
           setCartCount(count);
           setCartTotal(total);
