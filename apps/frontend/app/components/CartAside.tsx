@@ -84,6 +84,13 @@ export function CartAside() {
       });
 
       setCartTotal(prev => prev + (priceNum * (quantity || 1)));
+
+      // Notify header of cart update
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('cartUpdated', {
+          detail: { totalAmount: cartTotal + (priceNum * (quantity || 1)), itemCount: cartItems.length + 1 }
+        }));
+      }, 0);
     };
 
     window.addEventListener('addToCart', handleAddToCart);
