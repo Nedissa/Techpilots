@@ -85,10 +85,13 @@ export function CartAside() {
 
       setCartTotal(prev => prev + (priceNum * (quantity || 1)));
 
-      // Notify header of cart update
+      // Notify header of cart update - read from localStorage to get latest count
       setTimeout(() => {
+        const savedCartItems = localStorage.getItem('cartItems');
+        const items = savedCartItems ? JSON.parse(savedCartItems) : [];
+        const newTotal = items.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
         window.dispatchEvent(new CustomEvent('cartUpdated', {
-          detail: { totalAmount: cartTotal + (priceNum * (quantity || 1)), itemCount: cartItems.length + 1 }
+          detail: { totalAmount: newTotal, itemCount: items.length }
         }));
       }, 0);
     };
