@@ -53,11 +53,12 @@ export default function Checkout() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [shippingOptions, setShippingOptions] = useState<any[]>([]);
   const [loadingShipping, setLoadingShipping] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
   const addressInputRef = useRef<HTMLInputElement>(null);
 
   const handleContinueShopping = () => {
     // Clear the saved form data when leaving checkout
-    sessionStorage.removeItem('checkoutFormData');
+    localStorage.removeItem('checkoutFormData');
     router.push('/');
   };
 
@@ -165,14 +166,14 @@ export default function Checkout() {
   }, []);
 
   useEffect(() => {
-    // Load form data from sessionStorage if available
-    const savedFormData = sessionStorage.getItem('checkoutFormData');
+    // Load form data from localStorage if available (survives full page redirects)
+    const savedFormData = localStorage.getItem('checkoutFormData');
     if (savedFormData) {
       try {
         const parsedData = JSON.parse(savedFormData);
         setFormData(parsedData);
       } catch (e) {
-        console.error('Failed to load form data from sessionStorage', e);
+        console.error('Failed to load form data from localStorage', e);
       }
     }
 
@@ -220,6 +221,8 @@ export default function Checkout() {
       };
 
       window.addEventListener('addToCart', handleAddToCart);
+
+      setIsHydrated(true);
       return () => window.removeEventListener('addToCart', handleAddToCart);
     }
   }, []);
@@ -247,8 +250,8 @@ export default function Checkout() {
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
     };
     setFormData(newFormData);
-    // Save to sessionStorage so it persists if user navigates back
-    sessionStorage.setItem('checkoutFormData', JSON.stringify(newFormData));
+    // Save to localStorage so it persists through payment redirects
+    localStorage.setItem('checkoutFormData', JSON.stringify(newFormData));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -277,8 +280,7 @@ export default function Checkout() {
       }
 
       if (data.url) {
-        // Clear form data before redirecting
-        sessionStorage.removeItem('checkoutFormData');
+        // Note: Do NOT clear form data - keep it in case user comes back from payment
         window.location.href = data.url;
       } else {
         throw new Error('No checkout URL returned');
@@ -290,6 +292,16 @@ export default function Checkout() {
       alert('Det gick inte att starta checkout. Försök igen senare.');
     }
   };
+
+  if (!isHydrated) {
+    return (
+      <MainLayout bordered={false}>
+        <div className="flex justify-center pt-12 pb-16">
+          <div className="text-center">Laddar...</div>
+        </div>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout bordered={false}>
