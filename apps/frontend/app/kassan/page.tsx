@@ -187,6 +187,7 @@ export default function Checkout() {
       setCartItems([{ id: item.id, title: item.title, price: priceNum, originalPrice: originalPriceNum, quantity: item.quantity }]);
       setCartTotal(priceNum * item.quantity);
       localStorage.removeItem('quickCheckout');
+      setIsHydrated(true);
     } else {
       // Load from localStorage (CartAside uses this)
       const savedCartItems = localStorage.getItem('cartItems');
@@ -221,7 +222,6 @@ export default function Checkout() {
       };
 
       window.addEventListener('addToCart', handleAddToCart);
-
       setIsHydrated(true);
       return () => window.removeEventListener('addToCart', handleAddToCart);
     }
