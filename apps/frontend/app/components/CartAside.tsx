@@ -116,10 +116,10 @@ export function CartAside() {
   };
 
   const handleClearCart = () => {
+    localStorage.removeItem('cartItems');
+    sessionStorage.removeItem('cartItems');
     setCartItems([]);
     setCartTotal(0);
-    localStorage.setItem('cartItems', JSON.stringify([]));
-    sessionStorage.setItem('cartItems', JSON.stringify([]));
     window.dispatchEvent(new CustomEvent('cartUpdated', {
       detail: { totalAmount: 0, itemCount: 0 }
     }));
