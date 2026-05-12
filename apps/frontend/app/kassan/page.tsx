@@ -168,8 +168,8 @@ export default function Checkout() {
       setCartTotal(priceNum * item.quantity);
       localStorage.removeItem('quickCheckout');
     } else {
-      // Load from sessionStorage (CartAside uses this)
-      const savedCartItems = sessionStorage.getItem('cartItems');
+      // Load from localStorage (CartAside uses this)
+      const savedCartItems = localStorage.getItem('cartItems');
       if (savedCartItems) {
         try {
           const items = JSON.parse(savedCartItems);
@@ -177,7 +177,7 @@ export default function Checkout() {
           const total = items.reduce((sum: number, item: CartItem) => sum + (item.price * item.quantity), 0);
           setCartTotal(total);
         } catch (e) {
-          console.error('Failed to load cart items from sessionStorage', e);
+          console.error('Failed to load cart items from localStorage', e);
         }
       }
 
