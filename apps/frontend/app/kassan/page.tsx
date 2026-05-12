@@ -183,6 +183,18 @@ export default function Checkout() {
       }
     }
 
+    // If no cart items and no saved state, redirect to home
+    const savedCartItems = localStorage.getItem('cartItems');
+    if (!savedCartItems || (savedCartItems && JSON.parse(savedCartItems).length === 0)) {
+      // Don't redirect immediately - let page load, but if still empty after a moment, go home
+      setTimeout(() => {
+        const currentCart = localStorage.getItem('cartItems');
+        if (!currentCart || (currentCart && JSON.parse(currentCart).length === 0)) {
+          router.push('/');
+        }
+      }, 100);
+    }
+
     // Load form data from localStorage if available (survives full page redirects)
     const savedFormData = localStorage.getItem('checkoutFormData');
     if (savedFormData) {
@@ -303,6 +315,9 @@ export default function Checkout() {
 
       if (data.url) {
         // Save checkout state before redirecting to Stripe
+        // Also save cartItems to regular cartItems key as backup
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        localStorage.setItem('checkoutFormData', JSON.stringify(formData));
         localStorage.setItem('checkoutStateBeforePayment', JSON.stringify({
           cartItems,
           formData,
