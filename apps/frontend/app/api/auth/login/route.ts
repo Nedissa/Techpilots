@@ -26,7 +26,7 @@ export async function POST(request: Request) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-publishable-api-key': publishableKey,
+          'x-publishable-api-key': publishableKey as string,
         },
         body: JSON.stringify({ email, password }),
       }

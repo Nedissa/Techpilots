@@ -21,7 +21,7 @@ export async function GET(request: Request) {
       const createCartResponse = await fetch(`${medusaUrl}/store/carts`, {
         method: 'POST',
         headers: {
-          'x-publishable-api-key': publishableKey,
+          'x-publishable-api-key': publishableKey as string,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -57,7 +57,7 @@ export async function GET(request: Request) {
     const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {
-        'x-publishable-api-key': publishableKey,
+        'x-publishable-api-key': publishableKey as string,
         'Content-Type': 'application/json',
       },
     });

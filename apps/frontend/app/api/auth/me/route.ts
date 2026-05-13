@@ -26,7 +26,7 @@ export async function GET(request: Request) {
       {
         headers: {
           'Authorization': `Bearer ${token}`,
-          'x-publishable-api-key': publishableKey,
+          'x-publishable-api-key': publishableKey as string,
         },
       }
     );
@@ -97,7 +97,7 @@ export async function POST(request: Request) {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
-          'x-publishable-api-key': publishableKey,
+          'x-publishable-api-key': publishableKey as string,
         },
         body: JSON.stringify(updateData),
       }
