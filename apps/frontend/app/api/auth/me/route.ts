@@ -2,6 +2,14 @@ const MEDUSA_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localho
 
 export async function GET(request: Request) {
   try {
+    const publishableKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
+    if (!publishableKey) {
+      return Response.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
     const cookies = request.headers.get('cookie') || '';
     const tokenMatch = cookies.match(/medusa_token=([^;]+)/);
     const token = tokenMatch ? tokenMatch[1] : null;
@@ -18,7 +26,7 @@ export async function GET(request: Request) {
       {
         headers: {
           'Authorization': `Bearer ${token}`,
-          'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
+          'x-publishable-api-key': publishableKey,
         },
       }
     );
@@ -53,6 +61,14 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const publishableKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
+    if (!publishableKey) {
+      return Response.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
     const cookies = request.headers.get('cookie') || '';
     const tokenMatch = cookies.match(/medusa_token=([^;]+)/);
     const token = tokenMatch ? tokenMatch[1] : null;
@@ -81,7 +97,7 @@ export async function POST(request: Request) {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
-          'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
+          'x-publishable-api-key': publishableKey,
         },
         body: JSON.stringify(updateData),
       }

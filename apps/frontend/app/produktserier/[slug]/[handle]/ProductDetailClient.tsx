@@ -123,30 +123,33 @@ export default function ProductDetailClient({
     }
   };
 
-  // Mock product details for display
+  const defaultHighlights = [
+    { value: 'Högkvalitativ produkt', label: 'Kvalitet' },
+    { value: 'Snabb leverans', label: 'Leverans' },
+    { value: 'Säker betalning', label: 'Betalning' },
+    { value: '2 års garanti', label: 'Garanti' },
+    { value: 'Fri frakt över 500 kr', label: 'Frakt' },
+    { value: '30 dagars returrätt', label: 'Retur' },
+  ];
+
   const productDetails = {
-    sku: 'ASUS-ROG-16-001',
+    sku: product.id.slice(-8).toUpperCase(),
     quantityAvailable: 12,
-    compareAtPrice: 17999,
-    description: 'En kraftfull gaming-laptop med senaste teknik. Perfekt för gaming och professionellt arbete.\n\nUtstyrd med Intel Core i9-13900H, NVIDIA RTX 4080, 32GB DDR5 RAM och 1TB SSD. 16" 3.2K 165Hz display för en otrolig visuell upplevelse.',
+    compareAtPrice: product.originalPrice,
+    description: product.features?.join('\n') || `${product.title}\n\nEn premium-produkt med utmärkt kvalitet och pris. Perfekt för dina behov.`,
     featuredImage: {
       url: product.image,
       altText: product.title,
     },
-    images: [
-      { id: '1', url: product.image, altText: `${product.title} 1` },
-      { id: '2', url: product.image, altText: `${product.title} 2` },
-      { id: '3', url: product.image, altText: `${product.title} 3` },
-      { id: '4', url: product.image, altText: `${product.title} 4` },
-    ],
-    highlights: [
-      { value: 'Intel Core i9', label: 'Processor' },
-      { value: '32GB DDR5', label: 'RAM' },
-      { value: '1TB SSD', label: 'Lagring' },
-      { value: '16" 3.2K 165Hz', label: 'Display' },
-      { value: 'RTX 4080', label: 'GPU' },
-      { value: '8-10h', label: 'Batteritid' },
-    ],
+    images: (product.images && product.images.length > 0)
+      ? product.images.map((url, idx) => ({ id: String(idx + 1), url, altText: `${product.title} ${idx + 1}` }))
+      : [{ id: '1', url: product.image, altText: product.title }],
+    highlights: (product.features && product.features.length > 0)
+      ? product.features.slice(0, 6).map((feature, idx) => ({
+          value: feature,
+          label: `Specifikation ${idx + 1}`
+        }))
+      : defaultHighlights,
   };
 
   const discountPercent = product.originalPrice

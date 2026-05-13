@@ -1,0 +1,39 @@
+
+> techpilots-monorepo@1.0.0 dev:frontend
+> npm run dev -w apps/frontend
+
+
+> techpilots-frontend@0.1.0 dev
+> next dev
+
+[32m✔[0m [33mConsole Ninja[0m extension is connected to [33mNext.js[0m, see [36mhttps://tinyurl.com/2vt8jxzw[0m
+⚠ Console Ninja Turbopack support is a PRO feature, [33mcurrently available to community users while in preview[0m
+⚠ Port 3000 is in use by process 3952, using available port 3001 instead.
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.0.9:3001
+- Environments: .env.local
+✓ Ready in 734ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of F:\Techpilots-Webshopp\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * F:\Techpilots-Webshopp\Techpilots-Frontend\package-lock.json
+
+⨯ Another next dev server is already running.
+
+- Local:        http://localhost:3000
+- PID:          3952
+- Dir:          F:\Techpilots-Webshopp\Techpilots-Frontend\apps\frontend
+- Log:          .next\dev\logs\next-development.log
+
+Run taskkill /PID 3952 /F to stop it.
+[?25h
+npm error Lifecycle script `dev` failed with error:
+npm error code 1
+npm error path F:\Techpilots-Webshopp\Techpilots-Frontend\apps\frontend
+npm error workspace techpilots-frontend@0.1.0
+npm error location F:\Techpilots-Webshopp\Techpilots-Frontend\apps\frontend
+npm error command failed
+npm error command C:\Windows\system32\cmd.exe /d /s /c next dev

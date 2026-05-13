@@ -5,7 +5,8 @@ export async function GET(request: Request) {
     const cartId = searchParams.get('cart_id');
 
     const publishableKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
-    const medusaUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://194.14.207.94:9000';
+    const medusaUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000';
+    const regionId = process.env.NEXT_PUBLIC_MEDUSA_REGION_ID || 'reg_01KR9R4SFABTKM0CVFN7AVZ4RW';
 
     if (!publishableKey) {
       return Response.json(
@@ -24,7 +25,7 @@ export async function GET(request: Request) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          region_id: 'reg_01KR9R4SFABTKM0CVFN7AVZ4RW',
+          region_id: regionId,
         }),
       });
 

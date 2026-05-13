@@ -2,6 +2,14 @@ const MEDUSA_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localho
 
 export async function GET(request: Request) {
   try {
+    const publishableKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
+    if (!publishableKey) {
+      return Response.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const customerId = searchParams.get('customer_id');
 
@@ -16,7 +24,7 @@ export async function GET(request: Request) {
       `${MEDUSA_URL}/admin/customers/${customerId}`,
       {
         headers: {
-          'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
+          'x-publishable-api-key': publishableKey,
         },
       }
     );
@@ -43,6 +51,14 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const publishableKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
+    if (!publishableKey) {
+      return Response.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
     const { customerId, wishlist } = await request.json();
 
     if (!customerId || !Array.isArray(wishlist)) {
@@ -58,7 +74,7 @@ export async function POST(request: Request) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
+          'x-publishable-api-key': publishableKey,
         },
         body: JSON.stringify({
           metadata: {

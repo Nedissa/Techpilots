@@ -11,6 +11,14 @@ export async function POST(request: Request) {
       );
     }
 
+    const adminKey = process.env.MEDUSA_ADMIN_KEY;
+    if (!adminKey) {
+      return Response.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
     // Create customer using Secret API Key (backend-to-backend)
     const registerResponse = await fetch(
       `${MEDUSA_URL}/admin/customers`,
@@ -18,7 +26,7 @@ export async function POST(request: Request) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer sk_5b6b8a1196850bb79bfd7bfba30f1866c8ae86220dad8f973fa5e5eb68322683`,
+          'Authorization': `Bearer ${adminKey}`,
         },
         body: JSON.stringify({
           first_name: firstName,

@@ -11,6 +11,14 @@ export async function POST(request: Request) {
       );
     }
 
+    const publishableKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
+    if (!publishableKey) {
+      return Response.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
     // Authenticate with Medusa
     const authResponse = await fetch(
       `${MEDUSA_URL}/auth/customer/emailpass`,
@@ -18,7 +26,7 @@ export async function POST(request: Request) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
+          'x-publishable-api-key': publishableKey,
         },
         body: JSON.stringify({ email, password }),
       }
@@ -47,7 +55,7 @@ export async function POST(request: Request) {
       {
         headers: {
           'Authorization': `Bearer ${token}`,
-          'x-publishable-api-key': 'pk_ab6e93368dc9440a191c0540f0ab9227b81f916924bc422b654c61d371652e29',
+          'x-publishable-api-key': publishableKey,
         },
       }
     );
