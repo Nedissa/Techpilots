@@ -205,7 +205,7 @@ export function CartAside() {
               <ul className="space-y-0 py-4 flex-1">
                 {cartItems.map(item => (
                   <li key={item.id} className="border-b border-gray-200 last:border-b-0">
-                    <div className="flex items-center gap-6 py-4">
+                    <div className="flex items-center gap-2 py-4">
                       {/* Product image */}
                       <div className="flex-shrink-0 w-16 h-16 rounded">
                         <img
@@ -216,14 +216,14 @@ export function CartAside() {
                       </div>
 
                       {/* Product title and availability */}
-                      <div className="flex-shrink-0">
+                      <div className="min-w-0">
                         <Link
                           href={`/produkter/${item.id}`}
                           className="text-gray-900 font-semibold text-sm hover:text-gray-700 whitespace-nowrap block"
                         >
                           {item.title}
                         </Link>
-                        <div className="flex items-center gap-1 mt-1">
+                        <div className="flex items-center gap-1 mt-0.5">
                           <svg className="w-2 h-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                             <circle cx="10" cy="10" r="10" />
                           </svg>
@@ -232,7 +232,7 @@ export function CartAside() {
                       </div>
 
                       {/* Quantity controls */}
-                      <div className="flex items-center gap-2 flex-shrink-0">
+                      <div className="flex items-center gap-2 flex-shrink-0 mx-auto">
                         <button
                           onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
                           disabled={item.quantity <= 1}
@@ -295,7 +295,7 @@ export function CartAside() {
               </div>
 
               <Link href="/kassan" className="block" onClick={close}>
-                <button className="w-full bg-green-600 text-white py-3 text-base font-bold hover:bg-green-700">
+                <button className="w-full bg-green-600 text-white py-3 text-sm font-semibold hover:bg-green-700">
                   Till kassan
                 </button>
               </Link>

@@ -501,16 +501,17 @@ export default function ProductDetailClient({
             <label className="block text-sm font-semibold text-gray-900 mb-2">
               Välj färg{selectedColor && <span className="text-gray-600 font-normal"> - {selectedColor}</span>}
             </label>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               {Object.entries(COLORS).map(([name, hex]) => (
                 <button
                   key={name}
                   onClick={() => setSelectedColor(name)}
-                  className={`w-6 h-6 rounded border-2 flex-shrink-0 ${
-                    selectedColor === name ? 'border-black scale-110' : 'border-gray-300'
+                  className={`w-4 h-4 rounded-full border-2 flex-shrink-0 transition-all ${
+                    selectedColor === name ? 'border-black ring-2 ring-offset-2 ring-black' : 'border-gray-300 hover:border-gray-400'
                   }`}
                   style={{ backgroundColor: hex }}
                   title={name}
+                  aria-label={`Välj färg ${name}`}
                 />
               ))}
             </div>
