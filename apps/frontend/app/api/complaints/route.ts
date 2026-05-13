@@ -1,5 +1,6 @@
 export async function POST(request: Request) {
   try {
+    const medusaUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000';
     const { orderId, productId, description, customerId } = await request.json();
 
     if (!orderId || !productId || !description || !customerId) {
@@ -10,7 +11,7 @@ export async function POST(request: Request) {
     }
 
     const response = await fetch(
-      'https://techpilots.medusajs.app/admin/complaints',
+      `${medusaUrl}/admin/complaints`,
       {
         method: 'POST',
         headers: {

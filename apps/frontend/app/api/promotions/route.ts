@@ -1,10 +1,11 @@
 export async function GET(request: Request) {
   try {
+    const medusaUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000';
     const { searchParams } = new URL(request.url);
     const customerId = searchParams.get('customer_id');
 
     const response = await fetch(
-      'https://techpilots.medusajs.app/store/discounts',
+      `${medusaUrl}/store/discounts`,
       {
         headers: {
           'x-publishable-api-key': process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
