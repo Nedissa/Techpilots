@@ -51,7 +51,7 @@ export function Aside({
 
   return (
     <div
-      className={`fixed inset-0 overflow-hidden z-40 transition-opacity ${
+      className={`fixed inset-0 overflow-hidden z-40 transition-opacity duration-300 ${
         expanded ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       style={{ visibility: isVisible ? 'visible' : 'hidden' }}
@@ -66,7 +66,7 @@ export function Aside({
       />
 
       {/* Aside Panel */}
-      <aside className={`fixed right-0 top-0 h-screen w-full max-w-md bg-white shadow-lg transition-transform duration-200 z-50 ${
+      <aside className={`fixed right-0 top-0 h-screen w-full max-w-md bg-white shadow-lg transition-transform duration-300 z-50 ${
         expanded ? 'translate-x-0' : 'translate-x-full'
       } flex flex-col`}>
         {/* Header */}
