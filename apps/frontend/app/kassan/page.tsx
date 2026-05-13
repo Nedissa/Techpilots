@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { MainLayout } from '../components/MainLayout';
 
@@ -12,6 +12,13 @@ interface CartItem {
   quantity: number;
   image?: string;
 }
+
+const countryCodeMap: Record<string, string> = {
+  'Sverige': 'se',
+  'Norge': 'no',
+  'Danmark': 'dk',
+  'Finland': 'fi'
+};
 
 export default function Checkout() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -35,14 +42,7 @@ export default function Checkout() {
   const [loadingShipping, setLoadingShipping] = useState(false);
   const addressInputRef = useRef<HTMLInputElement>(null);
 
-  const countryCodeMap: Record<string, string> = {
-    'Sverige': 'se',
-    'Norge': 'no',
-    'Danmark': 'dk',
-    'Finland': 'fi'
-  };
-
-  const fetchShippingOptions = async (country: string) => {
+  const fetchShippingOptions = useCallback(async (country: string) => {
     setLoadingShipping(true);
     try {
       const countryCode = countryCodeMap[country] || country.toLowerCase();
@@ -58,16 +58,14 @@ export default function Checkout() {
     } finally {
       setLoadingShipping(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     // Load Google Maps Places API script once
     if ((window as any).google?.maps?.places) {
-      // API already loaded
       return;
     }
 
-    // Check if script already exists in DOM
     const existingScript = document.querySelector('script[src*="maps.googleapis.com"]');
     if (existingScript) {
       return;
@@ -102,15 +100,16 @@ export default function Checkout() {
                 'FI': 'Finland'
               };
 
+              const newCountry = countryMap[countryCode] || 'Sverige';
               setFormData(prev => ({
                 ...prev,
                 address: `${streetAddress} ${streetNumber}`.trim() || address,
                 postalCode,
                 city,
-                country: countryMap[countryCode] || prev.country
+                country: newCountry
               }));
 
-              fetchShippingOptions(countryMap[countryCode] || formData.country);
+              fetchShippingOptions(newCountry);
             }
           });
         } catch (error) {
@@ -132,12 +131,7 @@ export default function Checkout() {
     return () => {
       delete (window as any).initGoogleMapsAutocomplete;
     };
-  }, []);
-
-  useEffect(() => {
-    // Fetch shipping options when country changes
-    fetchShippingOptions(formData.country);
-  }, [formData.country]);
+  }, [fetchShippingOptions]);
 
   useEffect(() => {
     // Load from localStorage on mount (after hydration) - happens when returning from Stripe
@@ -147,10 +141,15 @@ export default function Checkout() {
         const data = JSON.parse(checkoutData);
         console.log('Loaded from checkoutData:', data);
         setCartItems(data.cartItems || []);
-        setFormData(data.formData || formData);
+        if (data.formData) {
+          setFormData(data.formData);
+        }
         setShippingMethod(data.shippingMethod || 'standard');
         const total = (data.cartItems || []).reduce((sum: number, item: CartItem) => sum + (item.price * item.quantity), 0);
         setCartTotal(total);
+        if (data.formData?.country) {
+          fetchShippingOptions(data.formData.country);
+        }
         return; // Exit early if we loaded from checkoutData
       } catch (e) {
         console.error('Failed to load checkout data from localStorage', e);
@@ -167,6 +166,7 @@ export default function Checkout() {
       setCartItems([{ id: item.id, title: item.title, price: priceNum, originalPrice: originalPriceNum, quantity: item.quantity }]);
       setCartTotal(priceNum * item.quantity);
       localStorage.removeItem('quickCheckout');
+      fetchShippingOptions('Sverige');
       return;
     }
 
@@ -182,6 +182,8 @@ export default function Checkout() {
         console.error('Failed to load cart items from sessionStorage', e);
       }
     }
+
+    fetchShippingOptions('Sverige');
 
     const handleAddToCart = (event: Event) => {
       const customEvent = event as CustomEvent;
@@ -204,7 +206,7 @@ export default function Checkout() {
 
     window.addEventListener('addToCart', handleAddToCart);
     return () => window.removeEventListener('addToCart', handleAddToCart);
-  }, [formData]);
+  }, [fetchShippingOptions]);
 
   const selectedShippingOption = shippingOptions.find(opt => opt.id === shippingMethod);
   const shippingCost = selectedShippingOption?.amount || 0;
