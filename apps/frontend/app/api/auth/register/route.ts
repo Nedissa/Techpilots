@@ -19,9 +19,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create customer using Store API (self-registration endpoint)
+    // Create customer using Store API
     const registerResponse = await fetch(
-      `${MEDUSA_URL}/store/auth/register`,
+      `${MEDUSA_URL}/store/customers`,
       {
         method: 'POST',
         headers: {
