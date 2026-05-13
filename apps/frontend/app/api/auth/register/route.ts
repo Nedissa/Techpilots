@@ -26,7 +26,7 @@ export async function POST(request: Request) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-medusa-access-token': adminKey,
+          'Authorization': adminKey,
         },
         body: JSON.stringify({
           first_name: firstName,
