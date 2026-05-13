@@ -1,5 +1,7 @@
-import { redirect, notFound } from 'next/navigation';
-import { getProductByHandle } from '@/app/lib/products';
+import { notFound } from 'next/navigation';
+import { MainLayout } from '@/app/components/MainLayout';
+import { getProductByHandle, getBreadcrumbTrail } from '@/app/lib/products';
+import ProductDetailClient from '@/app/produktserier/[slug]/[handle]/ProductDetailClient';
 
 interface PageProps {
   params: Promise<{
@@ -16,5 +18,16 @@ export default async function ProductPage({ params }: PageProps) {
   }
 
   const categorySlug = product.category || 'laptops';
-  redirect(`/produktserier/${categorySlug}/${handle}`);
+  const breadcrumbTrail = getBreadcrumbTrail(categorySlug);
+
+  return (
+    <MainLayout>
+      <ProductDetailClient
+        product={product}
+        categorySlug={categorySlug}
+        categoryTitle={product.category || 'Produkter'}
+        breadcrumbTrail={breadcrumbTrail}
+      />
+    </MainLayout>
+  );
 }
