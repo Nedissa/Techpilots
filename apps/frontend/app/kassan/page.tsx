@@ -331,13 +331,6 @@ export default function Checkout() {
     <MainLayout bordered={false}>
       <div className="flex justify-center pt-12 pb-16">
       <div className="w-full max-w-[800px] flex flex-col gap-12">
-        {/* Back Button */}
-        <button onClick={() => router.push('/')} className="flex items-center gap-2 text-black hover:text-gray-600 transition-colors">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          <span className="text-sm font-semibold">Tillbaka till hemsidan</span>
-        </button>
         {/* Cart Items Section */}
         <section className="bg-white p-6" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
           <h2 className="text-xl font-bold mb-4">Orderöversikt</h2>
