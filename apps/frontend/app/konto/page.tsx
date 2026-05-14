@@ -610,11 +610,6 @@ export default function AccountPage() {
           ) : (
             <div className="space-y-3 text-gray-700">
               <p>Du har ingen sparade favoriter än</p>
-              <Link href="/produkter">
-                <button className="px-6 py-2 bg-black text-white  hover:bg-gray-800 font-semibold">
-                  Börja shoppa
-                </button>
-              </Link>
             </div>
           )}
         </div>
