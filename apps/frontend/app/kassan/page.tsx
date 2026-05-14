@@ -314,9 +314,9 @@ export default function Checkout() {
       }
 
       if (data.url) {
-        // Open Stripe checkout in new window but also update current window location
-        // This preserves history for the back button
-        window.location.href = data.url;
+        // Navigate to stripe-redirect page with URL as param
+        // This keeps us in Next.js routing history so back button works
+        router.push(`/stripe-redirect?url=${encodeURIComponent(data.url)}`);
       } else {
         throw new Error('No checkout URL returned');
       }
