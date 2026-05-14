@@ -134,7 +134,6 @@ export default function AddressesPage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Johan Andersson"
-                    className="rounded-lg"
                     required
                   />
                 </div>
@@ -146,7 +145,6 @@ export default function AddressesPage() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="+46 70 123 45 67"
-                    className="rounded-lg"
                     required
                   />
                 </div>
@@ -160,7 +158,6 @@ export default function AddressesPage() {
                   value={formData.street}
                   onChange={handleInputChange}
                   placeholder="Storgatan 1"
-                  className="rounded-lg"
                   required
                 />
               </div>
@@ -174,7 +171,6 @@ export default function AddressesPage() {
                     value={formData.zipCode}
                     onChange={handleInputChange}
                     placeholder="123 45"
-                    className="rounded-lg"
                     required
                   />
                 </div>
@@ -186,7 +182,6 @@ export default function AddressesPage() {
                     value={formData.city}
                     onChange={handleInputChange}
                     placeholder="Stockholm"
-                    className="rounded-lg"
                     required
                   />
                 </div>
@@ -197,7 +192,7 @@ export default function AddressesPage() {
                       name="country"
                       value={formData.country}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black bg-gray-50 rounded-lg"
+                      className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black bg-gray-50"
                     >
                       <option>Sverige</option>
                       <option>Norge</option>
@@ -215,7 +210,7 @@ export default function AddressesPage() {
                     name="type"
                     value={formData.type}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black bg-gray-50 rounded-lg"
+                    className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black bg-gray-50"
                   >
                     <option value="shipping">Leveransadress</option>
                     <option value="billing">Fakturaadress</option>

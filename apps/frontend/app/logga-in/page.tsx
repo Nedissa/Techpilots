@@ -148,7 +148,7 @@ export default function LoginPage() {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="border-0 rounded-lg"
+                        className="border-0"
                         style={{
                           WebkitAutofillBoxShadow: '0 0 0 1000px #f9fafb inset',
                           WebkitAutofillTextFillColor: '#000'
@@ -162,7 +162,7 @@ export default function LoginPage() {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="border-0 rounded-lg"
+                        className="border-0"
                         style={{
                           WebkitAutofillBoxShadow: '0 0 0 1000px #f9fafb inset',
                           WebkitAutofillTextFillColor: '#000'
