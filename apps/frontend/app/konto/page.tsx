@@ -434,114 +434,100 @@ export default function AccountPage() {
                 <p className="text-gray-600 mb-6">Du har ingen sparad adress än</p>
               )}
 
-              {!showAddressForm ? (
-                <button
-                  onClick={() => setShowAddressForm(true)}
-                  className="px-6 py-2 border-2 border-black text-black hover:bg-gray-100 font-semibold"
-                >
-                  Lägg till adress
-                </button>
-              ) : (
-                <div className="p-4 border border-gray-200 rounded space-y-4 bg-gray-50">
-                  <h5 className="font-semibold">Ny adress</h5>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input
-                      type="text"
-                      placeholder="Förnamn"
-                      value={editFirstName}
-                      disabled
-                      className="px-4 py-2 border border-gray-300 bg-gray-100 text-sm"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Efternamn"
-                      value={editLastName}
-                      disabled
-                      className="px-4 py-2 border border-gray-300 bg-gray-100 text-sm"
-                    />
-                  </div>
+              <div className="p-4 border border-gray-200 rounded space-y-4 bg-gray-50">
+                <h5 className="font-semibold">Lägg till ny adress</h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
                     type="text"
-                    placeholder="Adress"
-                    id="newAddressStreet"
-                    className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
+                    placeholder="Förnamn"
+                    value={editFirstName}
+                    disabled
+                    className="px-4 py-2 border border-gray-300 bg-gray-100 text-sm"
                   />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input
-                      type="text"
-                      placeholder="Postnummer"
-                      id="newAddressPostal"
-                      className="px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Stad"
-                      id="newAddressCity"
-                      className="px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
-                    />
-                  </div>
                   <input
-                    type="tel"
-                    placeholder="Telefon (valfritt)"
-                    id="newAddressPhone"
-                    className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
+                    type="text"
+                    placeholder="Efternamn"
+                    value={editLastName}
+                    disabled
+                    className="px-4 py-2 border border-gray-300 bg-gray-100 text-sm"
                   />
-                  <div className="flex gap-2">
-                    <button
-                      onClick={async () => {
-                        const street = (document.getElementById('newAddressStreet') as HTMLInputElement)?.value;
-                        const postal = (document.getElementById('newAddressPostal') as HTMLInputElement)?.value;
-                        const city = (document.getElementById('newAddressCity') as HTMLInputElement)?.value;
-                        const phone = (document.getElementById('newAddressPhone') as HTMLInputElement)?.value;
-
-                        if (!street || !postal || !city) {
-                          setSaveError('Fyll i alla obligatoriska fält');
-                          return;
-                        }
-
-                        try {
-                          const response = await fetch('/api/auth/addresses', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                              first_name: editFirstName,
-                              last_name: editLastName,
-                              address_1: street,
-                              postal_code: postal,
-                              city: city,
-                              phone: phone || undefined,
-                              country_code: 'SE',
-                            }),
-                          });
-
-                          if (!response.ok) {
-                            setSaveError('Kunde inte spara adress');
-                            return;
-                          }
-
-                          const data = await response.json();
-                          setAddresses([...addresses, data.address]);
-                          setShowAddressForm(false);
-                          setSaveMessage('Adress sparad!');
-                          setTimeout(() => setSaveMessage(''), 3000);
-                        } catch (error) {
-                          setSaveError('Ett fel uppstod');
-                          console.error('Failed to save address:', error);
-                        }
-                      }}
-                      className="px-6 py-2 bg-black text-white hover:bg-gray-800 font-semibold text-sm"
-                    >
-                      Spara
-                    </button>
-                    <button
-                      onClick={() => setShowAddressForm(false)}
-                      className="px-6 py-2 border-2 border-black text-black hover:bg-gray-100 font-semibold text-sm"
-                    >
-                      Avbryt
-                    </button>
-                  </div>
                 </div>
-              )}
+                <input
+                  type="text"
+                  placeholder="Adress"
+                  id="newAddressStreet"
+                  className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
+                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    placeholder="Postnummer"
+                    id="newAddressPostal"
+                    className="px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Stad"
+                    id="newAddressCity"
+                    className="px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
+                  />
+                </div>
+                <input
+                  type="tel"
+                  placeholder="Telefon (valfritt)"
+                  id="newAddressPhone"
+                  className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm"
+                />
+                <button
+                  onClick={async () => {
+                    const street = (document.getElementById('newAddressStreet') as HTMLInputElement)?.value;
+                    const postal = (document.getElementById('newAddressPostal') as HTMLInputElement)?.value;
+                    const city = (document.getElementById('newAddressCity') as HTMLInputElement)?.value;
+                    const phone = (document.getElementById('newAddressPhone') as HTMLInputElement)?.value;
+
+                    if (!street || !postal || !city) {
+                      setSaveError('Fyll i alla obligatoriska fält');
+                      return;
+                    }
+
+                    try {
+                      const response = await fetch('/api/auth/addresses', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          first_name: editFirstName,
+                          last_name: editLastName,
+                          address_1: street,
+                          postal_code: postal,
+                          city: city,
+                          phone: phone || undefined,
+                          country_code: 'SE',
+                        }),
+                      });
+
+                      if (!response.ok) {
+                        setSaveError('Kunde inte spara adress');
+                        return;
+                      }
+
+                      const data = await response.json();
+                      setAddresses([...addresses, data.address]);
+                      (document.getElementById('newAddressStreet') as HTMLInputElement).value = '';
+                      (document.getElementById('newAddressPostal') as HTMLInputElement).value = '';
+                      (document.getElementById('newAddressCity') as HTMLInputElement).value = '';
+                      (document.getElementById('newAddressPhone') as HTMLInputElement).value = '';
+                      setSaveMessage('Adress sparad!');
+                      setTimeout(() => setSaveMessage(''), 3000);
+                    } catch (error) {
+                      setSaveError('Ett fel uppstod');
+                      console.error('Failed to save address:', error);
+                    }
+                  }}
+                  className="px-6 py-2 bg-black text-white hover:bg-gray-800 font-semibold text-sm"
+                >
+                  Spara adress
+                </button>
+              </div>
             </div>
           </div>
         </div>
