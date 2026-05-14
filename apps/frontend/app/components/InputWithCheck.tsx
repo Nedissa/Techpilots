@@ -30,7 +30,7 @@ export function InputWithCheck({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className={`w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black bg-gray-50 ${className}`}
+        className={`w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black ${className}`}
         style={style}
         {...props}
       />

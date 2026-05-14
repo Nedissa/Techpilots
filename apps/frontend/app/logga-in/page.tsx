@@ -150,7 +150,7 @@ export default function LoginPage() {
                         onChange={(e) => setEmail(e.target.value)}
                         className="border-0"
                         style={{
-                          WebkitAutofillBoxShadow: '0 0 0 1000px #f9fafb inset',
+                          WebkitAutofillBoxShadow: '0 0 0 1000px white inset',
                           WebkitAutofillTextFillColor: '#000'
                         } as React.CSSProperties}
                         required
@@ -164,7 +164,7 @@ export default function LoginPage() {
                         onChange={(e) => setPassword(e.target.value)}
                         className="border-0"
                         style={{
-                          WebkitAutofillBoxShadow: '0 0 0 1000px #f9fafb inset',
+                          WebkitAutofillBoxShadow: '0 0 0 1000px white inset',
                           WebkitAutofillTextFillColor: '#000'
                         } as React.CSSProperties}
                         required

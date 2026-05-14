@@ -68,7 +68,7 @@ export function NewsletterPopup() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="text-sm text-black placeholder-gray-500 bg-gray-50"
+                    className="text-sm text-black placeholder-gray-500"
                   />
                 </div>
                 <button
