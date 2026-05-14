@@ -349,9 +349,8 @@ export default function Checkout() {
       }
 
       if (data.url) {
-        // Direct redirect to Stripe - this IS added to browser history
-        // When user presses back on Stripe, cancel_url takes them to /kassan
-        // Then pressing back again takes them to the product page they came from
+        // Use a simple window.location to navigate to Stripe
+        // This naturally adds Stripe URL to browser history
         window.location.href = data.url;
       } else {
         throw new Error('No checkout URL returned');
