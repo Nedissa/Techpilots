@@ -22,6 +22,7 @@ export default function AccountPage() {
   const [editPostalCode, setEditPostalCode] = useState('');
   const [editCity, setEditCity] = useState('');
   const [editAddressPhone, setEditAddressPhone] = useState('');
+  const [currentAddressId, setCurrentAddressId] = useState<string | null>(null);
   const [addresses, setAddresses] = useState<any[]>([]);
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [editingAddressId, setEditingAddressId] = useState<string | null>(null);
@@ -149,6 +150,7 @@ export default function AccountPage() {
           // Populate form fields with first address if available
           if (loadedAddresses.length > 0) {
             const firstAddress = loadedAddresses[0];
+            setCurrentAddressId(firstAddress.id);
             setEditAddress(firstAddress.address_1 || '');
             setEditPostalCode(firstAddress.postal_code || '');
             setEditCity(firstAddress.city || '');
@@ -236,10 +238,16 @@ export default function AccountPage() {
       setEditLastName(customer.last_name);
       setEditPhone(customer.phone || '');
 
-      // Save address if provided
+      // Save/Update address if provided
       if (editAddress && editPostalCode && editCity) {
-        const addressResponse = await fetch('/api/auth/addresses', {
-          method: 'POST',
+        const addressUrl = currentAddressId
+          ? `/api/auth/addresses/${currentAddressId}`
+          : '/api/auth/addresses';
+
+        const method = currentAddressId ? 'POST' : 'POST';
+
+        const addressResponse = await fetch(addressUrl, {
+          method: method,
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             first_name: editFirstName,
@@ -254,7 +262,14 @@ export default function AccountPage() {
 
         if (addressResponse.ok) {
           const addressData = await addressResponse.json();
-          setAddresses([...addresses, addressData.address]);
+          if (currentAddressId) {
+            // Update existing address in list
+            setAddresses(addresses.map(a => a.id === currentAddressId ? addressData.address : a));
+          } else {
+            // Create new address
+            setCurrentAddressId(addressData.address.id);
+            setAddresses([addressData.address]);
+          }
         } else {
           console.error('Failed to save address');
         }
