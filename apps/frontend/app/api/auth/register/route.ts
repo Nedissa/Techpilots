@@ -21,13 +21,17 @@ export async function POST(request: Request) {
 
     // Step 1: Get registration token
     const tokenResponse = await fetch(
-      `${MEDUSA_URL}/store/auth/register`,
+      `${MEDUSA_URL}/auth/customer/emailpass/register`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'x-publishable-api-key': publishableKey,
         },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
       }
     );
 
@@ -45,7 +49,7 @@ export async function POST(request: Request) {
 
     // Step 2: Register customer with token
     const registerResponse = await fetch(
-      `${MEDUSA_URL}/store/auth/register`,
+      `${MEDUSA_URL}/store/customers`,
       {
         method: 'POST',
         headers: {
@@ -57,7 +61,6 @@ export async function POST(request: Request) {
           first_name: firstName,
           last_name: lastName,
           email,
-          password,
         }),
       }
     );
@@ -81,6 +84,7 @@ export async function POST(request: Request) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-publishable-api-key': publishableKey,
         },
         body: JSON.stringify({
           email,
