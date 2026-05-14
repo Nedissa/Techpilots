@@ -140,7 +140,17 @@ export default function AccountPage() {
         const addressResponse = await fetch('/api/auth/addresses');
         if (addressResponse.ok) {
           const addressData = await addressResponse.json();
-          setAddresses(addressData.addresses || []);
+          const loadedAddresses = addressData.addresses || [];
+          setAddresses(loadedAddresses);
+
+          // Populate form fields with first address if available
+          if (loadedAddresses.length > 0) {
+            const firstAddress = loadedAddresses[0];
+            setEditAddress(firstAddress.address_1 || '');
+            setEditPostalCode(firstAddress.postal_code || '');
+            setEditCity(firstAddress.city || '');
+            setEditAddressPhone(firstAddress.phone || '');
+          }
         }
       } catch (error) {
         console.error('Failed to load addresses:', error);
