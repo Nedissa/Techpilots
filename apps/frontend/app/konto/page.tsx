@@ -50,11 +50,6 @@ export default function AccountPage() {
       setFirstName(userData.firstName);
       setLastName(userData.lastName);
       setRegisterEmail(userData.email);
-      setEditFirstName(userData.firstName);
-      setEditLastName(userData.lastName);
-      setEditEmail(userData.email);
-      setEditPhone(userData.phone || '');
-      setEditAddress(userData.address || '');
     } catch (e) {
       console.error('Failed to load user data', e);
       router.push('/logga-in');
@@ -87,13 +82,21 @@ export default function AccountPage() {
           return;
         }
 
-      // Verify session with Medusa
+      // Load profile from Medusa
       try {
         const meResponse = await fetch('/api/auth/me');
         if (!meResponse.ok) {
           router.push('/logga-in');
           return;
         }
+        const meData = await meResponse.json();
+        const customer = meData.customer;
+
+        // Populate form fields with Medusa data
+        setEditFirstName(customer.first_name || '');
+        setEditLastName(customer.last_name || '');
+        setEditEmail(customer.email || '');
+        setEditPhone(customer.phone || '');
       } catch (error) {
         console.error('Session verification failed:', error);
       }
