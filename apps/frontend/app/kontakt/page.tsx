@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { MainLayout } from '@/app/components/MainLayout';
 import { Breadcrumb } from '@/app/components/Breadcrumb';
+import { InputWithCheck } from '@/app/components/InputWithCheck';
 
 export default function ContactPage() {
   const [name, setName] = useState('');
@@ -81,19 +82,22 @@ export default function ContactPage() {
                 )}
                 <div>
                   <label className="block text-sm font-medium mb-2">Namn</label>
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black bg-gray-100" placeholder="Ditt namn" required />
+                  <InputWithCheck type="text" value={name} onChange={(e) => setName(e.target.value)} className="rounded bg-gray-100" placeholder="Ditt namn" required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">E-post</label>
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black bg-gray-100" placeholder="din@email.se" required />
+                  <InputWithCheck type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="rounded bg-gray-100" placeholder="din@email.se" required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Ämne</label>
-                  <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black bg-gray-100" placeholder="Vad handlar det om?" required />
+                  <InputWithCheck type="text" value={subject} onChange={(e) => setSubject(e.target.value)} className="rounded bg-gray-100" placeholder="Vad handlar det om?" required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Meddelande</label>
-                  <textarea rows={6} value={message} onChange={(e) => setMessage(e.target.value)} className="w-full rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black bg-gray-100" placeholder="Beskriv ditt ärende här..." required />
+                  <div className="relative">
+                    <textarea rows={6} value={message} onChange={(e) => setMessage(e.target.value)} className="w-full rounded px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black bg-gray-100" placeholder="Beskriv ditt ärende här..." required />
+                    {message && <svg className="absolute right-3 top-3 w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                  </div>
                 </div>
                 <button type="submit" disabled={isLoading} className="w-full bg-black text-white px-6 py-3 font-semibold hover:bg-gray-800 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                   {isLoading ? 'Skickar...' : 'Skicka meddelande'}

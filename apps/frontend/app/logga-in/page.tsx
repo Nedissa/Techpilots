@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MainLayout } from '../components/MainLayout';
 import { Logo } from '../components/Logo';
+import { InputWithCheck } from '../components/InputWithCheck';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -143,11 +144,11 @@ export default function LoginPage() {
                   <form onSubmit={handleLogin} className="space-y-4">
                     <div>
                       <label className="block text-sm font-semibold mb-2">E-postadress</label>
-                      <input
+                      <InputWithCheck
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
+                        className="border-0 rounded-lg bg-gray-100"
                         style={{
                           WebkitAutofillBoxShadow: '0 0 0 1000px #f3f4f6 inset',
                           WebkitAutofillTextFillColor: '#000'
@@ -157,11 +158,11 @@ export default function LoginPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-semibold mb-2">Lösenord</label>
-                      <input
+                      <InputWithCheck
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
+                        className="border-0 rounded-lg bg-gray-100"
                         style={{
                           WebkitAutofillBoxShadow: '0 0 0 1000px #f3f4f6 inset',
                           WebkitAutofillTextFillColor: '#000'
@@ -188,41 +189,41 @@ export default function LoginPage() {
                   <form onSubmit={handleRegister} className="space-y-4">
                     <div>
                       <label className="block text-sm font-semibold mb-2">Förnamn</label>
-                      <input
+                      <InputWithCheck
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
+                        className="border-0 rounded-lg bg-gray-100"
                         required
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-semibold mb-2">Efternamn</label>
-                      <input
+                      <InputWithCheck
                         type="text"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
-                        className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
+                        className="border-0 rounded-lg bg-gray-100"
                         required
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-semibold mb-2">E-postadress</label>
-                      <input
+                      <InputWithCheck
                         type="email"
                         value={registerEmail}
                         onChange={(e) => setRegisterEmail(e.target.value)}
-                        className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
+                        className="border-0 rounded-lg bg-gray-100"
                         required
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-semibold mb-2">Lösenord</label>
-                      <input
+                      <InputWithCheck
                         type="password"
                         value={registerPassword}
                         onChange={(e) => setRegisterPassword(e.target.value)}
-                        className="w-full px-4 py-2 border-0 rounded-lg focus:outline-none bg-gray-100"
+                        className="border-0 rounded-lg bg-gray-100"
                         required
                       />
                     </div>

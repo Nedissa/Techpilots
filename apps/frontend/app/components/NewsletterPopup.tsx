@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { InputWithCheck } from './InputWithCheck';
 
 export function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,14 +61,16 @@ export function NewsletterPopup() {
             {/* Email Form */}
             <form onSubmit={handleSubmit} className="mb-6">
               <div className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Ange din e-postadress"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="flex-1 bg-gray-100 px-4 py-3 text-sm text-black placeholder-gray-500 focus:outline-none"
-                />
+                <div className="flex-1">
+                  <InputWithCheck
+                    type="email"
+                    placeholder="Ange din e-postadress"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="bg-gray-100 text-sm text-black placeholder-gray-500"
+                  />
+                </div>
                 <button
                   type="submit"
                   className="bg-black text-white px-6 py-3 font-semibold hover:bg-gray-900 transition-colors flex items-center justify-center"

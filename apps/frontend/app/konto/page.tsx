@@ -477,46 +477,58 @@ export default function AccountPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold mb-2">Förnamn</label>
-                <input
-                  type="text"
-                  value={editFirstName}
-                  onChange={(e) => setEditFirstName(e.target.value)}
-                  className="w-full px-4 py-2 focus:outline-none border-2 border-transparent focus:border-black"
-                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={editFirstName}
+                    onChange={(e) => setEditFirstName(e.target.value)}
+                    className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black"
+                    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                  />
+                  {editFirstName && <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold mb-2">Efternamn</label>
-                <input
-                  type="text"
-                  value={editLastName}
-                  onChange={(e) => setEditLastName(e.target.value)}
-                  className="w-full px-4 py-2 focus:outline-none border-2 border-transparent focus:border-black"
-                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={editLastName}
+                    onChange={(e) => setEditLastName(e.target.value)}
+                    className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black"
+                    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                  />
+                  {editLastName && <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                </div>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold mb-2">Telefon</label>
-                <input
-                  type="tel"
-                  value={editPhone}
-                  onChange={(e) => setEditPhone(e.target.value)}
-                  className="w-full px-4 py-2 focus:outline-none border-2 border-transparent focus:border-black"
-                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
-                />
+                <div className="relative">
+                  <input
+                    type="tel"
+                    value={editPhone}
+                    onChange={(e) => setEditPhone(e.target.value)}
+                    className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black"
+                    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                  />
+                  {editPhone && <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold mb-2">E-postadress</label>
-                <input
-                  type="email"
-                  value={editEmail}
-                  onChange={(e) => setEditEmail(e.target.value)}
-                  className="w-full px-4 py-2 focus:outline-none border-2 border-transparent focus:border-black"
-                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
-                />
+                <div className="relative">
+                  <input
+                    type="email"
+                    value={editEmail}
+                    onChange={(e) => setEditEmail(e.target.value)}
+                    className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black"
+                    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                  />
+                  {editEmail && <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                </div>
               </div>
             </div>
 
@@ -524,37 +536,46 @@ export default function AccountPage() {
             <div>
               <div>
                 <label className="block text-sm font-semibold mb-2">Adress</label>
-                <input
-                  type="text"
-                  value={editAddress}
-                  onChange={(e) => setEditAddress(e.target.value)}
-                  className="w-full px-4 py-2 focus:outline-none border-2 border-transparent focus:border-black"
-                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
-                  placeholder="Gata och husnummer"
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={editAddress}
+                    onChange={(e) => setEditAddress(e.target.value)}
+                    className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black"
+                    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                    placeholder="Gata och husnummer"
+                  />
+                  {editAddress && <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
                 <div>
                   <label className="block text-sm font-semibold mb-2">Postnummer</label>
-                  <input
-                    type="text"
-                    value={editPostalCode}
-                    onChange={(e) => setEditPostalCode(e.target.value)}
-                    className="w-full px-4 py-2 focus:outline-none border-2 border-transparent focus:border-black"
-                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
-                    placeholder="00000"
-                  />
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={editPostalCode}
+                      onChange={(e) => setEditPostalCode(e.target.value)}
+                      className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black"
+                      style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                      placeholder="00000"
+                    />
+                    {editPostalCode && <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-2">Stad</label>
-                  <input
-                    type="text"
-                    value={editCity}
-                    onChange={(e) => setEditCity(e.target.value)}
-                    className="w-full px-4 py-2 focus:outline-none border-2 border-transparent focus:border-black"
-                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
-                    placeholder="Stad"
-                  />
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={editCity}
+                      onChange={(e) => setEditCity(e.target.value)}
+                      className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black"
+                      style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                      placeholder="Stad"
+                    />
+                    {editCity && <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                  </div>
                 </div>
               </div>
             </div>

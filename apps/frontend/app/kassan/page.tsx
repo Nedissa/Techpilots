@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { MainLayout } from '../components/MainLayout';
+import { InputWithCheck } from '../components/InputWithCheck';
 
 interface CartItem {
   id: string;
@@ -425,89 +426,81 @@ export default function Checkout() {
               <h2 className="text-2xl font-bold mb-6">Leveransadress</h2>
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <input
+                  <InputWithCheck
                     type="text"
                     name="firstName"
                     placeholder="Förnamn"
                     value={formData.firstName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black"
                     style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                   />
-                  <input
+                  <InputWithCheck
                     type="text"
                     name="lastName"
                     placeholder="Efternamn"
                     value={formData.lastName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black"
                     style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                   />
                 </div>
                 {customerType === 'business' && (
-                  <input
+                  <InputWithCheck
                     type="text"
                     name="companyName"
                     placeholder="Företagsnamn"
                     value={formData.companyName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black"
                     style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                   />
                 )}
-                <input
+                <InputWithCheck
                   type="email"
                   name="email"
                   placeholder="E-postadress"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black"
-                    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                 />
-                <input
+                <InputWithCheck
                   type="tel"
                   name="phone"
                   placeholder="Telefonnummer"
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black"
-                    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
-                />
-                <input
                   ref={addressInputRef}
+                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                />
+                <InputWithCheck
                   type="text"
                   name="address"
                   placeholder="Gata och husnummer"
                   value={formData.address}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black"
-                    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+                  style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                 />
                 <div className="grid grid-cols-2 gap-4">
-                  <input
+                  <InputWithCheck
                     type="text"
                     name="postalCode"
                     placeholder="Postnummer"
                     value={formData.postalCode}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black"
                     style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                   />
-                  <input
+                  <InputWithCheck
                     type="text"
                     name="city"
                     placeholder="Stad"
                     value={formData.city}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 focus:outline-none border-2 border-transparent focus:border-black"
                     style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
                   />
                 </div>
