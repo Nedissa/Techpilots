@@ -136,6 +136,36 @@ export default function Checkout() {
     };
   }, [fetchShippingOptions]);
 
+  // Load cart from localStorage on mount and when page becomes visible
+  const loadCartData = useCallback(() => {
+    try {
+      const savedCartItems = localStorage.getItem('cartItems');
+      if (savedCartItems) {
+        const items = JSON.parse(savedCartItems);
+        setCartItems(items);
+        const total = items.reduce((sum: number, item: CartItem) => sum + (item.price * item.quantity), 0);
+        setCartTotal(total);
+      }
+    } catch (error) {
+      console.error('Failed to load cart items', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Load cart on mount
+    loadCartData();
+
+    // Reload cart when page becomes visible (after browser back from Stripe)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        loadCartData();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [loadCartData]);
+
   useEffect(() => {
     // Load customer data from Medusa if logged in
     const loadCustomerData = async () => {
@@ -314,9 +344,10 @@ export default function Checkout() {
       }
 
       if (data.url) {
-        // Navigate to stripe-redirect page with URL as param
-        // This keeps us in Next.js routing history so back button works
-        router.push(`/stripe-redirect?url=${encodeURIComponent(data.url)}`);
+        // Direct redirect to Stripe - this IS added to browser history
+        // When user presses back on Stripe, cancel_url takes them to /kassan
+        // Then pressing back again takes them to the product page they came from
+        window.location.href = data.url;
       } else {
         throw new Error('No checkout URL returned');
       }
