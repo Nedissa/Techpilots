@@ -314,7 +314,8 @@ export default function Checkout() {
       }
 
       if (data.url) {
-        // Use window.open to preserve browser history
+        // Open Stripe checkout in new window but also update current window location
+        // This preserves history for the back button
         window.location.href = data.url;
       } else {
         throw new Error('No checkout URL returned');
