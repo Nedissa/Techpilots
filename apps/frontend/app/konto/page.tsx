@@ -240,34 +240,45 @@ export default function AccountPage() {
 
       // Save/Update address if provided
       if (editAddress && editPostalCode && editCity) {
-        const addressUrl = currentAddressId
-          ? `/api/auth/addresses/${currentAddressId}`
-          : '/api/auth/addresses';
+        let addressResponse;
 
-        const method = currentAddressId ? 'POST' : 'POST';
-
-        const addressResponse = await fetch(addressUrl, {
-          method: method,
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            first_name: editFirstName,
-            last_name: editLastName,
-            address_1: editAddress,
-            postal_code: editPostalCode,
-            city: editCity,
-            phone: editAddressPhone || undefined,
-            country_code: 'SE',
-          }),
-        });
+        if (currentAddressId) {
+          // Update existing address
+          addressResponse = await fetch(`/api/auth/addresses/${currentAddressId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              first_name: editFirstName,
+              last_name: editLastName,
+              address_1: editAddress,
+              postal_code: editPostalCode,
+              city: editCity,
+              phone: editAddressPhone || undefined,
+              country_code: 'SE',
+            }),
+          });
+        } else {
+          // Create new address
+          addressResponse = await fetch('/api/auth/addresses', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              first_name: editFirstName,
+              last_name: editLastName,
+              address_1: editAddress,
+              postal_code: editPostalCode,
+              city: editCity,
+              phone: editAddressPhone || undefined,
+              country_code: 'SE',
+            }),
+          });
+        }
 
         if (addressResponse.ok) {
           const addressData = await addressResponse.json();
-          if (currentAddressId) {
-            // Update existing address in list
-            setAddresses(addresses.map(a => a.id === currentAddressId ? addressData.address : a));
-          } else {
-            // Create new address
-            setCurrentAddressId(addressData.address.id);
+          const newAddressId = addressData.address?.id;
+          if (newAddressId && !currentAddressId) {
+            setCurrentAddressId(newAddressId);
             setAddresses([addressData.address]);
           }
         } else {
