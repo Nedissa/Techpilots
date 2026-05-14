@@ -47,7 +47,7 @@ export default function ProductDetailClient({
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState('Svart');
   const [activeTab, setActiveTab] = useState('description');
-  const [showAccessories, setShowAccessories] = useState(false);
+  const [showAccessories, setShowAccessories] = useState(true);
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
   const [isAdded, setIsAdded] = useState(false);
   const [showZoom, setShowZoom] = useState(false);
@@ -519,6 +519,23 @@ export default function ProductDetailClient({
                 },
               });
               window.dispatchEvent(event);
+
+              selectedAccessories.forEach((accessoryId) => {
+                const accessory = RECOMMENDED_ACCESSORIES.find(a => a.id === accessoryId);
+                if (accessory) {
+                  const accessoryEvent = new CustomEvent('addToCart', {
+                    detail: {
+                      id: accessory.id,
+                      title: accessory.name,
+                      price: Number(accessory.price),
+                      quantity: 1,
+                      image: accessory.image,
+                    },
+                  });
+                  window.dispatchEvent(accessoryEvent);
+                }
+              });
+
               setIsAdded(true);
               setTimeout(() => setIsAdded(false), 100);
             }}
