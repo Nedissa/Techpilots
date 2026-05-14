@@ -415,7 +415,6 @@ export default function AccountPage() {
 
             {/* Address Fields */}
             <div className="pt-4 border-t border-gray-200">
-              <h4 className="text-lg font-bold mb-4">Adress</h4>
               <div>
                 <label className="block text-sm font-semibold mb-2">Gatuadress</label>
                 <input
