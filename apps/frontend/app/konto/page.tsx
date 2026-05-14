@@ -241,10 +241,6 @@ export default function AccountPage() {
         if (addressResponse.ok) {
           const addressData = await addressResponse.json();
           setAddresses([...addresses, addressData.address]);
-          setEditAddress('');
-          setEditPostalCode('');
-          setEditCity('');
-          setEditAddressPhone('');
         } else {
           console.error('Failed to save address');
         }
