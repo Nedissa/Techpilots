@@ -334,7 +334,7 @@ export default function Checkout() {
           <h2 className="text-xl font-bold mb-4">Orderöversikt</h2>
           <div className="space-y-3">
             {cartItems.map(item => (
-              <div key={item.id} className="flex gap-3 items-center p-3 bg-gray-50 rounded">
+              <div key={item.id} className="flex gap-3 items-center p-3" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
                 {/* Product Thumbnail */}
                 <div className="flex-shrink-0">
                   {item.image ? (
