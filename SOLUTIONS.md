@@ -55,3 +55,25 @@
 All API routes now use these env vars instead of hardcoded values.
 
 **Result:** Easy to switch between local dev and production - just change `.env.local`.
+
+---
+
+## Cart Icon Sync with Header
+
+**Problem:** Cart icon in header (showing total amount and item count) wasn't updating dynamically when cart was modified or cleared in the aside sidebar.
+
+**Solution:** 
+
+1. **CartAside** - Added `cartUpdated` and `cartCleared` event dispatches with `setTimeout` when:
+   - Updating item quantity
+   - Removing item
+   - Clearing entire cart
+
+2. **HeaderWrapper** - Added three listeners:
+   - `cartUpdated` event - Updates cart display
+   - `cartCleared` event - Clears cart display
+   - `storage` event - Listens for direct localStorage changes to catch all updates immediately
+
+**Key Fix:** Storage event listener catches when localStorage is directly modified, triggering instant UI updates without waiting for custom events.
+
+**Result:** Cart icon in header stays perfectly in sync with cart sidebar in real-time. Updates instantly when items are added, quantity changed, removed, or cart is emptied.
