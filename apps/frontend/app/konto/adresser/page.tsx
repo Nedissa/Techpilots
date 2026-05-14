@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { MainLayout } from '../../components/MainLayout';
+import { InputWithCheck } from '../../components/InputWithCheck';
 
 interface Address {
   id: string;
@@ -127,25 +128,25 @@ export default function AddressesPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold mb-2">Namn</label>
-                  <input
+                  <InputWithCheck
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Johan Andersson"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                    className="rounded-lg"
                     required
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-2">Telefon</label>
-                  <input
+                  <InputWithCheck
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="+46 70 123 45 67"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                    className="rounded-lg"
                     required
                   />
                 </div>
@@ -153,13 +154,13 @@ export default function AddressesPage() {
 
               <div>
                 <label className="block text-sm font-semibold mb-2">Gatuadress</label>
-                <input
+                <InputWithCheck
                   type="text"
                   name="street"
                   value={formData.street}
                   onChange={handleInputChange}
                   placeholder="Storgatan 1"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                  className="rounded-lg"
                   required
                 />
               </div>
@@ -167,55 +168,59 @@ export default function AddressesPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-sm font-semibold mb-2">Postnummer</label>
-                  <input
+                  <InputWithCheck
                     type="text"
                     name="zipCode"
                     value={formData.zipCode}
                     onChange={handleInputChange}
                     placeholder="123 45"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                    className="rounded-lg"
                     required
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-2">Stad</label>
-                  <input
+                  <InputWithCheck
                     type="text"
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
                     placeholder="Stockholm"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                    className="rounded-lg"
                     required
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-2">Land</label>
-                  <select
-                    name="country"
-                    value={formData.country}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
-                  >
-                    <option>Sverige</option>
-                    <option>Norge</option>
-                    <option>Danmark</option>
-                    <option>Finland</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black bg-gray-50 rounded-lg"
+                    >
+                      <option>Sverige</option>
+                      <option>Norge</option>
+                      <option>Danmark</option>
+                      <option>Finland</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-semibold mb-2">Adresstyp</label>
-                <select
-                  name="type"
-                  value={formData.type}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
-                >
-                  <option value="shipping">Leveransadress</option>
-                  <option value="billing">Fakturaadress</option>
-                </select>
+                <div className="relative">
+                  <select
+                    name="type"
+                    value={formData.type}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 pr-10 focus:outline-none border-2 border-transparent focus:border-black bg-gray-50 rounded-lg"
+                  >
+                    <option value="shipping">Leveransadress</option>
+                    <option value="billing">Fakturaadress</option>
+                  </select>
+                </div>
               </div>
 
               <div className="flex gap-4 pt-4">
