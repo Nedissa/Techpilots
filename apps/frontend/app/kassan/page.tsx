@@ -148,7 +148,6 @@ export default function Checkout() {
           if (addressResponse.ok) {
             const addressData = await addressResponse.json();
             const addresses = addressData.addresses || [];
-            console.log('Loaded addresses:', addresses);
 
             setFormData(prev => ({
               ...prev,
