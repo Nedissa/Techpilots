@@ -229,18 +229,6 @@ export default function ProductDetailClient({
                       className="max-w-full max-h-full object-contain"
                     />
                   </button>
-                  {/* Rating Badge - Top Right Corner */}
-                  <button
-                    onClick={() => setActiveTab('reviews')}
-                    className="absolute top-2 -right-8 flex items-center gap-1.5 hover:opacity-70 transition-opacity cursor-pointer"
-                  >
-                    <div className="flex gap-0">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className="text-black text-lg leading-none">★</span>
-                      ))}
-                    </div>
-                    <span className="text-xs text-black font-semibold">({product.reviews})</span>
-                  </button>
                 </div>
 
                 <button
@@ -283,13 +271,12 @@ export default function ProductDetailClient({
           >
             <div className="pt-0 w-full pb-8">
               {/* Tab Bar */}
-              <div className="flex gap-8 mb-8 border-b border-gray-200 w-full justify-center">
+              <div className="flex gap-8 mb-8 border-b border-gray-200 w-full">
                 {[
                 { key: 'description', label: 'Beskrivning' },
                 { key: 'specifications', label: 'Specifikationer' },
                 { key: 'contents', label: 'Produktinnehål' },
                 { key: 'reviews', label: 'Recensioner' },
-                { key: 'questions', label: 'Frågor' },
               ].map(({ key, label }) => (
                   <button
                     key={key}
@@ -320,11 +307,6 @@ export default function ProductDetailClient({
                     {key === 'reviews' && (
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                      </svg>
-                    )}
-                    {key === 'questions' && (
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.5-3 5h2c0-2.5 3-3 3-5 0-2.21-1.79-4-4-4z" />
                       </svg>
                     )}
                     {label}
@@ -375,80 +357,10 @@ export default function ProductDetailClient({
               )}
 
               {activeTab === 'reviews' && (
-                <div id="reviews" className="space-y-3 pb-8">
-                  {[
-                    { rating: 5, title: 'Utmärkt laptop', text: 'En fantastisk laptop med utmärkt prestanda och display. Väl värd pengarna!' },
-                    { rating: 5, title: 'Mycket nöjd', text: 'Leverans gick snabbt och produkten är exakt som beskrivit.' },
-                  ].map((review, idx) => (
-                    <div key={idx} className="border-b border-gray-200 pb-3">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="flex gap-0.5">
-                          {[...Array(5)].map((_, i) => (
-                            <span key={i} className="text-black">★</span>
-                          ))}
-                        </div>
-                        <span className="text-sm font-semibold text-gray-900">{review.title}</span>
-                      </div>
-                      <p className="text-sm text-gray-700">{review.text}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {activeTab === 'questions' && (
-                <div className="space-y-6 pb-8">
-                  <div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-4">Vanliga frågor</h3>
-                    <div className="space-y-3">
-                      {[
-                        { q: 'Hur lång är batteritiden?', a: 'Batteritiden är cirka 8-10 timmar beroende på användning.' },
-                        { q: 'Kan man uppgradera RAM?', a: 'Ja, RAM kan uppgraderas. Kontakta oss för mer information.' },
-                      ].map((qa, idx) => (
-                        <div key={idx} className="border-b border-gray-200 pb-3">
-                          <div className="font-semibold text-gray-900 mb-2">{qa.q}</div>
-                          <p className="text-sm text-gray-700">{qa.a}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-6 border-t border-gray-200">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-4">Ställ en fråga</h3>
-                    <form className="space-y-3" onSubmit={(e) => {
-                      e.preventDefault();
-                      const formData = new FormData(e.currentTarget);
-                      const subject = `Fråga om ${product.title}`;
-                      const body = `Namn: ${formData.get('name')}\nE-post: ${formData.get('email')}\n\nFråga:\n${formData.get('question')}`;
-                      window.location.href = `mailto:info@techpilots.se?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                    }}>
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder="Ditt namn"
-                        required
-                        className="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-gray-500"
-                      />
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="Din e-postadress"
-                        required
-                        className="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-gray-500"
-                      />
-                      <textarea
-                        name="question"
-                        placeholder="Din fråga"
-                        required
-                        rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-gray-500 resize-none"
-                      />
-                      <button
-                        type="submit"
-                        className="w-full bg-black text-white text-sm font-semibold py-2 px-3 hover:bg-gray-800 transition-colors"
-                      >
-                        Skicka fråga
-                      </button>
-                    </form>
+                <div className="space-y-3 pb-8">
+                  <div className="py-8">
+                    <p className="text-sm text-gray-600">Denna produkt har inga recensioner än</p>
+                    <p className="text-xs text-gray-500 mt-2">Var den första att recensera denna produkt</p>
                   </div>
                 </div>
               )}

@@ -1,8 +1,4 @@
 
-> techpilots-monorepo@1.0.0 dev:frontend
-> npm run dev -w apps/frontend
-
-
 > techpilots-frontend@0.1.0 dev
 > next dev
 
@@ -11,7 +7,7 @@
 - Local:         http://localhost:3000
 - Network:       http://192.168.0.9:3000
 - Environments: .env.local
-✓ Ready in 670ms
+✓ Ready in 847ms
 ⚠ Console Ninja Turbopack support is a PRO feature, [33mcurrently available to community users while in preview[0m
 ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of F:\Techpilots-Webshopp\package-lock.json as the root directory.
@@ -21,44 +17,406 @@
    * F:\Techpilots-Webshopp\Techpilots-Frontend\package-lock.json
 
 
-Fetching from: http://localhost:3000/api/products
- GET /api/products?limit=100 200 in 407ms (next.js: 38ms, application-code: 369ms)
-Fetched products: 4
- GET / 200 in 1414ms (next.js: 775ms, application-code: 640ms)
-Fetching from: http://localhost:3000/api/products
- GET /api/products?limit=100 200 in 316ms (next.js: 1467µs, application-code: 314ms)
-Fetched products: 4
- GET / 200 in 364ms (next.js: 3ms, application-code: 361ms)
-Fetching from: http://localhost:3000/api/products
-Fetched products: 4
- GET / 200 in 65ms (next.js: 21ms, application-code: 44ms)
-Fetching from: http://localhost:3000/api/products
-Fetched products: 4
- GET / 200 in 73ms (next.js: 30ms, application-code: 43ms)
-Fetching from: http://localhost:3000/api/products
- GET /api/products?limit=100 200 in 380ms (next.js: 15ms, application-code: 365ms)
-Fetched products: 4
- GET / 200 in 461ms (next.js: 3ms, application-code: 458ms)
-Fetching from: http://localhost:3000/api/products
- GET /api/products?limit=100 200 in 310ms (next.js: 1459µs, application-code: 309ms)
-Fetched products: 4
- GET / 200 in 358ms (next.js: 2ms, application-code: 356ms)
-Fetching from: http://localhost:3000/api/products
-Fetched products: 4
-✓ Compiled in 271ms
- GET / 200 in 64ms (next.js: 24ms, application-code: 40ms)
-Fetching from: http://localhost:3000/api/products
- GET /api/products?limit=100 200 in 352ms (next.js: 19ms, application-code: 334ms)
-Fetched products: 4
- GET / 200 in 458ms (next.js: 3ms, application-code: 456ms)
-Fetching from: http://localhost:3000/api/products
- GET /api/products?limit=100 200 in 294ms (next.js: 2ms, application-code: 292ms)
-Fetched products: 4
- GET / 200 in 369ms (next.js: 3ms, application-code: 366ms)
-Fetching from: http://localhost:3000/api/products
-Fetched products: 4
- GET / 200 in 80ms (next.js: 32ms, application-code: 48ms)
-Fetching from: http://localhost:3000/api/products
-Fetched products: 4
- GET / 200 in 52ms (next.js: 24ms, application-code: 28ms)
-✓ Compiled in 383ms
+ GET /api/products?limit=100 200 in 417ms (next.js: 44ms, application-code: 373ms)
+ GET /produkter/sweatpants 200 in 2.2s (next.js: 1466ms, application-code: 711ms)
+ GET /api/products 200 in 8ms (next.js: 2ms, application-code: 6ms)
+ GET /produkter/sweatpants 200 in 57ms (next.js: 9ms, application-code: 48ms)
+Error fetching products: TypeError: Failed to parse URL from /api/products?limit=100
+    at ignore-listed frames {
+  [cause]: TypeError: Invalid URL
+      at ignore-listed frames {
+    code: 'ERR_INVALID_URL',
+    input: '/api/products?limit=100'
+  }
+}
+ GET / 200 in 64ms (next.js: 16ms, application-code: 48ms)
+ GET /kategori/datorer-tillbehor 200 in 322ms (next.js: 302ms, application-code: 20ms)
+ GET /produkter 200 in 30ms (next.js: 14ms, application-code: 16ms)
+Error fetching products: TypeError: Failed to parse URL from /api/products?limit=100
+    at ignore-listed frames {
+  [cause]: TypeError: Invalid URL
+      at ignore-listed frames {
+    code: 'ERR_INVALID_URL',
+    input: '/api/products?limit=100'
+  }
+}
+ GET / 200 in 27ms (next.js: 1840µs, application-code: 25ms)
+Error fetching products: TypeError: Failed to parse URL from /api/products?limit=100
+    at ignore-listed frames {
+  [cause]: TypeError: Invalid URL
+      at ignore-listed frames {
+    code: 'ERR_INVALID_URL',
+    input: '/api/products?limit=100'
+  }
+}
+ GET / 200 in 60ms (next.js: 2ms, application-code: 58ms)
+ GET /produkter 200 in 17ms (next.js: 3ms, application-code: 14ms)
+ GET /produkter/t-shirt 200 in 29ms (next.js: 9ms, application-code: 20ms)
+Error fetching products: TypeError: Failed to parse URL from /api/products?limit=100
+    at ignore-listed frames {
+  [cause]: TypeError: Invalid URL
+      at ignore-listed frames {
+    code: 'ERR_INVALID_URL',
+    input: '/api/products?limit=100'
+  }
+}
+ GET / 200 in 33ms (next.js: 3ms, application-code: 31ms)
+Error fetching products: TypeError: Failed to parse URL from /api/products?limit=100
+    at ignore-listed frames {
+  [cause]: TypeError: Invalid URL
+      at ignore-listed frames {
+    code: 'ERR_INVALID_URL',
+    input: '/api/products?limit=100'
+  }
+}
+ GET / 200 in 49ms (next.js: 2ms, application-code: 47ms)
+ GET /produkter 200 in 39ms (next.js: 2ms, application-code: 37ms)
+ GET /produkter/t-shirt 200 in 24ms (next.js: 8ms, application-code: 16ms)
+Error fetching products: TypeError: Failed to parse URL from /api/products?limit=100
+    at ignore-listed frames {
+  [cause]: TypeError: Invalid URL
+      at ignore-listed frames {
+    code: 'ERR_INVALID_URL',
+    input: '/api/products?limit=100'
+  }
+}
+ GET / 200 in 23ms (next.js: 1667µs, application-code: 22ms)
+Error fetching products: TypeError: Failed to parse URL from /api/products?limit=100
+    at ignore-listed frames {
+  [cause]: TypeError: Invalid URL
+      at ignore-listed frames {
+    code: 'ERR_INVALID_URL',
+    input: '/api/products?limit=100'
+  }
+}
+ GET / 200 in 48ms (next.js: 2ms, application-code: 46ms)
+ GET /kategorier/datorkomponenter 404 in 39ms (next.js: 19ms, application-code: 20ms)
+ GET /kategorier/datorkomponenter 404 in 35ms (next.js: 3ms, application-code: 33ms)
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+✓ Compiled in 115ms
+ GET /api/products?limit=100 200 in 474ms (next.js: 25ms, application-code: 449ms)
+ GET / 200 in 701ms (next.js: 56ms, application-code: 645ms)
+ GET /api/products?limit=100 200 in 505ms (next.js: 2ms, application-code: 503ms)
+ GET /produkter/sweatshirt 200 in 559ms (next.js: 15ms, application-code: 544ms)
+✓ Compiled in 64ms
+ GET / 200 in 124ms (next.js: 46ms, application-code: 77ms)
+ GET / 200 in 34ms (next.js: 2ms, application-code: 31ms)
+✓ Compiled in 50ms
+ GET / 200 in 95ms (next.js: 42ms, application-code: 52ms)
+ GET / 200 in 19ms (next.js: 1693µs, application-code: 18ms)
+ GET /api/products?limit=100 200 in 421ms (next.js: 25ms, application-code: 396ms)
+ GET / 200 in 528ms (next.js: 3ms, application-code: 526ms)
+ GET /api/products?limit=100 200 in 404ms (next.js: 1488µs, application-code: 403ms)
+ GET / 200 in 453ms (next.js: 3ms, application-code: 450ms)
+ GET /api/products?limit=100 200 in 412ms (next.js: 1956µs, application-code: 410ms)
+ GET / 200 in 491ms (next.js: 8ms, application-code: 483ms)
+ GET /kassan 200 in 50ms (next.js: 28ms, application-code: 21ms)
+[browser] Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading (https://maps.googleapis.com/maps/api/js?key=AIzaSyBVOx1h5IQKkhw2SWhv7T8EpEhDIPqmOZc&libraries=places:1521:245)
+ GET /api/shipping-options?country=se 200 in 561ms (next.js: 26ms, application-code: 535ms)
+ GET /api/shipping-options?country=se 200 in 458ms (next.js: 1440µs, application-code: 457ms)
+✓ Compiled in 178ms
+ GET / 200 in 122ms (next.js: 62ms, application-code: 60ms)
+✓ Compiled in 90ms
+ GET / 200 in 98ms (next.js: 54ms, application-code: 44ms)
+✓ Compiled in 64ms
+ GET / 200 in 88ms (next.js: 52ms, application-code: 36ms)
+ GET /api/products?limit=100 200 in 485ms (next.js: 25ms, application-code: 459ms)
+ GET / 200 in 593ms (next.js: 2ms, application-code: 591ms)
+✓ Compiled in 77ms
+ GET / 200 in 102ms (next.js: 55ms, application-code: 47ms)
+✓ Compiled in 81ms
+ GET / 200 in 123ms (next.js: 76ms, application-code: 47ms)
+✓ Compiled in 99ms
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+Error fetching products: TypeError: Failed to parse URL from /api/products?limit=100
+    at async fetchProductsFromAPI (app\page.tsx:27:22)
+    at async Home (app\page.tsx:80:20)
+  25 | async function fetchProductsFromAPI() {
+  26 |   try {
+> 27 |     const response = await fetch(`/api/products?limit=100`, {
+     |                      ^
+  28 |       next: { revalidate: 60 },
+  29 |     });
+  30 | {
+  [cause]: TypeError: Invalid URL
+      at async fetchProductsFromAPI (app\page.tsx:27:22)
+      at async Home (app\page.tsx:80:20)
+    25 | async function fetchProductsFromAPI() {
+    26 |   try {
+  > 27 |     const response = await fetch(`/api/products?limit=100`, {
+       |                      ^
+    28 |       next: { revalidate: 60 },
+    29 |     });
+    30 | {
+    code: 'ERR_INVALID_URL',
+    input: '/api/products?limit=100'
+  }
+}
+ GET / 200 in 213ms (next.js: 52ms, application-code: 161ms)
+ GET /api/products?limit=100 200 in 498ms (next.js: 32ms, application-code: 466ms)
+ GET / 200 in 628ms (next.js: 56ms, application-code: 572ms)
+ GET /api/products?limit=100 200 in 512ms (next.js: 1391µs, application-code: 511ms)
+ GET / 200 in 587ms (next.js: 3ms, application-code: 584ms)
+ GET /api/image?url=http%3A%2F%2F194.14.207.94%3A9000%2Fstatic%2F1778455795307-1978563_1.webp 200 in 63ms (next.js: 24ms, application-code: 39ms)
+ GET /api/image?url=http%3A%2F%2F194.14.207.94%3A9000%2Fstatic%2F1778456776249-1.webp 200 in 66ms (next.js: 29ms, application-code: 36ms)
+ GET /api/image?url=http%3A%2F%2F194.14.207.94%3A9000%2Fstatic%2F1778450913947-1978563_1.webp 200 in 96ms (next.js: 1328µs, application-code: 94ms)
+ GET / 200 in 98ms (next.js: 37ms, application-code: 61ms)
+ GET / 200 in 31ms (next.js: 2ms, application-code: 28ms)
+ GET / 200 in 84ms (next.js: 36ms, application-code: 47ms)
+ GET / 200 in 17ms (next.js: 1484µs, application-code: 16ms)
+ GET /api/products?limit=100 200 in 43ms (next.js: 33ms, application-code: 10ms)
+ GET / 200 in 204ms (next.js: 3ms, application-code: 202ms)
+ GET /api/products?limit=100 200 in 344ms (next.js: 1440µs, application-code: 342ms)
+ GET /produkter/sweatshirt 200 in 459ms (next.js: 62ms, application-code: 397ms)
+ GET /api/products 200 in 7ms (next.js: 2ms, application-code: 5ms)
+ GET / 200 in 21ms (next.js: 2ms, application-code: 19ms)
+ GET /produkter/sweatshirt 200 in 26ms (next.js: 8ms, application-code: 18ms)
+ GET /konto 200 in 38ms (next.js: 18ms, application-code: 20ms)
+ GET /logga-in 200 in 45ms (next.js: 15ms, application-code: 30ms)
+ GET /logga-in 200 in 15ms (next.js: 1733µs, application-code: 13ms)
+ POST /api/auth/login 401 in 95ms (next.js: 22ms, application-code: 73ms)
+ GET /logga-in 200 in 93ms (next.js: 47ms, application-code: 47ms)
+ POST /api/auth/login 401 in 119ms (next.js: 17ms, application-code: 102ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 388ms (next.js: 327ms, application-code: 62ms)
+ GET /logga-in 200 in 81ms (next.js: 40ms, application-code: 41ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 134ms (next.js: 18ms, application-code: 116ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 97ms (next.js: 1832µs, application-code: 95ms)
+ GET /logga-in 200 in 95ms (next.js: 2ms, application-code: 93ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 63ms (next.js: 1698µs, application-code: 62ms)
+ GET /api/auth/register 405 in 5ms (next.js: 1783µs, application-code: 3ms)
+  Reload env: .env.local
+ GET /logga-in 200 in 69ms (next.js: 36ms, application-code: 33ms)
+ GET /logga-in 200 in 61ms (next.js: 35ms, application-code: 26ms)
+ GET /logga-in 200 in 78ms (next.js: 1868µs, application-code: 76ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 69ms (next.js: 16ms, application-code: 53ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 82ms (next.js: 1582µs, application-code: 80ms)
+ GET /logga-in 200 in 73ms (next.js: 40ms, application-code: 33ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 108ms (next.js: 17ms, application-code: 91ms)
+ GET /logga-in 200 in 87ms (next.js: 1943µs, application-code: 85ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 57ms (next.js: 1600µs, application-code: 56ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 30ms (next.js: 1706µs, application-code: 29ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 29ms (next.js: 1721µs, application-code: 28ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 30ms (next.js: 1356µs, application-code: 29ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 29ms (next.js: 1389µs, application-code: 28ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 28ms (next.js: 1395µs, application-code: 27ms)
+ GET /logga-in 200 in 88ms (next.js: 50ms, application-code: 37ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 102ms (next.js: 18ms, application-code: 84ms)
+ GET /logga-in 200 in 82ms (next.js: 1781µs, application-code: 81ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 53ms (next.js: 1539µs, application-code: 51ms)
+ GET /logga-in 200 in 85ms (next.js: 46ms, application-code: 38ms)
+Registration error: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+    at JSON.parse (<anonymous>)
+ POST /api/auth/register 500 in 127ms (next.js: 18ms, application-code: 110ms)
+ GET /logga-in 200 in 98ms (next.js: 1863µs, application-code: 96ms)
+Registration error: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+    at JSON.parse (<anonymous>)
+ POST /api/auth/register 500 in 72ms (next.js: 1498µs, application-code: 71ms)
+Registration error: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+    at JSON.parse (<anonymous>)
+ POST /api/auth/register 500 in 116ms (next.js: 1499µs, application-code: 115ms)
+ GET /logga-in 200 in 95ms (next.js: 61ms, application-code: 33ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 124ms (next.js: 17ms, application-code: 107ms)
+ GET /logga-in 200 in 83ms (next.js: 2ms, application-code: 81ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 72ms (next.js: 1934µs, application-code: 70ms)
+Register error: { message: 'Unauthorized' }
+ POST /api/auth/register 401 in 121ms (next.js: 2ms, application-code: 119ms)
+ GET /kassan 200 in 110ms (next.js: 73ms, application-code: 37ms)
+[browser] Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading (https://maps.googleapis.com/maps/api/js?key=AIzaSyBVOx1h5IQKkhw2SWhv7T8EpEhDIPqmOZc&libraries=places:1521:245)
+ GET /api/shipping-options?country=se 200 in 719ms (next.js: 20ms, application-code: 699ms)
+ GET /api/shipping-options?country=se 200 in 469ms (next.js: 1680µs, application-code: 467ms)
+ GET /kassan 200 in 242ms (next.js: 82ms, application-code: 160ms)
+[browser] Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading (https://maps.googleapis.com/maps/api/js?key=AIzaSyBVOx1h5IQKkhw2SWhv7T8EpEhDIPqmOZc&libraries=places:1521:245)
+[browser] As of March 1st, 2025, google.maps.places.Autocomplete is not available to new customers. Please use google.maps.places.PlaceAutocompleteElement instead. At this time, google.maps.places.Autocomplete is not scheduled to be discontinued, but google.maps.places.PlaceAutocompleteElement is recommended over google.maps.places.Autocomplete. While google.maps.places.Autocomplete will continue to receive bug fixes for any major regressions, existing bugs in google.maps.places.Autocomplete will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/legacy for additional details and https://developers.google.com/maps/documentation/javascript/places-migration-overview for the migration guide. (https://maps.googleapis.com/maps/api/js?key=AIzaSyBVOx1h5IQKkhw2SWhv7T8EpEhDIPqmOZc&libraries=places:635:578)
+ GET /api/shipping-options?country=se 200 in 1199ms (next.js: 21ms, application-code: 1178ms)
+ GET /konto 200 in 24ms (next.js: 9ms, application-code: 15ms)
+ GET /logga-in 200 in 37ms (next.js: 7ms, application-code: 30ms)
+ GET /logga-in 200 in 14ms (next.js: 1775µs, application-code: 13ms)
+ POST /api/auth/login 401 in 79ms (next.js: 18ms, application-code: 61ms)
+Registration error: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+    at JSON.parse (<anonymous>)
+ POST /api/auth/register 500 in 171ms (next.js: 20ms, application-code: 151ms)
+ GET /logga-in 200 in 36ms (next.js: 2ms, application-code: 34ms)
+ POST /api/auth/login 401 in 88ms (next.js: 1903µs, application-code: 86ms)
+ GET /konto 200 in 16ms (next.js: 3ms, application-code: 13ms)
+ GET /logga-in 200 in 32ms (next.js: 1991µs, application-code: 30ms)
+ GET /logga-in 200 in 17ms (next.js: 1736µs, application-code: 15ms)
+ GET /kategori/datorer-tillbehor 200 in 191ms (next.js: 72ms, application-code: 119ms)
+ GET /produkter 200 in 84ms (next.js: 55ms, application-code: 28ms)
+ GET / 200 in 47ms (next.js: 13ms, application-code: 34ms)
+ GET /api/products 200 in 236ms (next.js: 20ms, application-code: 217ms)
+ GET /api/products?limit=100 200 in 889ms (next.js: 1455µs, application-code: 887ms)
+⚠ Console Ninja Turbopack support is a PRO feature, [33mcurrently available to community users while in preview[0m
+✓ Compiled in 385ms
+ GET /produkte 404 in 188ms (next.js: 55ms, application-code: 132ms)
+ GET /api/products?limit=100 200 in 29ms (next.js: 23ms, application-code: 6ms)
+ GET / 200 in 122ms (next.js: 48ms, application-code: 74ms)
+ GET / 200 in 6ms (next.js: 1847µs, application-code: 4ms)
+ GET / 200 in 15ms (next.js: 1615µs, application-code: 14ms)
+ GET /api/image?url=http%3A%2F%2F194.14.207.94%3A9000%2Fstatic%2F1778456776250-6907594_ebnf7f.webp 200 in 251ms (next.js: 87ms, application-code: 163ms)
+ GET /api/image?url=http%3A%2F%2F194.14.207.94%3A9000%2Fstatic%2F1778450913949-1978563_3.webp 200 in 74ms (next.js: 2ms, application-code: 72ms)
+ GET /api/image?url=http%3A%2F%2F194.14.207.94%3A9000%2Fstatic%2F1778455795307-1978563_3.webp 200 in 78ms (next.js: 2ms, application-code: 76ms)
+ GET /konto 200 in 147ms (next.js: 72ms, application-code: 75ms)
+ GET /logga-in 200 in 109ms (next.js: 67ms, application-code: 42ms)
+ GET /logga-in 200 in 15ms (next.js: 1794µs, application-code: 14ms)
+ GET /kategori/datorer-tillbehor 200 in 91ms (next.js: 61ms, application-code: 30ms)
+ GET / 200 in 31ms (next.js: 3ms, application-code: 28ms)
+ GET /api/products?limit=100 200 in 408ms (next.js: 1649µs, application-code: 406ms)
+ GET /kategori/datorer-tillbehor 200 in 23ms (next.js: 7ms, application-code: 16ms)
+ GET /kategori/datorer-tillbehor 200 in 108ms (next.js: 12ms, application-code: 96ms)
+ GET / 200 in 33ms (next.js: 3ms, application-code: 30ms)
+ GET /api/products?limit=100 200 in 357ms (next.js: 1932µs, application-code: 355ms)
+✓ Compiled in 190ms
+ GET / 200 in 209ms (next.js: 52ms, application-code: 157ms)
+ GET / 200 in 113ms (next.js: 2ms, application-code: 111ms)
+ GET / 200 in 112ms (next.js: 3ms, application-code: 109ms)
+ GET / 200 in 111ms (next.js: 71ms, application-code: 40ms)
+ GET / 200 in 112ms (next.js: 21ms, application-code: 91ms)
+ GET / 200 in 112ms (next.js: 41ms, application-code: 71ms)
+ GET / 200 in 113ms (next.js: 3ms, application-code: 110ms)
+ GET / 200 in 93ms (next.js: 3ms, application-code: 90ms)
+ GET / 200 in 92ms (next.js: 2ms, application-code: 90ms)
+ GET / 200 in 93ms (next.js: 18ms, application-code: 75ms)
+ GET / 200 in 94ms (next.js: 38ms, application-code: 55ms)
+ GET / 200 in 94ms (next.js: 54ms, application-code: 39ms)
+ GET / 200 in 108ms (next.js: 2ms, application-code: 105ms)
+ GET / 200 in 88ms (next.js: 3ms, application-code: 85ms)
+ GET / 200 in 87ms (next.js: 18ms, application-code: 69ms)
+ GET / 200 in 88ms (next.js: 3ms, application-code: 85ms)
+ GET / 200 in 87ms (next.js: 48ms, application-code: 40ms)
+ GET / 200 in 88ms (next.js: 33ms, application-code: 55ms)
+ GET / 200 in 40ms (next.js: 4ms, application-code: 36ms)
+ GET / 200 in 19ms (next.js: 3ms, application-code: 16ms)
+✓ Compiled in 408ms
+ GET / 200 in 212ms (next.js: 57ms, application-code: 154ms)
+ GET / 200 in 136ms (next.js: 4ms, application-code: 132ms)
+ GET / 200 in 109ms (next.js: 3ms, application-code: 106ms)
+ GET / 200 in 109ms (next.js: 36ms, application-code: 73ms)
+ GET / 200 in 109ms (next.js: 53ms, application-code: 56ms)
+ GET / 200 in 127ms (next.js: 69ms, application-code: 58ms)
+ GET / 200 in 113ms (next.js: 2ms, application-code: 111ms)
+ GET / 200 in 94ms (next.js: 3ms, application-code: 91ms)
+ GET / 200 in 94ms (next.js: 3ms, application-code: 92ms)
+ GET / 200 in 94ms (next.js: 34ms, application-code: 59ms)
+ GET / 200 in 112ms (next.js: 18ms, application-code: 93ms)
+ GET / 200 in 58ms (next.js: 2ms, application-code: 56ms)
+ GET / 200 in 116ms (next.js: 2ms, application-code: 114ms)
+ GET / 200 in 98ms (next.js: 3ms, application-code: 95ms)
+ GET / 200 in 96ms (next.js: 2ms, application-code: 93ms)
+ GET / 200 in 94ms (next.js: 3ms, application-code: 91ms)
+ GET / 200 in 93ms (next.js: 19ms, application-code: 74ms)
+ GET / 200 in 93ms (next.js: 36ms, application-code: 57ms)
+ GET / 200 in 36ms (next.js: 1975µs, application-code: 34ms)
+ GET / 200 in 20ms (next.js: 2ms, application-code: 17ms)
+ GET / 200 in 102ms (next.js: 42ms, application-code: 61ms)
+ GET /api/products?limit=100 200 in 51ms (next.js: 40ms, application-code: 11ms)
+ GET / 200 in 175ms (next.js: 2ms, application-code: 173ms)
+ GET /konto 200 in 75ms (next.js: 47ms, application-code: 28ms)
+ GET /logga-in 200 in 93ms (next.js: 54ms, application-code: 39ms)
+ GET /logga-in 200 in 14ms (next.js: 1710µs, application-code: 12ms)
+ POST /api/auth/login 401 in 106ms (next.js: 24ms, application-code: 82ms)
+ POST /api/auth/register 200 in 701ms (next.js: 24ms, application-code: 677ms)
+ POST /api/auth/login 200 in 257ms (next.js: 1207µs, application-code: 256ms)
+ GET /konto 200 in 14ms (next.js: 1652µs, application-code: 12ms)
+ GET /api/auth/me 200 in 246ms (next.js: 192ms, application-code: 54ms)
+ GET /api/auth/me 200 in 44ms (next.js: 1420µs, application-code: 43ms)
+ GET /api/order-details?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 400 in 356ms (next.js: 354ms, application-code: 3ms)
+ GET /api/order-details?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 400 in 3ms (next.js: 1176µs, application-code: 2ms)
+ GET /api/complaints?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 127ms (next.js: 99ms, application-code: 28ms)
+ GET /api/complaints?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 24ms (next.js: 1362µs, application-code: 23ms)
+ GET /api/promotions 404 in 151ms (next.js: 95ms, application-code: 56ms)
+ GET /api/promotions 404 in 34ms (next.js: 1149µs, application-code: 33ms)
+ GET /api/loyalty?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 119ms (next.js: 95ms, application-code: 24ms)
+ GET /api/loyalty?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 41ms (next.js: 2ms, application-code: 38ms)
+ GET /api/favorites?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 147ms (next.js: 122ms, application-code: 25ms)
+ GET /api/favorites?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 22ms (next.js: 1062µs, application-code: 21ms)
+⚠ Fast Refresh had to perform a full reload when ./Techpilots-Frontend/node_modules/next/dist/build/polyfills/polyfill-module.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+✓ Compiled in 235ms
+ GET /konto 200 in 84ms (next.js: 3ms, application-code: 81ms)
+ GET /api/auth/me 200 in 94ms (next.js: 1854µs, application-code: 92ms)
+ GET /api/order-details?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 400 in 4ms (next.js: 1577µs, application-code: 2ms)
+ GET /api/complaints?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 25ms (next.js: 1201µs, application-code: 24ms)
+ GET /api/promotions 404 in 39ms (next.js: 1159µs, application-code: 38ms)
+ GET /api/loyalty?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 27ms (next.js: 1243µs, application-code: 26ms)
+ GET /api/favorites?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 24ms (next.js: 1150µs, application-code: 23ms)
+ GET /api/products?limit=100 200 in 4ms (next.js: 1200µs, application-code: 3ms)
+ GET / 200 in 29ms (next.js: 2ms, application-code: 27ms)
+✓ Compiled in 110ms
+ GET / 200 in 88ms (next.js: 40ms, application-code: 48ms)
+✓ Compiled in 95ms
+ GET / 200 in 72ms (next.js: 38ms, application-code: 35ms)
+✓ Compiled in 91ms
+ GET / 200 in 64ms (next.js: 30ms, application-code: 34ms)
+✓ Compiled in 85ms
+ GET / 200 in 67ms (next.js: 32ms, application-code: 34ms)
+ GET /konto 200 in 65ms (next.js: 42ms, application-code: 23ms)
+ GET /api/auth/me 200 in 124ms (next.js: 12ms, application-code: 112ms)
+ GET /api/order-details?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 400 in 19ms (next.js: 17ms, application-code: 3ms)
+ GET /api/auth/me 200 in 60ms (next.js: 1529µs, application-code: 58ms)
+ GET /api/order-details?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 400 in 4ms (next.js: 1286µs, application-code: 2ms)
+ GET /api/complaints?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 57ms (next.js: 6ms, application-code: 50ms)
+ GET /api/complaints?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 29ms (next.js: 1436µs, application-code: 28ms)
+ GET /api/loyalty?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 34ms (next.js: 7ms, application-code: 28ms)
+ GET /api/loyalty?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 26ms (next.js: 1240µs, application-code: 24ms)
+ GET /api/favorites?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 30ms (next.js: 6ms, application-code: 24ms)
+ GET /api/favorites?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 29ms (next.js: 1189µs, application-code: 28ms)
+ GET /konto 200 in 13ms (next.js: 1747µs, application-code: 11ms)
+ GET /konto 200 in 88ms (next.js: 2ms, application-code: 86ms)
+ GET /api/auth/me 200 in 115ms (next.js: 1601µs, application-code: 113ms)
+ GET /api/order-details?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 400 in 3ms (next.js: 1257µs, application-code: 2ms)
+ GET /api/complaints?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 26ms (next.js: 995µs, application-code: 25ms)
+ GET /api/loyalty?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 24ms (next.js: 1099µs, application-code: 23ms)
+ GET /api/favorites?customer_id=cus_01KRKCKS85PDDJSBBTJVFGHMPR 401 in 56ms (next.js: 1183µs, application-code: 55ms)
+ GET /api/products?limit=100 200 in 18ms (next.js: 14ms, application-code: 4ms)
+ GET / 200 in 42ms (next.js: 1697µs, application-code: 40ms)
+ GET /api/image?url=http%3A%2F%2F194.14.207.94%3A9000%2Fstatic%2F1778456776250-6907594_7fuptp.webp 200 in 76ms (next.js: 23ms, application-code: 53ms)
+ GET /api/products?limit=100 200 in 411ms (next.js: 1230µs, application-code: 409ms)
+ GET /produkter/sweatshirt 200 in 507ms (next.js: 59ms, application-code: 448ms)
+ GET /api/products 200 in 4ms (next.js: 1419µs, application-code: 3ms)
+✓ Compiled in 84ms
+ GET /produkter/sweatshirt 200 in 128ms (next.js: 72ms, application-code: 56ms)
+✓ Compiled in 80ms
+ GET /produkter/sweatshirt 200 in 94ms (next.js: 57ms, application-code: 37ms)
+✓ Compiled in 74ms
+ GET /produkter/sweatshirt 200 in 96ms (next.js: 54ms, application-code: 41ms)
+✓ Compiled in 81ms
+ GET /produkter/sweatshirt 200 in 91ms (next.js: 53ms, application-code: 37ms)
+✓ Compiled in 90ms
+ GET /produkter/sweatshirt 200 in 85ms (next.js: 50ms, application-code: 35ms)
+✓ Compiled in 78ms
+ GET /produkter/sweatshirt 200 in 96ms (next.js: 53ms, application-code: 43ms)
+✓ Compiled in 75ms
+ GET /produkter/sweatshirt 200 in 99ms (next.js: 55ms, application-code: 43ms)
+✓ Compiled in 73ms
+ GET /produkter/sweatshirt 200 in 115ms (next.js: 78ms, application-code: 37ms)
+✓ Compiled in 72ms
+ GET /produkter/sweatshirt 200 in 90ms (next.js: 53ms, application-code: 37ms)
+✓ Compiled in 69ms
+ GET /produkter/sweatshirt 200 in 89ms (next.js: 52ms, application-code: 37ms)
+✓ Compiled in 87ms
+ GET /produkter/sweatshirt 200 in 92ms (next.js: 50ms, application-code: 42ms)
+ GET /produkter/sweatshirt 200 in 96ms (next.js: 7ms, application-code: 90ms)
+✓ Compiled in 98ms
+ GET /produkter/sweatshirt 200 in 121ms (next.js: 72ms, application-code: 49ms)

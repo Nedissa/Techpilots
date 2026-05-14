@@ -22,11 +22,9 @@ export default function AccountPage() {
   const [editAddress, setEditAddress] = useState('');
   const [favoriteProducts, setFavoriteProducts] = useState<ProductData[]>([]);
   const [complaints, setComplaints] = useState<any[]>([]);
-  const [promotions, setPromotions] = useState<any[]>([]);
   const [loyalty, setLoyalty] = useState<any>(null);
   const [orders, setOrders] = useState<any[]>([]);
   const [loadingComplaintsError, setLoadingComplaintsError] = useState('');
-  const [loadingPromotionsError, setLoadingPromotionsError] = useState('');
   const [loadingLoyaltyError, setLoadingLoyaltyError] = useState('');
   const [loadingOrdersError, setLoadingOrdersError] = useState('');
   const addressInputRef = useRef<HTMLInputElement>(null);
@@ -113,17 +111,6 @@ export default function AccountPage() {
         }
       } catch (error) {
         console.error('Failed to load complaints:', error);
-      }
-
-      // Load promotions
-      try {
-        const response = await fetch('/api/promotions');
-        if (response.ok) {
-          const data = await response.json();
-          setPromotions(data.promotions || []);
-        }
-      } catch (error) {
-        console.error('Failed to load promotions:', error);
       }
 
       // Load loyalty
@@ -286,19 +273,6 @@ export default function AccountPage() {
             }`}
           >
             Felanmälan
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('erbjudanden');
-              localStorage.setItem('accountTab', 'erbjudanden');
-            }}
-            className={`px-6 py-3 font-semibold text-sm border-b-2 transition-colors ${
-              activeTab === 'erbjudanden'
-                ? 'border-black text-black'
-                : 'border-transparent text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            Erbjudanden
           </button>
           <button
             onClick={() => {
@@ -656,50 +630,6 @@ export default function AccountPage() {
               <button className="w-full px-6 py-2 bg-black text-white  hover:bg-gray-800 font-semibold">
                 Anmäl ett fel
               </button>
-            </div>
-          )}
-        </div>
-        )}
-
-        {activeTab === 'erbjudanden' && (
-        <div className="p-6  shadow-sm" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-          <h3 className="text-xl font-bold mb-6">Erbjudanden</h3>
-          {loadingPromotionsError && (
-            <div className="mb-4 p-4 bg-red-50 text-red-700 rounded">
-              {loadingPromotionsError}
-            </div>
-          )}
-          {promotions.length > 0 ? (
-            <div className="space-y-4">
-              <p className="text-gray-700">Du har {promotions.length} aktiva erbjudanden</p>
-              {promotions.map((promo) => (
-                <div key={promo.id} className="p-4 border border-gray-200">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <p className="font-semibold">{promo.code}</p>
-                      <p className="text-sm text-gray-600">{promo.description}</p>
-                    </div>
-                    <div className="text-right">
-                      {promo.percentage_discount && (
-                        <p className="text-lg font-bold text-green-600">{promo.percentage_discount}% rabatt</p>
-                      )}
-                      {promo.fixed_discount && (
-                        <p className="text-lg font-bold text-green-600">{promo.fixed_discount} SEK rabatt</p>
-                      )}
-                    </div>
-                  </div>
-                  {promo.valid_from && promo.valid_to && (
-                    <p className="text-xs text-gray-500">
-                      Gäller t.o.m. {new Date(promo.valid_to).toLocaleDateString('sv-SE')}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="space-y-3 text-gray-700">
-              <p>Du har inga aktiva erbjudanden just nu</p>
-              <p className="text-sm">Nya erbjudanden baserat på dina köp visas här</p>
             </div>
           )}
         </div>
