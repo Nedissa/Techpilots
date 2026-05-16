@@ -89,7 +89,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Login error:', error);
     return Response.json(
-      { error: 'Internal server error' },
+      { error: 'Ett fel uppstod. Försök igen senare.' },
       { status: 500 }
     );
   }
