@@ -63,7 +63,7 @@ export async function POST(req: Request) {
 
     // Update customer metadata with new complaint
     const updateResponse = await fetch(
-      `${backendUrl}/store/customers`,
+      `${backendUrl}/store/customers/me`,
       {
         method: "POST",
         headers: {
