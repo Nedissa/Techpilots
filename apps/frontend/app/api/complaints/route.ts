@@ -58,7 +58,7 @@ export async function POST(req: Request) {
       order_id,
       description,
       created_at: new Date().toISOString(),
-      status: "open",
+      status: "öppen",
     }
 
     // Update customer metadata with new complaint
